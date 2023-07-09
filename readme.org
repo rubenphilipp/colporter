@@ -1,0 +1,14 @@
+#+title: colporter
+#+author: Ruben Philipp
+#+date: 2023-07-09
+#+startup: showall 
+
+* colporter
+
+/colporter/ is a static-site generator written in Common Lisp, loosely modeled
+after [[https://github.com/jekyll/jekyll][Jekyll]]. Its HTML generation is partly based on [[https://github.com/ruricolist/spinneret][Spinneret]].
+
+
+#+begin_comment
+$$ Last modified:  20:56:29 Sun Jul  9 2023 CEST
+#+end_comment
