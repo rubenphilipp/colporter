@@ -13,7 +13,7 @@
 ;;; Package definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  23:37:41 Sun Jul  9 2023 CEST
+;;; $$ Last modified:  23:42:51 Sun Jul  9 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -29,7 +29,6 @@
   :depends-on ("alexandria"
                "spinneret"
                "spinneret/cl-markdown"
-               ;;"spinneret/cl-markdown"
                "cl-ppcre"
                "cl-fad"
                "cl-yaml")
@@ -39,6 +38,7 @@
                (:file "asset")
                (:file "snippet")
                (:file "template")
+               (:file "page")
                (:file "colporter")))
 
 
