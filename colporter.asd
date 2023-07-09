@@ -13,7 +13,7 @@
 ;;; Package definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  23:02:58 Sun Jul  9 2023 CEST
+;;; $$ Last modified:  23:37:41 Sun Jul  9 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -24,7 +24,7 @@
   :version "0.0.1"
   :author "Ruben Philipp <me@rubenphilipp.com>"
   :license "GPL Version 2.0 or later"
-  :serial nil ;; could also be T; test
+  :serial nil ;; could also be T; TODO: test/elaborate
   :in-order-to ((test-op (test-op "colporter/tests")))
   :depends-on ("alexandria"
                "spinneret"
@@ -36,6 +36,7 @@
   :pathname "src/"
   :components ((:file "package")
                (:file "utilities")
+               (:file "asset")
                (:file "snippet")
                (:file "template")
                (:file "colporter")))
