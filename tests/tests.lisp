@@ -12,14 +12,14 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  21:29:17 Sun Jul  9 2023 CEST
+;;; $$ Last modified:  21:35:43 Sun Jul  9 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defpackage #:colporter-tests
-  (:use #:cl #:colporter #:fiveam)
+(defpackage :colporter-tests
+  (:use :cl :colporter :fiveam)
   (:shadow :test)
-  (:export #:run-tests))
+  (:export :run-tests))
 
 
 (in-package #:colporter-tests)

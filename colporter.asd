@@ -13,7 +13,7 @@
 ;;; Package definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  21:21:59 Sun Jul  9 2023 CEST
+;;; $$ Last modified:  23:02:58 Sun Jul  9 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -24,16 +24,21 @@
   :version "0.0.1"
   :author "Ruben Philipp <me@rubenphilipp.com>"
   :license "GPL Version 2.0 or later"
-  :serial t
+  :serial nil ;; could also be T; test
   :in-order-to ((test-op (test-op "colporter/tests")))
   :depends-on ("alexandria"
                "spinneret"
+               "spinneret/cl-markdown"
                ;;"spinneret/cl-markdown"
                "cl-ppcre"
                "cl-fad"
                "cl-yaml")
   :pathname "src/"
-  :components ((:file "named-object")))
+  :components ((:file "package")
+               (:file "utilities")
+               (:file "snippet")
+               (:file "template")
+               (:file "colporter")))
 
 
 ;;; regression tests
