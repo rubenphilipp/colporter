@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> asset
 ;;;
-;;; $$ Last modified:  22:47:24 Sun Jul 23 2023 CEST
+;;; $$ Last modified:  22:54:48 Sun Jul 23 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
