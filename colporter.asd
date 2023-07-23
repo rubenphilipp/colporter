@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  14:24:02 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  21:50:56 Sun Jul 23 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -52,6 +52,18 @@
   :pathname "tests/"
   :perform (test-op (o c) (symbol-call :colporter.tests :run-tests))
   :components ((:file "tests")))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Export all symbols
+;;; RP  Sun Jul 23 21:50:54 2023
+
+(let ((package (find-package :colporter)))
+  (do-all-symbols (symb package)
+    (when (and (or (find-class symb nil)
+                   (fboundp symb))
+               (eql (symbol-package symb) package))
+      (export symb package))))
                
 
 
