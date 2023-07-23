@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> snippet
 ;;;
-;;; $$ Last modified:  23:13:50 Sun Jul 23 2023 CEST
+;;; $$ Last modified:  23:25:30 Sun Jul 23 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -70,8 +70,9 @@
 ;;;
 ;;; EXAMPLE
 #|
-(make-snippet #'(lambda (x) (+ x 3))
-              :description "Add 3 to x.")
+(funcall (data (make-snippet #'(lambda (x) (+ x 3))
+:description "Add 3 to x.")) 3)
+;; => 6
 |#
 ;;; SYNOPSIS
 (defun make-snippet (snippet-fun &key
@@ -82,6 +83,36 @@
                  :snippet-fun snippet-fun
                  :description description
                  :id id))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* snippet/snippet
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-23
+;;; 
+;;; DESCRIPTION
+;;; This method evaluates the snippet-fun with the given arguments.
+;;;
+;;; ARGUMENTS
+;;; - A snippet object.
+;;; - The arguments to the snippet-fun.
+;;; 
+;;; RETURN VALUE
+;;; The return value of the snippet-fun.
+;;;
+;;; EXAMPLE
+#|
+(let ((snippet (make-snippet #'(lambda (x y) (+ x y)))))
+(snippet snippet 4 5))
+|#
+;; => 9
+;;; SYNOPSIS
+(defmethod snippet ((sn snippet) &rest args)
+  ;;; ****
+  (apply (snippet-fun sn) args))
+
 
 
 
