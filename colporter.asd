@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  21:50:56 Sun Jul 23 2023 CEST
+;;; $$ Last modified:  22:31:05 Sun Jul 23 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -30,15 +30,18 @@
                "spinneret"
                "spinneret/cl-markdown"
                "cl-ppcre"
+               "file-types"
                "cl-fad"
                "cl-yaml")
   :pathname "src/"
   :components ((:file "package")
+               (:file "named-object")
                (:file "utilities")
                (:file "asset")
                (:file "snippet")
                (:file "template")
                (:file "page")
+               (:file "site")
                (:file "colporter")))
 
 
@@ -64,7 +67,6 @@
                    (fboundp symb))
                (eql (symbol-package symb) package))
       (export symb package))))
-               
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
