@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  22:00:13 Sun Jul 23 2023 CEST
+;;; $$ Last modified:  00:25:16 Mon Jul 24 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -175,6 +175,73 @@
       (error "utilities::shell: The call to ~a failed. Error output: ~a ~%"
              command error-output))
     output))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/alistp
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-17
+;;; 
+;;; DESCRIPTION
+;;; Tests if an object is of type alist.
+;;;
+;;; ARGUMENTS
+;;; The object to test.
+;;; 
+;;; RETURN VALUE
+;;; Either t or NIL
+;;;
+;;; EXAMPLE
+#|
+(alistp '((a . b)
+          (c . d)))
+
+;; => T
+|#
+;;; SYNOPSIS
+(defun alistp (object)
+  ;;; ****
+  (and (listp object)
+       (every #'consp object)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/assoc-keys
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-17
+;;; 
+;;; DESCRIPTION
+;;; Returns a list with all keys of an alist. 
+;;;
+;;; ARGUMENTS
+;;; An alist. 
+;;; 
+;;; RETURN VALUE
+;;; A list with keys of the alist.
+;;;
+;;; EXAMPLE
+#|
+(let ((lst '((:test . 12)
+             (:value2 . 13)
+             (:something . 'of-importance))))
+  (assoc-keys lst))
+
+;; => '(:TEST :VALUE2 :SOMETHING)
+|#
+;;; SYNOPSIS
+(defun assoc-keys (alist)
+  ;;; ****
+  ;; sanity checks
+  (unless (alistp alist)
+    (error "utilities::assoc-keys: The value is not of type alist."))
+  (loop for item in alist
+        collect
+        (car item)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

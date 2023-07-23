@@ -11,13 +11,13 @@
 ;;; 
 ;;; PURPOSE
 ;;; Implementation of the snippet class and related methods and functions.
-;;; An snippet is essentially a function which takes an arbitrary amount of
+;;; A snippet is essentially a function which takes an arbitrary amount of
 ;;; arguments and returns a certain value (e.g. HTML, spinneret "markup" etc.).
 ;;;
 ;;; CLASS HIERARCHY
 ;;; named-object -> snippet
 ;;;
-;;; $$ Last modified:  23:25:30 Sun Jul 23 2023 CEST
+;;; $$ Last modified:  23:52:21 Sun Jul 23 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -26,7 +26,7 @@
 (defclass snippet (named-object)
   ;; a short (optional) documentation string of the snippet-fun
   ((description :accessor description :initarg :description :initform nil)
-   ;; the snippet fun (must be a lambda function)
+   ;; the snippet fun (e.g. lambda function)
    (snippet-fun :accessor snippet-fun :initarg :snippet-fun :initform nil)))
 
 (defmethod initialize-instance :after ((sn snippet) &rest initargs)
@@ -104,15 +104,14 @@
 ;;;
 ;;; EXAMPLE
 #|
-(let ((snippet (make-snippet #'(lambda (x y) (+ x y)))))
-(snippet snippet 4 5))
+(let ((sn (make-snippet #'(lambda (x y) (+ x y)))))
+  (snippet sn 4 5))
 |#
 ;; => 9
 ;;; SYNOPSIS
 (defmethod snippet ((sn snippet) &rest args)
   ;;; ****
   (apply (snippet-fun sn) args))
-
 
 
 
