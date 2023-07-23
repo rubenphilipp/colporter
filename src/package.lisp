@@ -13,15 +13,21 @@
 ;;; Package definition for colporter.
 ;;;
 ;;;
-;;; $$ Last modified:  23:03:42 Sun Jul  9 2023 CEST
+;;; $$ Last modified:  21:36:27 Sun Jul 23 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(in-package :cl-user)
 
 (defpackage :colporter
   (:use :common-lisp)
   (:nicknames :clptr)
-  (:import-from :alexandria :read-file-into-string)
-  (:import-from :cl-ppcre :split)
+  (:import-from
+   :alexandria
+   :read-file-into-string)
+  (:import-from
+   :cl-ppcre
+   :split)
   (:import-from
    :spinneret
    :with-html

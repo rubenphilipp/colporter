@@ -1,7 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****h* package
+;;; ****h* system
 ;;; NAME
-;;; package
+;;; system
 ;;; 
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
@@ -10,10 +10,10 @@
 ;;; 2023-07-09
 ;;; 
 ;;; PURPOSE
-;;; Package definition for colporter. 
+;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  23:42:51 Sun Jul  9 2023 CEST
+;;; $$ Last modified:  14:24:02 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
