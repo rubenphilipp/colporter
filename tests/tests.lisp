@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  15:22:07 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  15:30:11 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -59,6 +59,16 @@
              (file (colporter::make-file testfile
                                          :description "A test file")))
         (is (equal '("text" "css") (colporter::type file)))))
+
+
+;;; test make-asset
+;;; RP  Mon Jul 24 15:28:19 2023
+(test test-make-asset
+  (let* ((testfile (test-pathname "style.css"))
+         (asset (colporter::make-asset testfile "css/main.css")))
+    (is (and
+         (equal '("text" "css") (colporter::type asset))
+         (equal "css/main.css" (colporter::destination asset))))))
 
 
 

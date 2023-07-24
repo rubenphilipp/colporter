@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  15:24:52 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  15:26:43 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -77,7 +77,8 @@
          (file-size-kb (/ (osicat-posix:stat-size file-stats) 1000.0))
          (file-mime (file-types::file-mime (path fl))))
     (setf (slot-value fl 'size) file-size-kb
-          (slot-value fl 'type) file-mime)))
+          (slot-value fl 'type) file-mime
+          (slot-value fl 'data) (path fl))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
