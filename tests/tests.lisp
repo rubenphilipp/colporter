@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  18:15:42 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:23:38 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -112,6 +112,15 @@
            "/sites/rubenphilipp/content/projects/opus-1.yaml"
            "/sites/rubenphilipp/content/")))
     (is (equal result "projects/opus-1"))))
+
+
+;;; test make-page
+;;; RP  Mon Jul 24 18:19:12 2023
+(test test-make-page
+  (let ((page (colporter::make-page
+               (test-pathname "content/opus-1.md")
+               (test-pathname "content/"))))
+    (is (equal "opus-1" (colporter::uid page)))))
 
 
 

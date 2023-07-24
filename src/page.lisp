@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  18:08:54 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:23:22 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -36,14 +36,14 @@
    ;; the unique id (uid) of the page object
    ;; this is most likely related to the relative structure of the page
    ;; object in the data system and will be used to generate the path of the
-   ;; output file (e.g. "content/projects/opus-1/project.yaml" =>
+   ;; output file (e.g. "content/projects/opus-1.yaml" =>
    ;; "projects/opus-1"). 
    (uid :accessor uid :initarg :uid :initform nil)
    ;; a base path used for uid-generation
    ;; this is most likely the root path for the site content (e.g. "content/")
    (base :accessor base :initarg :base :initform nil)
    ;; a template object related to this page
-   (template :accessor template :initform nil)))
+   (template :accessor template :initarg :template  :initform nil)))
 
 (defmethod initialize-instance :after ((pg page) &rest initargs)
   (declare (ignore initargs))
@@ -74,7 +74,7 @@
 ;;; SYNOPSIS
 (defmethod update ((pg page))
   ;;; ****
-  (unless (probe-file (pg page))
+  (unless (probe-file (path pg))
     (error "page::update: The file ~a does not exist."
            (path pg)))
   (unless (base pg)
@@ -107,7 +107,10 @@
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
 ;;; - :uid. A UID of the page. It is recommended to leave this blank, as the
-;;;   UID will be generated via the
+;;;   UID will be generated using the path and the base path.
+;;;   E.g.: "/sites/rubenphilipp/content/projects/opus-1.yaml"
+;;;   with base="/sites/rubenphilipp/content/" => "projects/opus-1"
+;;;   (cf. uid-from-path).
 ;;; - :template. A template object used to render the page. If NIL, the
 ;;;   template will be automatically selected based on the data of the page
 ;;;   or the default template. Default = NIL.
@@ -115,9 +118,6 @@
 ;;; RETURN VALUE
 ;;; The page object. 
 ;;;
-;;; EXAMPLE
-
-
 ;;; SYNOPSIS
 (defun make-page (path base-path &key
                                    (uid nil)
