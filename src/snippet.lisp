@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> snippet
 ;;;
-;;; $$ Last modified:  23:52:21 Sun Jul 23 2023 CEST
+;;; $$ Last modified:  16:03:47 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -71,7 +71,7 @@
 ;;; EXAMPLE
 #|
 (funcall (data (make-snippet #'(lambda (x) (+ x 3))
-:description "Add 3 to x.")) 3)
+                             :description "Add 3 to x.")) 3)
 ;; => 6
 |#
 ;;; SYNOPSIS
@@ -85,7 +85,7 @@
                  :id id))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****m* snippet/snippet
+;;; ****m* snippet/do-snippet
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -105,15 +105,13 @@
 ;;; EXAMPLE
 #|
 (let ((sn (make-snippet #'(lambda (x y) (+ x y)))))
-  (snippet sn 4 5))
+  (do-snippet sn 4 5))
 |#
 ;; => 9
 ;;; SYNOPSIS
-(defmethod snippet ((sn snippet) &rest args)
+(defmethod do-snippet ((sn snippet) &rest args)
   ;;; ****
   (apply (snippet-fun sn) args))
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF snippet.lisp

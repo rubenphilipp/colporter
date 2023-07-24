@@ -48,14 +48,45 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>snippet</strong>
 
- $$ Last modified:  23:52:21 Sun Jul 23 2023 CEST
+ $$ Last modified:  16:03:47 Mon Jul 24 2023 CEST
+</pre>
+
+<hr />
+<a name="snippet2fdo2dsnippet"></a>
+<a name="robo14"></a><h2>snippet/do-snippet [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">snippet</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-23
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This method evaluates the <a href="#robo12">snippet</a>-fun with the given arguments.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="#robo12">snippet</a> object.
+ - The arguments to the <a href="#robo12">snippet</a>-fun.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The return value of the <a href="#robo12">snippet</a>-fun.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(let ((sn (<a href="#robo15">make-snippet</a> #'(lambda (x y) (+ x y)))))
+  (<strong>do-snippet</strong> sn 4 5))
+|#
+;; =&gt; 9
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>do-snippet</strong> ((sn <a href="#robo12">snippet</a>) &amp;rest args)
 </pre>
 
 <hr />
 <a name="snippet2fmake2dsnippet"></a>
-<a name="robo14"></a><h2>snippet/make-snippet [ Functions ]</h2>
+<a name="robo15"></a><h2>snippet/make-snippet [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">snippet</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">snippet</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -79,7 +110,7 @@
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(funcall (data (<strong>make-snippet</strong> #'(lambda (x) (+ x 3))
-:description "Add 3 to x.")) 3)
+                             :description "Add 3 to x.")) 3)
 ;; =&gt; 6
 </pre>
 <p class="item_name">SYNOPSIS</p>
@@ -88,40 +119,9 @@
                                    (id nil))
 </pre>
 
-<hr />
-<a name="snippet2fsnippet"></a>
-<a name="robo15"></a><h2>snippet/snippet [ Methods ]</h2>
-
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">snippet</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
-<p class="item_name">AUTHOR</p>
-<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
-</pre>
-<p class="item_name">CREATED</p>
-<pre> 2023-07-23
-</pre>
-<p class="item_name">DESCRIPTION</p>
-<pre> This method evaluates the <strong>snippet</strong>-fun with the given arguments.
-</pre>
-<p class="item_name">ARGUMENTS</p>
-<pre> - A <strong>snippet</strong> object.
- - The arguments to the <strong>snippet</strong>-fun.
-</pre>
-<p class="item_name">RETURN VALUE</p>
-<pre> The return value of the <strong>snippet</strong>-fun.
-</pre>
-<p class="item_name">EXAMPLE</p>
-<pre class="source">(let ((sn (<a href="#robo14">make-snippet</a> #'(lambda (x y) (+ x y)))))
-  (<strong>snippet</strong> sn 4 5))
-|#
-;; =&gt; 9
-</pre>
-<p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>snippet</strong> ((sn <strong>snippet</strong>) &amp;rest args)
-</pre>
-
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/snippet.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 15:45:03</p>
+<p>Generated from ./src/snippet.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 16:04:11</p>
 </div> <!-- footer -->
 </body>
 </html>

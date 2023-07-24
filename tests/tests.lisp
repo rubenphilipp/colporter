@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  15:44:56 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  16:03:57 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -77,6 +77,14 @@
   (let* ((testfile (test-pathname "test.jpg"))
          (file (colporter::make-file testfile)))
     (is (colporter::imagep file))))
+
+;;; test snippet
+;;; RP  Mon Jul 24 15:48:23 2023
+(test test-snippet
+  (let* ((snippet-fun #'(lambda (x y) (+ x y)))
+         (snippet (colporter::make-snippet snippet-fun
+                                           :description "addition")))
+    (is (= (colporter::do-snippet snippet 4 5) 9))))
 
 
 
