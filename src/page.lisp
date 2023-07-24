@@ -12,8 +12,8 @@
 ;;; PURPOSE
 ;;; Implementation of the page class and related methods and functions.
 ;;; A page object contains both the data/content of the page as well as 
-;;; meta information required for processing (e.g. a template object related to
-;;; the page).
+;;; meta information required for processing (e.g. a template id related to
+;;; a template object which will be used to render the page).
 ;;;
 ;;; A page always relates to a source file (e.g. a .yaml file) or object (e.g.
 ;;; a database row), which is used to retrieve the content and the data. 
@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  18:23:22 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:34:01 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -42,7 +42,7 @@
    ;; a base path used for uid-generation
    ;; this is most likely the root path for the site content (e.g. "content/")
    (base :accessor base :initarg :base :initform nil)
-   ;; a template object related to this page
+   ;; a template id related to this page
    (template :accessor template :initarg :template  :initform nil)))
 
 (defmethod initialize-instance :after ((pg page) &rest initargs)
@@ -80,6 +80,19 @@
   (unless (base pg)
     (warn "page::update: No :base is set for the page. Thus, the UID might ~
            be meaningless."))
+  ;; get data
+  (let* ((data-string (read-file-into-string (path pg)))
+         (yaml-data (cl-yaml::parse data-string)))
+    (setf (slot-value pg 'data) yaml-data))
+  ;; get template from data
+  (unless (template pg)
+    (let ((template-id (gethash (get-clptr-config :template-key)
+                                (data pg))))
+      (when template-id
+        (setf (slot-value pg 'template)
+              (if (stringp template-id)
+                  (read-from-string template-id)
+                  template-id)))))
   ;; set uid
   (unless (uid pg)
     (setf (slot-value pg 'uid) (uid-from-path (path pg) (base pg))))
@@ -111,9 +124,10 @@
 ;;;   E.g.: "/sites/rubenphilipp/content/projects/opus-1.yaml"
 ;;;   with base="/sites/rubenphilipp/content/" => "projects/opus-1"
 ;;;   (cf. uid-from-path).
-;;; - :template. A template object used to render the page. If NIL, the
-;;;   template will be automatically selected based on the data of the page
-;;;   or the default template. Default = NIL.
+;;; - :template. A template id referring to the template object which will be
+;;;   used to render the page. If NIL, the template will be automatically
+;;;   selected based on the data of the page or the default template.
+;;;   Must be a symbol. Default = NIL.
 ;;; 
 ;;; RETURN VALUE
 ;;; The page object. 
@@ -123,11 +137,6 @@
                                    (uid nil)
                                    (template nil))
   ;;; ****
-  (unless (or (null template)
-              (typep template 'template))
-    (error "page::make-page: The template must be either NIL or of type ~
-            TEMPLATE, not ~a."
-           (type-of template)))
   (make-instance 'page :path path
                        :base base-path
                        :uid uid

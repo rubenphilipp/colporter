@@ -15,7 +15,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined.
 ;;;
-;;; $$ Last modified:  00:29:57 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:31:31 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -38,6 +38,8 @@
 (defparameter +clptr-config-data+
   `(;; the directory for temp files.
     (:temp-dir . "/tmp/")
+    ;; the default template-key
+    (:template-key . "template")
     ;; the default suffix to indicate files containing page data
     (:page-suffix . ".md")))
   ;;; ****
