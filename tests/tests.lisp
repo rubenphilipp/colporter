@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  18:11:12 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:15:42 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -109,7 +109,7 @@
 (test test-uid-from-path
   (let ((result
           (colporter::uid-from-path
-           "/sites/rubenphilipp/content/projects/opus-1/project.yaml"
+           "/sites/rubenphilipp/content/projects/opus-1.yaml"
            "/sites/rubenphilipp/content/")))
     (is (equal result "projects/opus-1"))))
 

@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  17:40:45 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:15:27 Mon Jul 24 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -267,7 +267,7 @@
 ;;;
 ;;; EXAMPLE
 #|
-(uid-from-path "/sites/rubenphilipp/content/projects/opus-1/project.yaml"
+(uid-from-path "/sites/rubenphilipp/content/projects/opus-1.yaml"
                "/sites/rubenphilipp/content/")
 
 ;; => "projects/opus-1"
@@ -281,12 +281,12 @@
       (setf path (enough-namestring path base))
       (setf path (enough-namestring path "/")))
   (let ((uid-elements (cdr (pathname-directory (directory-namestring path)))))
-    (loop for i from 0 to (1- (length uid-elements))
+    (loop for i from 0 to (length uid-elements)
           for uid-e = (nth i uid-elements)
           with result = ""
-          if (= i (1- (length uid-elements)))
+          if (= i (length uid-elements))
             do (setf result
-                     (concatenate 'string result uid-e))
+                     (concatenate 'string result (pathname-name path)))
           else
             do (setf result
                      (concatenate 'string result uid-e "/"))
