@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  17:37:47 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  17:40:45 Mon Jul 24 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -270,7 +270,7 @@
 (uid-from-path "/sites/rubenphilipp/content/projects/opus-1/project.yaml"
                "/sites/rubenphilipp/content/")
 
-;; => projects/opus-1
+;; => "projects/opus-1"
 |#
 ;;; SYNOPSIS
 (defun uid-from-path (path &optional base)

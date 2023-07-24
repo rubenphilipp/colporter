@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  17:18:48 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:08:54 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -78,10 +78,60 @@
     (error "page::update: The file ~a does not exist."
            (path pg)))
   (unless (base pg)
-    (warn "page::update: No :base is set for the page.")))
+    (warn "page::update: No :base is set for the page. Thus, the UID might ~
+           be meaningless."))
+  ;; set uid
+  (unless (uid pg)
+    (setf (slot-value pg 'uid) (uid-from-path (path pg) (base pg))))
+  pg)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* page/make-page
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This function is a shortcut to instantiate a page object. 
+;;;
+;;; ARGUMENTS
+;;; - The (absolute) path to the file used to retrieve the page data.
+;;;   Should be (as of 2023-07-24) a YAML-file. Path is given as a string.
+;;; - The base path to the content directory. This is the directory that
+;;;   holds the data structure which will also reflect the data structure of
+;;;   the site generated via colporter. 
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :uid. A UID of the page. It is recommended to leave this blank, as the
+;;;   UID will be generated via the
+;;; - :template. A template object used to render the page. If NIL, the
+;;;   template will be automatically selected based on the data of the page
+;;;   or the default template. Default = NIL.
+;;; 
+;;; RETURN VALUE
+;;; The page object. 
+;;;
+;;; EXAMPLE
 
+
+;;; SYNOPSIS
+(defun make-page (path base-path &key
+                                   (uid nil)
+                                   (template nil))
+  ;;; ****
+  (unless (or (null template)
+              (typep template 'template))
+    (error "page::make-page: The template must be either NIL or of type ~
+            TEMPLATE, not ~a."
+           (type-of template)))
+  (make-instance 'page :path path
+                       :base base-path
+                       :uid uid
+                       :template template))
 
 
 

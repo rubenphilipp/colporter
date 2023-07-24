@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  15:43:55 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:11:53 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -28,6 +28,14 @@
 (defclass file (named-object)
   ;; the (absolute) path to the file
   ((path :accessor path :initarg :path :initform nil)
+   ;; the namestring of the file
+   (filename :accessor filename :initform nil)
+   ;; the file extension
+   (extension :accessor extension :initform nil)
+   ;; the uid of the file
+   (uid :accessor uid :initarg :uid :initform nil)
+   ;; the base path of the file, used for generating the uid
+   (base :accessor base :initarg :base :initform nil)
    ;; a simple (optional) textual description of the file
    (description :accessor description :initarg :description :initform "")
    ;; the size of the the file (in kilobytes)
@@ -43,9 +51,11 @@
   (update fl))
 
 (defmethod print-object :before ((fl file) stream)
-  (format stream "~%FILE: path: ~a, description: ~a, ~
+  (format stream "~%FILE: path: ~a, uid: ~a ~%~
+                  description: ~a, extension: ~a ~
                   size (KB): ~a, type: ~a"
-          (path fl) (description fl) (size fl) (type fl)))
+          (path fl) (uid fl) (description fl) (extension fl)
+          (size fl) (type fl)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -77,8 +87,15 @@
          (file-size-kb (/ (osicat-posix:stat-size file-stats) 1000.0))
          (file-mime (file-types::file-mime (path fl))))
     (setf (slot-value fl 'size) file-size-kb
+          (slot-value fl 'extension) (pathname-type (path fl))
+          (slot-value fl 'filename) (file-namestring (path fl))
           (slot-value fl 'type) file-mime
-          (slot-value fl 'data) (path fl))))
+          (slot-value fl 'data) (path fl)))
+  ;; generate uid
+  (unless (uid fl)
+    (setf (slot-value fl 'uid)
+          (uid-from-path (path fl) (base fl))))
+  fl)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
