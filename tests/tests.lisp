@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  18:35:48 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:38:18 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -121,7 +121,7 @@
                (test-pathname "content/opus-1.yaml")
                (test-pathname "content/"))))
     (is (and
-         (equal "Opus Eins" (gethash "title" (colporter::data page)))
+         (equal "Opus Eins" (colporter::get-data "title" page))
          (eq 'project (colporter::template page))
          (typep (colporter::data page) 'hash-table)
          (equal "opus-1" (colporter::uid page))))))

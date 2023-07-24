@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  18:34:01 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  18:38:00 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -141,6 +141,33 @@
                        :base base-path
                        :uid uid
                        :template template))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* page/get-data
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns the data of a given key from the YAML hash table contained in the
+;;; data slot of a page object. 
+;;;
+;;; ARGUMENTS
+;;; - The key to the data field.
+;;; - The page object. 
+;;; 
+;;; RETURN VALUE
+;;; The data contained in the slot of the data hash-table. 
+;;; 
+;;; SYNOPSIS
+(defmethod get-data (key (pg page))
+  ;;; ****
+  (gethash key (data pg)))
+
 
 
 
