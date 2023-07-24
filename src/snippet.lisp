@@ -17,25 +17,26 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> snippet
 ;;;
-;;; $$ Last modified:  16:03:47 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  16:26:15 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
 
 (defclass snippet (named-object)
-  ;; a short (optional) documentation string of the snippet-fun
+  ;; a short (optional) documentation string of the snippet
   ((description :accessor description :initarg :description :initform nil)
-   ;; the snippet fun (e.g. lambda function)
-   (snippet-fun :accessor snippet-fun :initarg :snippet-fun :initform nil)))
+   ;; the snippet (must be a function which takes any arbitrary amount of
+   ;; arguments)
+   (snippet :accessor snippet :initarg :snippet :initform nil)))
 
 (defmethod initialize-instance :after ((sn snippet) &rest initargs)
   (declare (ignore initargs))
-  (unless (functionp (snippet-fun sn))
-    (error "snippet::initialize-instance: The snippet-fun must be of type ~
+  (unless (functionp (snippet sn))
+    (error "snippet::initialize-instance: The snippet must be of type ~
             FUNCTION, not ~a."
-           (type-of (snippet-fun sn))))
-  (setf (slot-value sn 'data) (snippet-fun sn)))
+           (type-of (snippet sn))))
+  (setf (slot-value sn 'data) (snippet sn)))
 
 
 (defmethod print-object :before ((sn snippet) stream)
@@ -57,7 +58,8 @@
 ;;; This function is a shorthand to instantiate a snippet object. 
 ;;;
 ;;; ARGUMENTS
-;;; The snippet function. Must be a (lambda) function.
+;;; The snippet. Must be a (lambda) function which takes an arbitrary amount
+;;; of arguments.
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
@@ -75,14 +77,46 @@
 ;; => 6
 |#
 ;;; SYNOPSIS
-(defun make-snippet (snippet-fun &key
+(defun make-snippet (snippet &key
                                    (description "")
                                    (id nil))
   ;;; ****
   (make-instance 'snippet
-                 :snippet-fun snippet-fun
+                 :snippet snippet
                  :description description
                  :id id))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** snippet/define-snippet
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro expands to a function definition to be used to create snippet
+;;; functions. 
+;;;
+;;; ARGUMENTS
+;;; - The arguments to the snippet function (can be used in the body).
+;;; - The body of the snippet function. 
+;;;
+;;; EXAMPLE
+#|
+(funcall (define-snippet (title text)
+           (with-html-string
+             (:h1 title)
+             (:p text))) "test" "Ein Text...")
+;; => "<h1>test</h1>
+;;     <p>Ein Text..."
+|#
+;;; SYNOPSIS
+(defmacro define-snippet ((&rest args) &body body)
+  ;;; ****
+  `(lambda (,@args)
+     (eval ,@body)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* snippet/do-snippet
@@ -93,14 +127,14 @@
 ;;; 2023-07-23
 ;;; 
 ;;; DESCRIPTION
-;;; This method evaluates the snippet-fun with the given arguments.
+;;; This method evaluates the snippet with the given arguments.
 ;;;
 ;;; ARGUMENTS
 ;;; - A snippet object.
-;;; - The arguments to the snippet-fun.
+;;; - The arguments to the snippet.
 ;;; 
 ;;; RETURN VALUE
-;;; The return value of the snippet-fun.
+;;; The return value of the snippet.
 ;;;
 ;;; EXAMPLE
 #|
@@ -111,7 +145,9 @@
 ;;; SYNOPSIS
 (defmethod do-snippet ((sn snippet) &rest args)
   ;;; ****
-  (apply (snippet-fun sn) args))
+  (apply (snippet sn) args))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF snippet.lisp

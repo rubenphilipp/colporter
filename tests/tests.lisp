@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  16:03:57 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  16:25:42 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -85,6 +85,21 @@
          (snippet (colporter::make-snippet snippet-fun
                                            :description "addition")))
     (is (= (colporter::do-snippet snippet 4 5) 9))))
+
+;;; test define-snippet
+;;; RP  Mon Jul 24 16:22:53 2023
+(test test-define-snippet
+  (let* ((snippet-fun
+           (colporter::define-snippet (title text)
+             (colporter::with-html-string
+               (:h1 title)
+               (:p text))))
+         (snippet (colporter::make-snippet snippet-fun))
+         (result (colporter::do-snippet snippet "titel" "inhalt")))
+    (is (equal result
+               "<h1>titel</h1>
+<p>inhalt"
+               ))))
 
 
 
