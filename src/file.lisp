@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  18:11:53 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  23:48:21 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -95,6 +95,8 @@
   (unless (uid fl)
     (setf (slot-value fl 'uid)
           (uid-from-path (path fl) (base fl))))
+  ;; set id according to uid
+  (setf (slot-value fl 'id) (uid fl))
   fl)
 
 
