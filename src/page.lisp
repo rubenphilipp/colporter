@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  18:38:00 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  23:46:12 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -96,6 +96,8 @@
   ;; set uid
   (unless (uid pg)
     (setf (slot-value pg 'uid) (uid-from-path (path pg) (base pg))))
+  ;; set id according to uid
+  (setf (slot-value pg 'id) (uid pg))
   pg)
 
 
@@ -127,6 +129,9 @@
 ;;; - :template. A template id referring to the template object which will be
 ;;;   used to render the page. If NIL, the template will be automatically
 ;;;   selected based on the data of the page or the default template.
+;;;   NB: In order to build the page with the processes suggested in
+;;;   colporter.lisp, the value of this slot should correspond to a key
+;;;   in the :pages slot in a colporter object. 
 ;;;   Must be a symbol. Default = NIL.
 ;;; 
 ;;; RETURN VALUE
