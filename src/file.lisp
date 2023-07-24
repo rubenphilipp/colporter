@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  15:22:41 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  15:24:52 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -46,6 +46,12 @@
   (format stream "~%FILE: path: ~a, description: ~a, ~
                   size (KB): ~a, type: ~a"
           (path fl) (description fl) (size fl) (type fl)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod (setf path) :after (value (fl file))
+  (declare (ignore value))
+  (update fl))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* file/update
@@ -110,7 +116,6 @@
   (make-instance 'file :path path
                        :description description
                        :id id))
-                 
 
 
    

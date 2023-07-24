@@ -21,14 +21,16 @@
 <a class="menuitem" href="./masterindex.html#top">Index</a>
 <a class="menuitem" href="./robo_classes.html#top">Classes</a>
 <a class="menuitem" href="./robo_functions.html#top">Functions</a>
+<a class="menuitem" href="./robo_modules.html#top">Modules</a>
 <a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_variables.html#top">Variables</a>
 </div> <!-- navigation -->
 <div id="content">
 <hr />
 <a name="named2dobject2fsnippet"></a>
-<a name="robo3"></a><h2>named-object/snippet [ Classes ]</h2>
+<a name="robo11"></a><h2>named-object/snippet [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo1">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo2">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>snippet</strong>
 </pre>
@@ -40,20 +42,20 @@
 </pre>
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>snippet</strong> class and related methods and functions.
- An <strong>snippet</strong> is essentially a function which takes an arbitrary amount of
+ A <strong>snippet</strong> is essentially a function which takes an arbitrary amount of
  arguments and returns a certain value (e.g. HTML, spinneret "markup" etc.).
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo1">named-object</a> -&gt; <strong>snippet</strong>
+ <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>snippet</strong>
 
- $$ Last modified:  23:26:41 Sun Jul 23 2023 CEST
+ $$ Last modified:  23:52:21 Sun Jul 23 2023 CEST
 </pre>
 
 <hr />
 <a name="snippet2fmake2dsnippet"></a>
-<a name="robo4"></a><h2>snippet/make-snippet [ Functions ]</h2>
+<a name="robo13"></a><h2>snippet/make-snippet [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo5">snippet</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo14">snippet</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -61,19 +63,19 @@
 <pre> 2023-07-23
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This function is a shorthand to instantiate a <a href="#robo5">snippet</a> object. 
+<pre> This function is a shorthand to instantiate a <a href="#robo11">snippet</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> The <a href="#robo5">snippet</a> function. Must be a (lambda) function.
+<pre> The <a href="#robo11">snippet</a> function. Must be a (lambda) function.
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
  - :description. A short description of the lambda functions (preferably
    including its arguments) as a string.
- - :id. The id of the <a href="#robo5">snippet</a>-object.
+ - :id. The id of the <a href="#robo11">snippet</a>-object.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="#robo5">snippet</a>-object. 
+<pre> The <a href="#robo11">snippet</a>-object. 
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(funcall (data (<strong>make-snippet</strong> #'(lambda (x) (+ x 3))
@@ -81,16 +83,16 @@
 ;; =&gt; 6
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defun <strong>make-snippet</strong> (<a href="#robo5">snippet</a>-fun &amp;key
+<pre class="source">(defun <strong>make-snippet</strong> (<a href="#robo11">snippet</a>-fun &amp;key
                                    (description "")
                                    (id nil))
 </pre>
 
 <hr />
 <a name="snippet2fsnippet"></a>
-<a name="robo5"></a><h2>snippet/snippet [ Methods ]</h2>
+<a name="robo14"></a><h2>snippet/snippet [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo3">snippet</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">snippet</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -108,8 +110,8 @@
 <pre> The return value of the <strong>snippet</strong>-fun.
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(let ((sn (<a href="#robo4">make-snippet</a> #'(lambda (x y) (+ x y)))))
-(<strong>snippet</strong> sn 4 5))
+<pre class="source">(let ((sn (<a href="#robo13">make-snippet</a> #'(lambda (x y) (+ x y)))))
+  (<strong>snippet</strong> sn 4 5))
 |#
 ;; =&gt; 9
 </pre>
@@ -119,7 +121,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/snippet.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-23 23:28:52</p>
+<p>Generated from ./src/snippet.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 15:25:11</p>
 </div> <!-- footer -->
 </body>
 </html>
