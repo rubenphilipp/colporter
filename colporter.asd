@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  00:24:02 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  15:22:57 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -31,6 +31,7 @@
                "spinneret/cl-markdown"
                "cl-ppcre"
                "file-types"
+               "osicat"
                "cl-fad"
                "cl-yaml")
   :pathname "src/"
@@ -38,6 +39,7 @@
                (:file "named-object")
                (:file "utilities")
                (:file "globals")
+               (:file "file")
                (:file "asset")
                (:file "snippet")
                (:file "template")
