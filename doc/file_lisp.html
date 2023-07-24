@@ -27,10 +27,10 @@
 </div> <!-- navigation -->
 <div id="content">
 <hr />
-<a name="file2fmake2dfile"></a>
-<a name="robo3"></a><h2>file/make-file [ Functions ]</h2>
+<a name="file2fimagep"></a>
+<a name="robo4"></a><h2>file/imagep [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo9">file</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo10">file</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -38,23 +38,52 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Helper function to make a <a href="#robo9">file</a> object. 
+<pre> Tests if the <a href="#robo10">file</a> is an image. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> The path to the <a href="#robo9">file</a>. 
+<pre> A <a href="#robo10">file</a> object. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> Either T or NIL. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(let ((<a href="#robo10">file</a> (<a href="#robo5">make-file</a> "~/test.jpg")))
+  (<strong>imagep</strong> <a href="#robo10">file</a>))
+;; =&gt; T
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>imagep</strong> ((fl <a href="#robo10">file</a>))
+</pre>
+
+<hr />
+<a name="file2fmake2dfile"></a>
+<a name="robo5"></a><h2>file/make-file [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo10">file</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Helper function to make a <a href="#robo10">file</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The path to the <a href="#robo10">file</a>. 
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
  - :description. An optional short description as a string. Default = "".
- - :id. The id of the <a href="#robo9">file</a>. Default = NIL.
+ - :id. The id of the <a href="#robo10">file</a>. Default = NIL.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="#robo9">file</a> object. 
+<pre> The <a href="#robo10">file</a> object. 
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(let ((<a href="#robo9">file</a> (<strong>make-file</strong> "~/image.jpg")))
-  (type <a href="#robo9">file</a>))
-;; =&gt; ("imace" "jpeg")
+<pre class="source">(let ((<a href="#robo10">file</a> (<strong>make-file</strong> "~/image.jpg")))
+  (type <a href="#robo10">file</a>))
+;; =&gt; ("image" "jpeg")
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defun <strong>make-file</strong> (path &amp;key
@@ -64,9 +93,9 @@
 
 <hr />
 <a name="file2fupdate"></a>
-<a name="robo4"></a><h2>file/update [ Methods ]</h2>
+<a name="robo6"></a><h2>file/update [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo9">file</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo10">file</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -74,21 +103,21 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This method updates the slots in a <a href="#robo9">file</a>-object. 
+<pre> This method updates the slots in a <a href="#robo10">file</a>-object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> A <a href="#robo9">file</a> object. 
+<pre> A <a href="#robo10">file</a> object. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The updated <a href="#robo9">file</a> object. 
+<pre> The updated <a href="#robo10">file</a> object. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>update</strong> ((fl <a href="#robo9">file</a>))
+<pre class="source">(defmethod <strong>update</strong> ((fl <a href="#robo10">file</a>))
 </pre>
 
 <hr />
 <a name="named2dobject2ffile"></a>
-<a name="robo9"></a><h2>named-object/file [ Classes ]</h2>
+<a name="robo10"></a><h2>named-object/file [ Classes ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo2">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
@@ -103,19 +132,19 @@
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>file</strong> class and related methods. This class holds
  general information (e.g. size, mime type etc.) about files (which could be
- for example files associated with a <a href="./page_lisp.html#robo10">page</a>, e.g. images, or assets -- cf.
- <a href="./asset_lisp.html#robo8">asset</a>). Nonetheless, <strong>file</strong> objects just contain references to files but
+ for example files associated with a <a href="./page_lisp.html#robo11">page</a>, e.g. images, or assets -- cf.
+ <a href="./asset_lisp.html#robo3">asset</a>). Nonetheless, <strong>file</strong> objects just contain references to files but
  not the data / the <strong>file</strong> itself.
 
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>file</strong>
 
- $$ Last modified:  15:24:52 Mon Jul 24 2023 CEST
+ $$ Last modified:  15:43:55 Mon Jul 24 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/file.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 15:25:11</p>
+<p>Generated from ./src/file.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 15:45:03</p>
 </div> <!-- footer -->
 </body>
 </html>

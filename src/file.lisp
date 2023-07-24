@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  15:26:43 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  15:43:55 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -107,7 +107,7 @@
 #|
 (let ((file (make-file "~/image.jpg")))
   (type file))
-;; => ("imace" "jpeg")
+;; => ("image" "jpeg")
 |#
 ;;; SYNOPSIS
 (defun make-file (path &key
@@ -117,6 +117,34 @@
   (make-instance 'file :path path
                        :description description
                        :id id))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* file/imagep
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Tests if the file is an image. 
+;;;
+;;; ARGUMENTS
+;;; A file object. 
+;;; 
+;;; RETURN VALUE
+;;; Either T or NIL. 
+;;;
+;;; EXAMPLE
+#|
+(let ((file (make-file "~/test.jpg")))
+  (imagep file))
+;; => T
+|#
+;;; SYNOPSIS
+(defmethod imagep ((fl file))
+  ;;; ****
+  (equal (first (type fl)) "image"))
 
 
    

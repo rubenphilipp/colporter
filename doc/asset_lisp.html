@@ -30,7 +30,7 @@
 <a name="asset2fmake2dasset"></a>
 <a name="robo1"></a><h2>asset/make-asset [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo8">asset</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo3">asset</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -38,21 +38,21 @@
 <pre> 2023-07-23
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This is a helper function to instantiate an <a href="#robo8">asset</a> object.
+<pre> This is a helper function to instantiate an <a href="#robo3">asset</a> object.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The path to the <a href="#robo8">asset</a> as a string.
- - The destination (i.e. the output path relative to the size <a href="#robo8">asset</a>
-   directory) of the <a href="#robo8">asset</a> as a string. 
+<pre> - The path to the <a href="#robo3">asset</a> as a string.
+ - The destination (i.e. the output path relative to the size <a href="#robo3">asset</a>
+   directory) of the <a href="#robo3">asset</a> as a string. 
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
- - :id. The id of the <a href="#robo8">asset</a> object. Default = NIL. 
- - :description. A short textual description of the <a href="#robo8">asset</a>. Must be a string.
+ - :id. The id of the <a href="#robo3">asset</a> object. Default = NIL. 
+ - :description. A short textual description of the <a href="#robo3">asset</a>. Must be a string.
    Default = NIL. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="#robo8">asset</a> object. 
+<pre> The <a href="#robo3">asset</a> object. 
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>make-asset</strong> "~/screenshot1.png" "img/screenshot1.png")
@@ -65,10 +65,10 @@
 </pre>
 
 <hr />
-<a name="named2dobject2fasset"></a>
-<a name="robo8"></a><h2>named-object/asset [ Classes ]</h2>
+<a name="file2fasset"></a>
+<a name="robo3"></a><h2>file/asset [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo2">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./file_lisp.html#robo10">file</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>asset</strong>
 </pre>
@@ -80,20 +80,20 @@
 </pre>
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>asset</strong> class and related methods. An <strong>asset</strong> is a static
- <a href="./file_lisp.html#robo9">file</a> which is available globally on all pages (...) of the site.
+ <a href="./file_lisp.html#robo10">file</a> which is available globally on all pages (...) of the site.
  
  NB: The contents of the files (esp. as they might be binaries) will not
- be stored in <strong>asset</strong> objects. 
+ be stored in <strong>asset</strong> objects (cf. <a href="./file_lisp.html#robo10">file</a>). 
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>asset</strong>
+ <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <a href="./file_lisp.html#robo10">file</a> -&gt; <strong>asset</strong>
 
- $$ Last modified:  22:54:48 Sun Jul 23 2023 CEST
+ $$ Last modified:  15:27:46 Mon Jul 24 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/asset.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 15:25:11</p>
+<p>Generated from ./src/asset.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 15:45:03</p>
 </div> <!-- footer -->
 </body>
 </html>
