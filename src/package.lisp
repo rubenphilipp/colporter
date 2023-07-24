@@ -13,7 +13,7 @@
 ;;; Package definition for colporter.
 ;;;
 ;;;
-;;; $$ Last modified:  00:28:26 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  16:38:23 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -40,7 +40,10 @@
    :dynamic-tag
    :interpret-html-tree
    :escape-string
-   :parse-as-markdown))
+   :parse-as-markdown)
+  (:import-from
+   :cl-yaml
+   :parse))
 
 
 

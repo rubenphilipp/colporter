@@ -43,23 +43,25 @@
 </pre>
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>page</strong> class and related methods and functions.
- A <strong>page</strong> object contains both the data/content of the <strong>page</strong> as well as some
+ A <strong>page</strong> object contains both the data/content of the <strong>page</strong> as well as 
  meta information required for processing (e.g. a <a href="./template_lisp.html#robo13">template</a> object related to
  the <strong>page</strong>).
 
- The content slot of a <strong>page</strong> consists of the markdown-formatted content of a
- .md <a href="./file_lisp.html#robo10">file</a> in the respective content directory.
- The data slot holds all (meta-)data contained in the YAML-part of a <strong>page</strong>. 
+ A <strong>page</strong> always relates to a source <a href="./file_lisp.html#robo10">file</a> (e.g. a .md <a href="./file_lisp.html#robo10">file</a>) or object (e.g.
+ a database row), which is used to retrieve the content and the data. 
+
+ The data of the <strong>page</strong> is a hash table retrieved from the (e.g. YAML) data
+ from the source <a href="./file_lisp.html#robo10">file</a>/object.
 
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>page</strong>
 
- $$ Last modified:  00:31:10 Mon Jul 24 2023 CEST
+ $$ Last modified:  16:51:44 Mon Jul 24 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/page.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 16:36:47</p>
+<p>Generated from ./src/page.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-24 17:06:16</p>
 </div> <!-- footer -->
 </body>
 </html>

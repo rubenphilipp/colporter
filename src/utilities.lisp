@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  00:25:16 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  17:37:47 Mon Jul 24 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -242,6 +242,56 @@
   (loop for item in alist
         collect
         (car item)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/uid-from-path
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This function returns a uid from a given path.
+;;; When base is set, the uid will be relative to the path given as base.
+;;;
+;;; ARGUMENTS
+;;; A path to a file as a string. 
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; - base. The root directory, which serves as the base for retrieving a
+;;;   (relative) UID. Either a string or NIL. Default = NIL. 
+;;; 
+;;; RETURN VALUE
+;;; The UID generated. As a string.
+;;;
+;;; EXAMPLE
+#|
+(uid-from-path "/sites/rubenphilipp/content/projects/opus-1/project.yaml"
+               "/sites/rubenphilipp/content/")
+
+;; => projects/opus-1
+|#
+;;; SYNOPSIS
+(defun uid-from-path (path &optional base)
+  ;;; ****
+  ;; ensure that trailing slash is used
+  (setf base (trailing-slash base))
+  (if base
+      (setf path (enough-namestring path base))
+      (setf path (enough-namestring path "/")))
+  (let ((uid-elements (cdr (pathname-directory (directory-namestring path)))))
+    (loop for i from 0 to (1- (length uid-elements))
+          for uid-e = (nth i uid-elements)
+          with result = ""
+          if (= i (1- (length uid-elements)))
+            do (setf result
+                     (concatenate 'string result uid-e))
+          else
+            do (setf result
+                     (concatenate 'string result uid-e "/"))
+          finally
+             (return result))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  16:25:42 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  17:38:45 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -65,10 +65,10 @@
 ;;; RP  Mon Jul 24 15:28:19 2023
 (test test-make-asset
   (let* ((testfile (test-pathname "style.css"))
-         (asset (colporter::make-asset testfile "css/main.css")))
+         (asset (colporter::make-asset testfile "css/main")))
     (is (and
          (equal '("text" "css") (colporter::type asset))
-         (equal "css/main.css" (colporter::destination asset))))))
+         (equal "css/main" (colporter::uid asset))))))
 
 
 ;;; test imagep
@@ -100,6 +100,15 @@
                "<h1>titel</h1>
 <p>inhalt"
                ))))
+
+;;; test uid-from-path
+;;; RP  Mon Jul 24 17:37:57 2023
+(test test-uid-from-path
+  (let ((result
+          (colporter::uid-from-path
+           "/sites/rubenphilipp/content/projects/opus-1/project.yaml"
+           "/sites/rubenphilipp/content/")))
+    (is (equal result "projects/opus-1"))))
 
 
 

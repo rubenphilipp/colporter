@@ -19,28 +19,30 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file -> asset
 ;;;
-;;; $$ Last modified:  15:27:46 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  17:05:31 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
 
 (defclass asset (file)
-  ;; the output path relative to the site asset directory (e.g. "css/main.css")
+  ;; the UID (unique id) of the asset
+  ;; this is most related to the output path relative to the site asset
+  ;; directory (e.g. "css/main" => "css/main.css")
   ;; all other slots are inherited from the file class
   ;; RP  Mon Jul 24 15:27:31 2023
-  ((destination :accessor destination :initarg :destination :initform nil)))
+  ((uid :accessor uid :initarg :uid :initform nil)))
 
 (defmethod initialize-instance :after ((as asset) &rest initargs)
   (declare (ignore initargs))
-  (unless (destination as)
-    (error "asset::initialize-instance: The destination for asset ~a is not ~
+  (unless (uid as)
+    (error "asset::initialize-instance: The uid for asset ~a is not ~
             set.")))
 
 
 (defmethod print-object :before ((as asset) stream)
-  (format stream "~%ASSET: destination: ~a"
-          (destination as)))
+  (format stream "~%ASSET: uid: ~a"
+          (uid as)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -57,7 +59,7 @@
 ;;;
 ;;; ARGUMENTS
 ;;; - The path to the asset as a string.
-;;; - The destination (i.e. the output path relative to the size asset
+;;; - The uid (i.e. most likely the output path relative to the size asset
 ;;;   directory) of the asset as a string. 
 ;;; 
 ;;; OPTIONAL ARGUMENTS
@@ -74,7 +76,7 @@
 (make-asset "~/screenshot1.png" "img/screenshot1.png")
 |#
 ;;; SYNOPSIS
-(defun make-asset (path destination
+(defun make-asset (path uid
                    &key
                      (id nil)
                      (description nil))
@@ -82,7 +84,7 @@
   (make-instance 'asset
                  :id id
                  :path path
-                 :destination destination
+                 :uid uid
                  :description description))
 
 
