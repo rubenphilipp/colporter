@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  15:27:37 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  17:38:08 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -353,6 +353,30 @@
 (defmethod get-asset ((obj site) key)
   ;;; ****
   (gethash key (assets obj)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-file
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns a file object from the file hash-table of a site object by
+;;; its key. 
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The key of the file according to the hash-table. 
+;;; 
+;;; RETURN VALUE
+;;; The file-object. 
+;;;
+;;; SYNOPSIS
+(defmethod get-file ((obj site) key)
+  ;;; ****
+  (gethash key (files obj)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* site/get-template

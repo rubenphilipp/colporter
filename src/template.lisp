@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  15:42:25 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  17:50:49 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -284,6 +284,59 @@
      (concatenate 'string
                   asset-base-dir
                   (data asset))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/insert-file-path
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro inserts the path of a file object relative to the site base
+;;; directory. 
+;;; NB: This macro is intended to be used in the context of define-template. 
+;;;
+;;; ARGUMENTS
+;;; The (relative or absolute) uid of the file object, as referenced in the
+;;; site object hash-table. 
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; - A boolean indicating whether the given uid path is relative of the current
+;;;   file or relative (i.e. "absolute") to the site base path.
+;;;   Examples:
+;;;   A) relative:
+;;;      page-uid: "projects/opus-1"
+;;;      actual file-uid: "projects/images/test.jpg"
+;;;      file-uid used as argument: "images/test.jpg"
+;;;      => will resolve into the actual file-uid
+;;;   B) absolute:
+;;;      in this case the actual file-uid corresponds the file-uid given as
+;;;      argument.
+;;;   Default = T (i.e. relative).
+;;; 
+;;; EXAMPLE
+#|
+(insert-file-path "images/test.jpg")
+;; =>
+;; (LET ((FILE-ID
+;;        (CONCATENATE 'STRING
+;;                     (DIRECTORY-NAMESTRING (UID PAGE) "images/test.jpg"))))
+;;   (DATA (GET-FILE SITE FILE-ID)))
+|#
+;;; SYNOPSIS
+(defmacro insert-file-path (uid &optional (relative t))
+  ;;; ****
+  (if relative
+      `(let ((file-id (concatenate 'string
+                                   (directory-namestring
+                                    (uid page))
+                                    ,uid)))
+         (data (get-file site file-id)))
+      `(data (get-file site ,uid))))
+
 
 
 

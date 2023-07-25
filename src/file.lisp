@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  16:57:27 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  17:18:14 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -111,7 +111,10 @@
 ;;; 2023-07-24
 ;;; 
 ;;; DESCRIPTION
-;;; Helper function to make a file object. 
+;;; Helper function to make a file object.
+;;;
+;;; NB: The path slot of the file object will hold the uid which is in most
+;;; cases equivalent to the relative path to the file. 
 ;;;
 ;;; ARGUMENTS
 ;;; - The path to the file.

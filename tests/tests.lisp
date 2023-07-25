@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  17:05:14 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  17:51:14 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -326,6 +326,62 @@
   (let* ((dir (test-pathname "assets/"))
          (result (colporter::make-assets-from-dir dir)))
     (is (typep result 'hash-table))))
+
+
+;;; test insert-file-path
+(test test-insert-file-path
+  (let* ((snippets (list
+                    (colporter::make-snippet #'(lambda (x y) (+ x y))
+                                             :id "sn1"
+                                             :description "addition")
+                    (colporter::make-snippet #'(lambda (x) (print x))
+                                             :id "sn2"
+                                             :description "just print")))
+         (assets (list
+                  (colporter::make-asset
+                   (test-pathname "assets/style.css")
+                   "style.css")))
+         (templates (list
+                     (cons 'project
+                           (colporter::make-template
+                            (colporter::define-template
+                              (colporter::insert-file-path "testb.jpg"))))
+                     (cons 'home
+                           (colporter::make-template
+                            (colporter::define-template
+                               (colporter::insert-file-path
+                                   "projects/testb.jpg" nil))))))
+         (base (test-pathname "content/"))
+         (pages (list
+                 (colporter::make-page
+                  (test-pathname "content/home.yaml")
+                  base)
+                 (colporter::make-page
+                  (test-pathname "content/projects/opus-1.yaml")
+                  base)))
+         (files (list
+                 (colporter::make-file
+                  (test-pathname "content/projects/testb.jpg")
+                  "projects/testb.jpg")
+                 (colporter::make-file
+                  (test-pathname "content/test.jpg")
+                  "test.jpg")))
+         (site (colporter::make-site snippets assets templates
+                                     pages files :data '((title . "Test"))
+                                     :asset-base-dir "assets/"))
+         (result-a (colporter::do-template
+                       (colporter::get-template site 'home)
+                     (colporter::get-page site "home")
+                     site))
+         (result-b (colporter::do-template
+                       (colporter::get-template site 'project)
+                     (colporter::get-page site "projects/opus-1")
+                     site)))
+    (is (and
+         (equal "projects/testb.jpg"
+                result-a)
+         (equal "projects/testb.jpg"
+                result-b)))))
 
 
 
