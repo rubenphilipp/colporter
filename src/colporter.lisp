@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  23:59:33 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  00:13:57 Wed Jul 26 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -263,12 +263,24 @@
     (unless (probe-file error-page)
       (error "colporter::build: The error page ~a does not exist."
              error-page))
-    (let ((htaccess-data (concatenate 'string
-                                      "ErrorDocument 404 "
-                                      "/"
-                                      (error-page clptr)
-                                      "."
-                                      (output-suffix clptr))))
+    (let ((htaccess-data
+            (concatenate 'string
+                         "RewriteCond %{REQUEST_FILENAME} !-d"
+                         (format nil "~%")
+                         "RewriteCond %{REQUEST_FILENAME}\."
+                         (output-suffix clptr)
+                         " -f"
+                         (format nil "~%")
+                         "RewriteRule ^(.*)$ $1."
+                         (output-suffix clptr)
+                         " [NC,L]"
+                         (format nil "~%")
+                         (format nil "~%")
+                         "ErrorDocument 404 "
+                         "/"
+                         (error-page clptr)
+                         "."
+                         (output-suffix clptr))))
       (with-open-file (stream (concatenate 'string
                                            (output-dir clptr)
                                            ".htaccess")
