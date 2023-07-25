@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  18:44:29 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  18:45:49 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -402,8 +402,14 @@
          (site (colporter::make-site snippets assets templates
                                      pages files
                                      :asset-base-dir "assets/"
-                                     :data '(("title" . "Test")))))
-    (is (typep site 'colporter::site))))
+                                     :data '(("title" . "Test"))))
+         (colporter (colporter::make-colporter
+                     site
+                     :output-dir "/tmp/testsite/"
+                     :error-page "error"
+                     :output-suffix "html"
+                     :default-template "default")))
+    (is (typep colporter 'colporter::colporter))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
