@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  12:22:17 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  12:51:11 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -131,10 +131,10 @@
 (test test-make-site
   (let* ((snippets (list
                     (colporter::make-snippet #'(lambda (x y) (+ x y))
-                                             :id 'sn1
+                                             :id "sn1"
                                              :description "addition")
                     (colporter::make-snippet #'(lambda (x) (print x))
-                                             :id 'sn2
+                                             :id "sn2"
                                              :description "just print")))
          (assets (list
                   (colporter::make-asset
@@ -169,8 +169,13 @@
     (colporter::set-data site 'test 12)
     (colporter::remove-data site 'test)
     (is (and
+         (equal '("sn2" "sn1")
+                (colporter::get-snippets site :objects nil))
+         (typep (first (colporter::get-snippets site :objects t))
+                'colporter::snippet)
          (eq nil (colporter::get-data site 'test))
          (equal "Test" (colporter::get-data site 'title))
+         (typep (colporter::get-snippet site "sn1") 'colporter::snippet)
          (equal "RP" (colporter::get-data site 'author))))))
 
 

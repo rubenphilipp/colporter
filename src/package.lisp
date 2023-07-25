@@ -13,7 +13,7 @@
 ;;; Package definition for colporter.
 ;;;
 ;;;
-;;; $$ Last modified:  00:23:18 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  12:45:38 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -27,6 +27,7 @@
    :assoc-value
    :alist-hash-table
    :hash-table-alist
+   :hash-table-keys
    :read-file-into-string)
   (:import-from
    :cl-ppcre

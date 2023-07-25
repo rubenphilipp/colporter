@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  12:21:49 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  12:49:17 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -217,9 +217,9 @@
 ;;; The data stored in the field of the hash table. 
 ;;;
 ;;; SYNOPSIS
-(defmethod get-data ((st site) key)
+(defmethod get-data ((obj site) key)
   ;;; ****
-  (gethash key (data st)))
+  (gethash key (data obj)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -282,6 +282,107 @@
 (defmethod remove-data ((obj site) key)
   ;;; ****
   (remhash key (data obj)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-snippet
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns a snippet object from the snippet hash-table of a site object by
+;;; its key. 
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The key of the snippet according to the hash-table. 
+;;; 
+;;; RETURN VALUE
+;;; The snippet-object. 
+;;;
+;;; SYNOPSIS
+(defmethod get-snippet ((obj site) key)
+  ;;; ****
+  (gethash key (snippets obj)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-keys-or-objects
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; A helper macro for most of the getter shorthand methods (e.g.
+;;; get-snippets) which returns either a list of the keys in the hash-table
+;;; or the objects themselves (also cf. get-snippets). 
+;;;
+;;; ARGUMENTS
+;;; - A site object.
+;;; - The accessor of the slot containing the hash-table.
+;;; - A boolean which indicates whether a list of keys (NIL) or objects (T)
+;;;   should be returned.
+;;;
+;;; EXAMPLE
+#|
+(get-keys-or-objects site assets nil)
+;; => 
+;; (LET ((DATA (GETHASH (ASSETS SITE))))
+;;   (IF NIL
+;;       (LOOP FOR VALUE BEING THE HASH-VALUES OF DATA
+;;             WITH RESULT = 'NIL
+;;             DO (PUSH VALUE RESULT)
+;;             FINALLY (RETURN (REVERSE RESULT)))
+;;       (HASH-TABLE-KEYS DATA)))
+|#
+;;; SYNOPSIS
+(defmacro get-keys-or-objects (obj slot objects?)
+  ;;; ****
+  `(let ((data (,slot ,obj)))
+     (if ,objects?
+         (loop for value being the hash-values of data
+               with result = '()
+               do (push value result)
+               finally (return (reverse result)))
+         (hash-table-keys data))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-snippets
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns either a list of all keys related to the snippets objects in the
+;;; snippets hash-table or, when :objects is T, a list of the objects
+;;; themselves. 
+;;;
+;;; ARGUMENTS
+;;; - A site object.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :objects. A boolean indicating whether returning a list of keys (NIL) or
+;;;   a list of objects (T). Default = NIL
+;;; 
+;;; RETURN VALUE
+;;; Either a list of keys or snippet objects. 
+;;;
+;;; SYNOPSIS
+(defmethod get-snippets ((obj site) &key (objects nil))
+  ;;; ****
+  (get-keys-or-objects obj snippets objects))
+
+
+
 
 
 
