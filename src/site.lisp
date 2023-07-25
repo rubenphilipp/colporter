@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  13:37:58 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  14:47:04 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -33,6 +33,9 @@
    (assets :accessor assets :initarg :assets :initform nil)
    ;; a hash table containing all template objects available to the site
    ;; please also note the doc for make-page
+   ;; the base directory for the assets (relative to output-dir; cf. colporter)
+   (asset-base-dir :accessor asset-base-dir :initarg :asset-base-dir
+                   :initform "")
    (templates :accessor templates :initarg :templates :initform nil)
    ;; a hash table containing all page objects
    (pages :accessor pages :initarg :pages :initform nil)
@@ -69,8 +72,17 @@
   (init-alist?-hash-table pages st)
   (init-alist?-hash-table files st)
   (when (data st)
-    (init-alist?-hash-table data st)))
+    (init-alist?-hash-table data st))
+  (update st))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; update the object
+
+(defmethod update ((st site))
+  ;; trailing slash for asset-base-dir
+  (setf (slot-value st 'asset-base-dir) (trailing-slash (asset-base-dir st)))
+  st)
 
 (defmethod print-object :before ((st site) stream)
   (format stream "~%SITE: description: ~a ~% ~

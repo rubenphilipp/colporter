@@ -15,7 +15,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined.
 ;;;
-;;; $$ Last modified:  18:31:31 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  14:15:02 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -38,10 +38,16 @@
 (defparameter +clptr-config-data+
   `(;; the directory for temp files.
     (:temp-dir . "/tmp/")
-    ;; the default template-key
+    ;; the default template-key / -field in an YAML file
     (:template-key . "template")
+    ;; the default output directory for colporter-generated sites
+    (:output-dir . "/tmp/site/")
+    ;; the standard default template hash key (cf. colporter class def.)
+    (:default-template . "default")
+    ;; the default html output suffix
+    (:html-out-suffix . "html")
     ;; the default suffix to indicate files containing page data
-    (:page-suffix . ".md")))
+    (:page-suffix . "yaml")))
   ;;; ****
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
