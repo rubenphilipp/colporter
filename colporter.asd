@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  20:05:53 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  20:16:56 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -39,6 +39,7 @@
   :components ((:file "package")
                (:file "named-object")
                (:file "utilities")
+               (:file "markdown")
                (:file "globals")
                (:file "file")
                (:file "asset")

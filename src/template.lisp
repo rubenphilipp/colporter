@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  17:50:49 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  23:14:10 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -336,6 +336,67 @@
                                     ,uid)))
          (data (get-file site file-id)))
       `(data (get-file site ,uid))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/with-colportage
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro (to be used in the context of define-template) is part of the
+;;; implementation of colportage, a markdown-variant which implements
+;;; features specific to colporter. Its main purpose is to make snippets and
+;;; files available in the page source files (e.g. the YAML files used to
+;;; generate page objects).
+;;; Strings evaluated via with-colportage will go through the following steps:
+;;; 1) The string will be parsed via parse-markdown in order to convert
+;;;    markdown to html syntax.
+;;; 2) Then, all colportage-specific tags (e.g. [[file uid]] or [[asset ...]])
+;;;    will be converted. In this conversion process, the path to the actual
+;;;    file or snippet (in this example) will be retrieved from the respective
+;;;    object in the site object. 
+;;;
+;;; ARGUMENTS
+;;; The string to be parsed.
+;;;
+;;; EXAMPLE
+#|
+(with-colportage "Test [[file projects/img.jpg]] or [[asset logo.png]]")
+;; =>
+
+|#
+;;; SYNOPSIS
+(defmacro with-colportage (string)
+  ;;; ****
+  `(let* ((md (parse-markdown ,string))
+          (result md))
+     ;; parse files
+     (setf result
+           (cl-ppcre::regex-replace-all
+            "\\[\\[file\\s(.*?)\\]\\]"
+            result
+            #'(lambda (target start end match-start match-end &rest args)
+                (declare (ignore start end args))
+                (let* ((regex "(?:\\[\\[file\\s)\|(?:\\]\\])")
+                       (match (subseq target match-start match-end))
+                       (uid (cl-ppcre:regex-replace-all regex match "")))
+                  (insert-file-path uid)))))
+     ;; parse assets
+     (setf result
+           (cl-ppcre::regex-replace-all
+            "\\[\\[asset\\s(.*?)\\]\\]"
+            result
+            #'(lambda (target start end match-start match-end &rest args)
+                (declare (ignore start end args))
+                (let* ((regex "(?:\\[\\[asset\\s)\|(?:\\]\\])")
+                       (match (subseq target match-start match-end))
+                       (uid (cl-ppcre:regex-replace-all regex match "")))
+                  (insert-asset-path uid)))))
+     result))
 
 
 
