@@ -50,12 +50,12 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>template</strong>
 
- $$ Last modified:  13:32:11 Tue Jul 25 2023 CEST
+ $$ Last modified:  13:37:12 Tue Jul 25 2023 CEST
 </pre>
 
 <hr />
 <a name="template2fdefine2dtemplate"></a>
-<a name="robo34"></a><h2>template/define-template [ Generics ]</h2>
+<a name="robo35"></a><h2>template/define-template [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo14">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -95,7 +95,7 @@
 
 <hr />
 <a name="template2fdo2dtemplate"></a>
-<a name="robo35"></a><h2>template/do-template [ Methods ]</h2>
+<a name="robo36"></a><h2>template/do-template [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo14">template</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -121,7 +121,7 @@
 
 <hr />
 <a name="template2finsert2dsnippet"></a>
-<a name="robo36"></a><h2>template/insert-snippet [ Generics ]</h2>
+<a name="robo37"></a><h2>template/insert-snippet [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo14">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -131,7 +131,7 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This macro can be used within <a href="#robo34">define-template</a> in order to insert a <a href="./snippet_lisp.html#robo13">snippet</a>
+<pre> This macro can be used within <a href="#robo35">define-template</a> in order to insert a <a href="./snippet_lisp.html#robo13">snippet</a>
  available to the (implicitly given) <a href="./site_lisp.html#robo12">site</a> object by solely referring to
  the id by which the respective <a href="./snippet_lisp.html#robo13">snippet</a> object is stored in the snippets
  slot of the <a href="./site_lisp.html#robo12">site</a> object. 
@@ -156,7 +156,7 @@
 
 <hr />
 <a name="template2fmake2dtemplate"></a>
-<a name="robo37"></a><h2>template/make-template [ Functions ]</h2>
+<a name="robo38"></a><h2>template/make-template [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo14">template</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -190,8 +190,8 @@
 </pre>
 
 <hr />
-<a name="template2fyield2dsnippet"></a>
-<a name="robo38"></a><h2>template/yield-snippet [ Generics ]</h2>
+<a name="template2fyield2dasset"></a>
+<a name="robo39"></a><h2>template/yield-asset [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo14">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -201,7 +201,35 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This macro can be used within <a href="#robo34">define-template</a> in order to retrieve a 
+<pre> This macro can be used within <a href="#robo35">define-template</a> in order to retrieve a 
+ <a href="./asset_lisp.html#robo3">asset</a> object available to the (implicitly given) <a href="./site_lisp.html#robo12">site</a> object by solely
+ referring to the id by which the respective <a href="./asset_lisp.html#robo3">asset</a> object is stored in
+ the assets slot of the <a href="./site_lisp.html#robo12">site</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The <a href="./asset_lisp.html#robo3">asset</a> id (see above).
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>yield-asset</strong> "style.css")
+;; =&gt; (GET-ASSET SITE "sn1")
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>yield-asset</strong> (id)
+</pre>
+
+<hr />
+<a name="template2fyield2dsnippet"></a>
+<a name="robo40"></a><h2>template/yield-snippet [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo14">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro can be used within <a href="#robo35">define-template</a> in order to retrieve a 
  <a href="./snippet_lisp.html#robo13">snippet</a> object available to the (implicitly given) <a href="./site_lisp.html#robo12">site</a> object by solely
  referring to the id by which the respective <a href="./snippet_lisp.html#robo13">snippet</a> object is stored in
  the snippets slot of the <a href="./site_lisp.html#robo12">site</a> object. 
@@ -219,7 +247,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 13:32:48</p>
+<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 13:39:26</p>
 </div> <!-- footer -->
 </body>
 </html>

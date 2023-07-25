@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  13:26:24 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  13:37:58 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -308,6 +308,29 @@
   ;;; ****
   (gethash key (snippets obj)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-asset
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns a asset object from the asset hash-table of a site object by
+;;; its key. 
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The key of the asset according to the hash-table. 
+;;; 
+;;; RETURN VALUE
+;;; The asset-object. 
+;;;
+;;; SYNOPSIS
+(defmethod get-asset ((obj site) key)
+  ;;; ****
+  (gethash key (assets obj)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* site/get-template

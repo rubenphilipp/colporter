@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  13:32:11 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  13:37:12 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -223,7 +223,32 @@
      (apply #'do-snippet (list snippet ,@args))))
 
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/yield-asset
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro can be used within define-template in order to retrieve a 
+;;; asset object available to the (implicitly given) site object by solely
+;;; referring to the id by which the respective asset object is stored in
+;;; the assets slot of the site object. 
+;;;
+;;; ARGUMENTS
+;;; - The asset id (see above).
+;;;
+;;; EXAMPLE
+#|
+(yield-asset "style.css")
+;; => (GET-ASSET SITE "sn1")
+|#
+;;; SYNOPSIS
+(defmacro yield-asset (id)
+  ;;; ****
+  `(get-asset site ,id))
 
 
 

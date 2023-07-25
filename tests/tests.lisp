@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  13:32:25 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  13:39:16 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -179,9 +179,9 @@
          (equal "RP" (colporter::get-data site 'author))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; test insert-snippet
+;;; test insert-snippet and yield-asset
 ;;; RP  Tue Jul 25 13:20:46 2023
-(test test-insert-snippet
+(test test-insert-snippet-and-yield-asset
   (let* ((snippets (list
                     (colporter::make-snippet #'(lambda (x y) (+ x y))
                                              :id "sn1"
@@ -201,7 +201,8 @@
                      (cons 'project
                            (colporter::make-template
                             (colporter::define-template
-                              "project")))))
+                              (colporter::uid
+                               (colporter::yield-asset "style.css")))))))
          (base (test-pathname "content/"))
          (pages (list
                  (colporter::make-page
@@ -217,11 +218,17 @@
                   (test-pathname "content/test.jpg"))))
          (site (colporter::make-site snippets assets templates
                                      pages files :data '((title . "Test"))))
-         (result (colporter::do-template
-                     (colporter::get-template site 'home)
-                   (colporter::get-page site "home")
-                   site)))
-    (is (eq result 3))))
+         (result-a (colporter::do-template
+                       (colporter::get-template site 'home)
+                     (colporter::get-page site "home")
+                     site))
+         (result-b (colporter::do-template
+                       (colporter::get-template site 'project)
+                     (colporter::get-page site "projects/opus-1")
+                     site)))
+    (is (and
+         (eq result-a 3)
+         (equal "style.css" result-b)))))
 
 
 
