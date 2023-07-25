@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-24
 ;;;
-;;; $$ Last modified:  23:14:24 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  23:34:06 Tue Jul 25 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter.tests)
@@ -35,6 +35,19 @@
        (:body
         (:img :src (colporter::insert-asset-path "test.jpg")
               :style "width: 300px; height: auto;")
+        (:h2 "author")
+        (:p (colporter::get-data colporter::page "author"))
+        (:h3 "keywords")
+        (:div
+         (loop for keyword in (colporter::get-data
+                               colporter::page "keywords")
+               with result = ""
+               do
+                  (setf result (concatenate 'string
+                                            result
+                                            " "
+                                            keyword))
+               finally (return result)))
         (:raw
          (colporter::with-colportage
              (colporter::get-data colporter::page "content")))))))
