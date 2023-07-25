@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  16:07:43 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  16:47:14 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -302,6 +302,15 @@
                      :error-page "error"
                      :output-suffix "html")))
     (is (equal "/tmp/test-site/" (colporter::data colporter)))))
+
+
+;;; test make-files-from-dir
+;;; RP  Tue Jul 25 16:45:59 2023
+(test test-make-files-from-dir
+  (let* ((dir (test-pathname "content/"))
+         (result (colporter::make-files-from-dir dir
+                                                 :page-suffix "yaml")))
+    (is (typep result 'hash-table))))
 
 
 

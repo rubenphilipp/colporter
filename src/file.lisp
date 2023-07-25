@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  15:41:44 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  16:45:47 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -174,7 +174,69 @@
   (equal (first (type fl)) "image"))
 
 
-   
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* file/make-files-from-dir
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This function recursively scans a given directory for all files that do
+;;; not match the common page suffix (i.e. the file extension being used for
+;;; generating pages, e.g. "yaml") and instantiates file objects with the
+;;; respective uid set according to the root of the given path. Finally, the
+;;; generated objects will be returned as a hash-table with keys set to the
+;;; uids to be further used in a site object. 
+;;;
+;;; ARGUMENTS
+;;; A string being the path to the directory to recursively scan for files.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :page-suffix. A string being the file suffix of pages which will be
+;;;   excluded from the search. Default = The :page-suffix from
+;;;   +clptr-config-data+. 
+;;; 
+;;; RETURN VALUE
+;;; A hash-table with page objects (see above and cf. site).
+;;;
+;;; EXAMPLE
+#|
+(make-files-from-dir "/Users/rubenphilipp/lisp/colporter/tests/content"
+                     :page-suffix "yaml")
+;; => #<HASH-TABLE :TEST EQUAL :COUNT 3 {700881DD13}>
+|#
+;;; SYNOPSIS
+(defun make-files-from-dir (dir
+                            &key
+                              (page-suffix (get-clptr-config :page-suffix)))
+  ;;; ****
+  (let ((dir (trailing-slash dir))
+        (file-paths nil)
+        (files (make-hash-table :test 'equal)))
+    ;; scan files
+    (cl-fad:walk-directory dir
+                           #'(lambda (name)
+                               (when (and
+                                      (not (equal (pathname-type name)
+                                                  page-suffix))
+                                      ;; do not include hidden files
+                                      (not (equal "."
+                                                  (subseq
+                                                   (file-namestring name)
+                                                   0 1))))
+                                 (push name file-paths)))
+                           :directories nil)
+    ;; generate file objects
+    (loop for path in file-paths
+          for uid = (enough-namestring path dir)
+          for file = (make-file path uid :id uid)
+          do
+             (setf (gethash uid files) file))
+    files))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF file.lisp
