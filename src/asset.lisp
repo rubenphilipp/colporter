@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file -> asset
 ;;;
-;;; $$ Last modified:  15:18:53 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  17:05:18 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -82,6 +82,58 @@
                  :path path
                  :uid uid
                  :description description))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* asset/make-assets-from-dir
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This function recursively scans a given directory for all files contained
+;;; therein and instantiates file objects with the respective uid set according
+;;; to the root of the given path. Finally, the generated objects will be
+;;; returned as a hash-table with keys set to the uids to be further used in a
+;;; site object. 
+;;;
+;;; ARGUMENTS
+;;; A string being the path to the directory to recursively scan for assets.
+;;; 
+;;; RETURN VALUE
+;;; A hash-table with asset objects (see above and cf. site).
+;;;
+;;; EXAMPLE
+#|
+(let ((ass (make-assets-from-dir
+            "/Users/rubenphilipp/lisp/colporter/tests/assets")))
+  (hash-table-keys ass))
+;; => ("projects/bla/dingsdo.css" "projects/testb.jpg" "test.jpg")
+|#
+;;; SYNOPSIS
+(defun make-assets-from-dir (dir)
+  ;;; ****
+  (let ((dir (trailing-slash dir))
+        (file-paths nil)
+        (assets (make-hash-table :test 'equal)))
+    ;; scan assets
+    (cl-fad:walk-directory dir
+                           #'(lambda (name)
+                               (when ;; do not include hidden files
+                                      (not (equal "."
+                                                  (subseq
+                                                   (file-namestring name)
+                                                   0 1)))
+                                 (push name file-paths)))
+                           :directories nil)
+    ;; generate file objects
+    (loop for path in file-paths
+          for uid = (enough-namestring path dir)
+          for file = (make-file path uid :id uid)
+          do
+             (setf (gethash uid assets) file))
+    assets))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

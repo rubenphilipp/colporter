@@ -29,9 +29,9 @@
 <div id="content">
 <hr />
 <a name="named2dobject2ftemplate"></a>
-<a name="robo18"></a><h2>named-object/template [ Classes ]</h2>
+<a name="robo19"></a><h2>named-object/template [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo3">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo4">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>template</strong>
 </pre>
@@ -43,21 +43,21 @@
 </pre>
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>template</strong> class and related methods and functions.
- A <strong>template</strong> consists of a function which takes a <a href="./page_lisp.html#robo15">page</a> and a <a href="./site_lisp.html#robo16">site</a> object as
- its arguments and returns a string which will be stored as the <a href="./page_lisp.html#robo15">page</a> data
+ A <strong>template</strong> consists of a function which takes a <a href="./page_lisp.html#robo16">page</a> and a <a href="./site_lisp.html#robo17">site</a> object as
+ its arguments and returns a string which will be stored as the <a href="./page_lisp.html#robo16">page</a> data
  (thus, most likely, containing HTML markup).
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo3">named-object</a> -&gt; <strong>template</strong>
+ <a href="./named-object_lisp.html#robo4">named-object</a> -&gt; <strong>template</strong>
 
  $$ Last modified:  15:42:25 Tue Jul 25 2023 CEST
 </pre>
 
 <hr />
 <a name="template2fdefine2dtemplate"></a>
-<a name="robo40"></a><h2>template/define-template [ Generics ]</h2>
+<a name="robo41"></a><h2>template/define-template [ Generics ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo18">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo19">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -65,16 +65,16 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This macro expands to a function definition to be used to create a <a href="#robo18">template</a>
- function (i.e. a function which takes a <a href="./page_lisp.html#robo15">page</a> and a <a href="./site_lisp.html#robo16">site</a> as arguments).
+<pre> This macro expands to a function definition to be used to create a <a href="#robo19">template</a>
+ function (i.e. a function which takes a <a href="./page_lisp.html#robo16">page</a> and a <a href="./site_lisp.html#robo17">site</a> as arguments).
  
- As the aforementioned objects are available when the <a href="#robo18">template</a> function is
- evaluated during the context of assembling a <a href="./colporter_lisp.html#robo13">colporter</a>-<a href="./site_lisp.html#robo16">site</a>, all related
- methods and the slots of <a href="./page_lisp.html#robo15">page</a> and <a href="./site_lisp.html#robo16">site</a> objects (via the `<a href="./site_lisp.html#robo16">site</a>` and `<a href="./page_lisp.html#robo15">page</a>`
- symbols are available in the body of the <a href="#robo18">template</a> function. 
+ As the aforementioned objects are available when the <a href="#robo19">template</a> function is
+ evaluated during the context of assembling a <a href="./colporter_lisp.html#robo14">colporter</a>-<a href="./site_lisp.html#robo17">site</a>, all related
+ methods and the slots of <a href="./page_lisp.html#robo16">page</a> and <a href="./site_lisp.html#robo17">site</a> objects (via the `<a href="./site_lisp.html#robo17">site</a>` and `<a href="./page_lisp.html#robo16">page</a>`
+ symbols are available in the body of the <a href="#robo19">template</a> function. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The body of the <a href="#robo18">template</a> (function). 
+<pre> - The body of the <a href="#robo19">template</a> (function). 
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> Expands to a lambda function. 
@@ -82,7 +82,7 @@
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>define-template</strong>
   (with-html
-    (:p (content <a href="./page_lisp.html#robo15">page</a>))))
+    (:p (content <a href="./page_lisp.html#robo16">page</a>))))
 
 ;; =&gt; (LAMBDA (SITE PAGE)
 ;;     (EVAL
@@ -95,9 +95,9 @@
 
 <hr />
 <a name="template2fdo2dtemplate"></a>
-<a name="robo41"></a><h2>template/do-template [ Methods ]</h2>
+<a name="robo42"></a><h2>template/do-template [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo18">template</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo19">template</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -105,25 +105,25 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This method evaluates the <a href="#robo18">template</a> with the given <a href="./page_lisp.html#robo15">page</a> and <a href="./site_lisp.html#robo16">site</a> object. 
+<pre> This method evaluates the <a href="#robo19">template</a> with the given <a href="./page_lisp.html#robo16">page</a> and <a href="./site_lisp.html#robo17">site</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo18">template</a> object.
- - A <a href="./page_lisp.html#robo15">page</a> object.
- - A <a href="./site_lisp.html#robo16">site</a> object. 
+<pre> - The <a href="#robo19">template</a> object.
+ - A <a href="./page_lisp.html#robo16">page</a> object.
+ - A <a href="./site_lisp.html#robo17">site</a> object. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The return value of the <a href="#robo18">template</a>. 
+<pre> The return value of the <a href="#robo19">template</a>. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>do-template</strong> ((<a href="#robo18">template</a> <a href="#robo18">template</a>) <a href="./page_lisp.html#robo15">page</a> <a href="./site_lisp.html#robo16">site</a>)
+<pre class="source">(defmethod <strong>do-template</strong> ((<a href="#robo19">template</a> <a href="#robo19">template</a>) <a href="./page_lisp.html#robo16">page</a> <a href="./site_lisp.html#robo17">site</a>)
 </pre>
 
 <hr />
 <a name="template2finsert2dasset2dpath"></a>
-<a name="robo42"></a><h2>template/insert-asset-path [ Generics ]</h2>
+<a name="robo43"></a><h2>template/insert-asset-path [ Generics ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo18">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo19">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -131,13 +131,13 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This macro inserts the <a href="./asset_lisp.html#robo5">asset</a> path relative to the <a href="./asset_lisp.html#robo5">asset</a> base dir (cf.
- <a href="./site_lisp.html#robo16">site</a>) which could be used for referencing to the <a href="./file_lisp.html#robo14">file</a> in an html-context
+<pre> This macro inserts the <a href="./asset_lisp.html#robo6">asset</a> path relative to the <a href="./asset_lisp.html#robo6">asset</a> base dir (cf.
+ <a href="./site_lisp.html#robo17">site</a>) which could be used for referencing to the <a href="./file_lisp.html#robo15">file</a> in an html-context
  (e.g. in the href for images). This macro is intended to be used in the
- context of <a href="#robo40">define-template</a>.
+ context of <a href="#robo41">define-template</a>.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> The <a href="./asset_lisp.html#robo5">asset</a> id (see above).
+<pre> The <a href="./asset_lisp.html#robo6">asset</a> id (see above).
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>insert-asset-path</strong> "css/main.css")
@@ -152,9 +152,9 @@
 
 <hr />
 <a name="template2finsert2dsnippet"></a>
-<a name="robo43"></a><h2>template/insert-snippet [ Generics ]</h2>
+<a name="robo44"></a><h2>template/insert-snippet [ Generics ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo18">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo19">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -162,18 +162,18 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This macro can be used within <a href="#robo40">define-template</a> in order to insert a <a href="./snippet_lisp.html#robo17">snippet</a>
- available to the (implicitly given) <a href="./site_lisp.html#robo16">site</a> object by solely referring to
- the id by which the respective <a href="./snippet_lisp.html#robo17">snippet</a> object is stored in the snippets
- slot of the <a href="./site_lisp.html#robo16">site</a> object. 
+<pre> This macro can be used within <a href="#robo41">define-template</a> in order to insert a <a href="./snippet_lisp.html#robo18">snippet</a>
+ available to the (implicitly given) <a href="./site_lisp.html#robo17">site</a> object by solely referring to
+ the id by which the respective <a href="./snippet_lisp.html#robo18">snippet</a> object is stored in the snippets
+ slot of the <a href="./site_lisp.html#robo17">site</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="./snippet_lisp.html#robo17">snippet</a> id (see above). 
+<pre> - The <a href="./snippet_lisp.html#robo18">snippet</a> id (see above). 
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> rest:
- - All other arguments required by the <a href="./snippet_lisp.html#robo17">snippet</a> according to its definition
-   (cf. define-<a href="./snippet_lisp.html#robo17">snippet</a>). 
+ - All other arguments required by the <a href="./snippet_lisp.html#robo18">snippet</a> according to its definition
+   (cf. define-<a href="./snippet_lisp.html#robo18">snippet</a>). 
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>insert-snippet</strong> "sn1" 1 'test)
@@ -187,9 +187,9 @@
 
 <hr />
 <a name="template2fmake2dtemplate"></a>
-<a name="robo44"></a><h2>template/make-template [ Functions ]</h2>
+<a name="robo45"></a><h2>template/make-template [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo18">template</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo19">template</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -197,24 +197,24 @@
 <pre> 2023-07-23
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This function is a shorthand to instantiate a <a href="#robo18">template</a> object.
+<pre> This function is a shorthand to instantiate a <a href="#robo19">template</a> object.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> The <a href="#robo18">template</a> (function). Must be a (lambda) function. This function must 
+<pre> The <a href="#robo19">template</a> (function). Must be a (lambda) function. This function must 
  take at least two arguments:
- - A <a href="./page_lisp.html#robo15">page</a> object.
- - A <a href="./site_lisp.html#robo16">site</a> object. 
+ - A <a href="./page_lisp.html#robo16">page</a> object.
+ - A <a href="./site_lisp.html#robo17">site</a> object. 
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
- - :description. A short description of the <a href="#robo18">template</a> function as a string.
- - :id. The id of the <a href="#robo18">template</a> object. 
+ - :description. A short description of the <a href="#robo19">template</a> function as a string.
+ - :id. The id of the <a href="#robo19">template</a> object. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="#robo18">template</a> object. 
+<pre> The <a href="#robo19">template</a> object. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defun <strong>make-template</strong> (<a href="#robo18">template</a>
+<pre class="source">(defun <strong>make-template</strong> (<a href="#robo19">template</a>
                       &amp;key
                         (description "")
                         (id nil))
@@ -222,9 +222,9 @@
 
 <hr />
 <a name="template2fyield2dasset"></a>
-<a name="robo45"></a><h2>template/yield-asset [ Generics ]</h2>
+<a name="robo46"></a><h2>template/yield-asset [ Generics ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo18">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo19">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -232,13 +232,13 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This macro can be used within <a href="#robo40">define-template</a> in order to retrieve a 
- <a href="./asset_lisp.html#robo5">asset</a> object available to the (implicitly given) <a href="./site_lisp.html#robo16">site</a> object by solely
- referring to the id by which the respective <a href="./asset_lisp.html#robo5">asset</a> object is stored in
- the assets slot of the <a href="./site_lisp.html#robo16">site</a> object. 
+<pre> This macro can be used within <a href="#robo41">define-template</a> in order to retrieve a 
+ <a href="./asset_lisp.html#robo6">asset</a> object available to the (implicitly given) <a href="./site_lisp.html#robo17">site</a> object by solely
+ referring to the id by which the respective <a href="./asset_lisp.html#robo6">asset</a> object is stored in
+ the assets slot of the <a href="./site_lisp.html#robo17">site</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="./asset_lisp.html#robo5">asset</a> id (see above).
+<pre> - The <a href="./asset_lisp.html#robo6">asset</a> id (see above).
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>yield-asset</strong> "style.css")
@@ -250,9 +250,9 @@
 
 <hr />
 <a name="template2fyield2dsnippet"></a>
-<a name="robo46"></a><h2>template/yield-snippet [ Generics ]</h2>
+<a name="robo47"></a><h2>template/yield-snippet [ Generics ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo18">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo19">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -260,13 +260,13 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This macro can be used within <a href="#robo40">define-template</a> in order to retrieve a 
- <a href="./snippet_lisp.html#robo17">snippet</a> object available to the (implicitly given) <a href="./site_lisp.html#robo16">site</a> object by solely
- referring to the id by which the respective <a href="./snippet_lisp.html#robo17">snippet</a> object is stored in
- the snippets slot of the <a href="./site_lisp.html#robo16">site</a> object. 
+<pre> This macro can be used within <a href="#robo41">define-template</a> in order to retrieve a 
+ <a href="./snippet_lisp.html#robo18">snippet</a> object available to the (implicitly given) <a href="./site_lisp.html#robo17">site</a> object by solely
+ referring to the id by which the respective <a href="./snippet_lisp.html#robo18">snippet</a> object is stored in
+ the snippets slot of the <a href="./site_lisp.html#robo17">site</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="./snippet_lisp.html#robo17">snippet</a> id (see above).
+<pre> - The <a href="./snippet_lisp.html#robo18">snippet</a> id (see above).
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>yield-snippet</strong> "sn1")
@@ -278,7 +278,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 16:57:36</p>
+<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 17:05:40</p>
 </div> <!-- footer -->
 </body>
 </html>
