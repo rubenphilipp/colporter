@@ -19,19 +19,15 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file -> asset
 ;;;
-;;; $$ Last modified:  01:28:40 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  15:18:53 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
 
 (defclass asset (file)
-  ;; the UID (unique id) of the asset
-  ;; this is most related to the output path relative to the site asset
-  ;; directory (e.g. "css/main" => "css/main.css")
-  ;; all other slots are inherited from the file class
-  ;; RP  Mon Jul 24 15:27:31 2023
-  ((uid :accessor uid :initarg :uid :initform nil)))
+  ;; nothing to add
+  ())
 
 (defmethod initialize-instance :after ((as asset) &rest initargs)
   (declare (ignore initargs))
@@ -39,10 +35,6 @@
     (error "asset::initialize-instance: The uid for asset ~a is not ~
             set.")))
 
-
-(defmethod print-object :before ((as asset) stream)
-  (format stream "~%ASSET: uid: ~a"
-          (uid as)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -59,8 +51,12 @@
 ;;;
 ;;; ARGUMENTS
 ;;; - The path to the asset as a string.
-;;; - The uid (i.e. most likely the output path relative to the size asset
-;;;   directory) of the asset as a string. 
+;;; - The uid of the asset. This should be a string mirroring the path
+;;;   to the asset relative to the site asset path (cf. site and colporter), as
+;;;   this will  be used both for referencing the asset and for generating the
+;;;   url which will be used e.g. in html output. For example, an asset with
+;;;   the path "/assets/css/main.css" should obtain the uid
+;;;   "css/main.css".
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:

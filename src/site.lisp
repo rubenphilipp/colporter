@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  14:47:04 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  15:27:37 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -84,6 +84,12 @@
   (setf (slot-value st 'asset-base-dir) (trailing-slash (asset-base-dir st)))
   st)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod (setf asset-base-dir) (value (st site))
+  (declare (ignore value))
+  (update st))
+
 (defmethod print-object :before ((st site) stream)
   (format stream "~%SITE: description: ~a ~% ~
                   NB: other slots (snippets, templates etc.) are left out ~
@@ -141,6 +147,8 @@
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
+;;; - :asset-base-dir. A string being the base directory for the assets
+;;;   (relative to the output-dir; cf. colporter). Default = "assets/"
 ;;; - :data. The data of the site (e.g. title, author etc.) as an alist or
 ;;;   hash-table. Default = nil.
 ;;; - :description. A short textual description of the site. Default = ""
@@ -191,6 +199,7 @@
 ;;; SYNOPSIS
 (defun make-site (snippets assets templates pages files
                   &key
+                    (asset-base-dir "assets/")
                     (data nil)
                     (description "")
                     (id nil))
@@ -202,6 +211,7 @@
         (files (site-list?-to-hash files)))
     (make-instance 'site :snippets snippets
                          :assets assets
+                         :asset-base-dir asset-base-dir
                          :templates templates
                          :pages pages
                          :files files

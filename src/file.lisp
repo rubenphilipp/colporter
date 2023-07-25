@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  23:48:21 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  15:14:21 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -83,6 +83,8 @@
 ;;; SYNOPSIS
 (defmethod update ((fl file))
   ;;; ****
+  (unless (uid fl)
+    (error "file::update: No uid is set."))
   (let* ((file-stats (osicat-posix:stat (path fl)))
          (file-size-kb (/ (osicat-posix:stat-size file-stats) 1000.0))
          (file-mime (file-types::file-mime (path fl))))
@@ -90,11 +92,11 @@
           (slot-value fl 'extension) (pathname-type (path fl))
           (slot-value fl 'filename) (file-namestring (path fl))
           (slot-value fl 'type) file-mime
-          (slot-value fl 'data) (path fl)))
+          (slot-value fl 'data) (uid fl)))
   ;; generate uid
-  (unless (uid fl)
-    (setf (slot-value fl 'uid)
-          (uid-from-path (path fl) (base fl))))
+  ;; (unless (uid fl)
+  ;;   (setf (slot-value fl 'uid)
+  ;;         (uid-from-path (path fl) (base fl))))
   ;; set id according to uid
   (setf (slot-value fl 'id) (uid fl))
   fl)
@@ -112,7 +114,12 @@
 ;;; Helper function to make a file object. 
 ;;;
 ;;; ARGUMENTS
-;;; The path to the file. 
+;;; - The path to the file.
+;;; - The uid of the file. This should be a string mirroring the path
+;;;   to the file relative to the site base path (cf. colporter), as this will
+;;;   be used both for referencing the file and for generating the url which
+;;;   will be used e.g. in html output. For example, a file with the path
+;;;   "/contents/projects/image.jpg" should obtain the uid "projects/image.jpg".
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
@@ -124,16 +131,17 @@
 ;;;
 ;;; EXAMPLE
 #|
-(let ((file (make-file "~/image.jpg")))
+(let ((file (make-file "image.jpg" "~/image.jpg")))
   (type file))
 ;; => ("image" "jpeg")
 |#
 ;;; SYNOPSIS
-(defun make-file (path &key
-                         (description "")
-                         (id nil))
+(defun make-file (path uid &key
+                             (description "")
+                             (id nil))
   ;;; ****
   (make-instance 'file :path path
+                       :uid uid
                        :description description
                        :id id))
 

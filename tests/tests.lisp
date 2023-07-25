@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  14:02:45 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  15:32:08 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -56,7 +56,7 @@
 ;;; RP  Mon Jul 24 15:18:15 2023
 (test test-make-file
       (let* ((testfile (test-pathname "style.css"))
-             (file (colporter::make-file testfile
+             (file (colporter::make-file testfile "style.css"
                                          :description "A test file")))
         (is (and
              (equal "style.css" (colporter::filename file))
@@ -78,7 +78,7 @@
 ;;; RP  Mon Jul 24 15:44:03 2023
 (test test-imagep
   (let* ((testfile (test-pathname "test.jpg"))
-         (file (colporter::make-file testfile)))
+         (file (colporter::make-file testfile "test.jpg")))
     (is (colporter::imagep file))))
 
 ;;; test snippet
@@ -159,9 +159,11 @@
                   base)))
          (files (list
                  (colporter::make-file
-                  (test-pathname "content/projects/testb.jpg"))
+                  (test-pathname "content/projects/testb.jpg")
+                  "projects/testb.jpg")
                  (colporter::make-file
-                  (test-pathname "content/test.jpg"))))
+                  (test-pathname "content/test.jpg")
+                  "test.jpg")))
          (site (colporter::make-site snippets assets templates
                                      pages files :data '((title . "Test")))))
     ;; test adding a value
@@ -198,6 +200,10 @@
                            (colporter::make-template
                             (colporter::define-template
                               (colporter::insert-snippet "sn1" 1 2))))
+                     (cons 'project-b
+                           (colporter::make-template
+                            (colporter::define-template
+                               (colporter::insert-asset-path "style.css"))))
                      (cons 'project
                            (colporter::make-template
                             (colporter::define-template
@@ -213,11 +219,14 @@
                   base)))
          (files (list
                  (colporter::make-file
-                  (test-pathname "content/projects/testb.jpg"))
+                  (test-pathname "content/projects/testb.jpg")
+                  "projects/testb.jpg")
                  (colporter::make-file
-                  (test-pathname "content/test.jpg"))))
+                  (test-pathname "content/test.jpg")
+                  "test.jpg")))
          (site (colporter::make-site snippets assets templates
-                                     pages files :data '((title . "Test"))))
+                                     pages files :data '((title . "Test"))
+                                     :asset-base-dir "assets/"))
          (result-a (colporter::do-template
                        (colporter::get-template site 'home)
                      (colporter::get-page site "home")
@@ -225,8 +234,14 @@
          (result-b (colporter::do-template
                        (colporter::get-template site 'project)
                      (colporter::get-page site "projects/opus-1")
+                     site))
+         (result-c (colporter::do-template
+                       (colporter::get-template site 'project-b)
+                     (colporter::get-page site "projects/opus-1")
                      site)))
+    (print pages)
     (is (and
+         (equal "assets/style.css" result-c)
          (equal "Home" (colporter::get-data
                         (colporter::get-page site "home") "title"))
          (eq result-a 3)

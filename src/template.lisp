@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  13:37:12 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  15:25:26 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -250,6 +250,40 @@
   ;;; ****
   `(get-asset site ,id))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/insert-asset-path
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro inserts the asset path relative to the asset base dir (cf.
+;;; site) which could be used for referencing to the file in an html-context
+;;; (e.g. in the href for images). This macro is intended to be used in the
+;;; context of define-template.
+;;;
+;;; ARGUMENTS
+;;; The asset id (see above).
+;;; 
+;;; EXAMPLE
+#|
+(insert-asset-path "css/main.css")
+;; =>
+;; (LET ((ASSET (GET-ASSET SITE "css/main.css"))
+;;       (ASSET-BASE-DIR (ASSET-BASE-DIR SITE)))
+;;   (CONCATENATE 'STRING ASSET-BASE-DIR (DATA ASSET)))
+|#
+;;; SYNOPSIS
+(defmacro insert-asset-path (id)
+  ;;; ****
+  `(let ((asset (get-asset site ,id))
+         (asset-base-dir (asset-base-dir site)))
+     (concatenate 'string
+                  asset-base-dir
+                  (data asset))))
 
 
 
