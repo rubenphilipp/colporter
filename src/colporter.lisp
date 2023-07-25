@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  00:13:57 Wed Jul 26 2023 CEST
+;;; $$ Last modified:  00:17:49 Wed Jul 26 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -189,7 +189,7 @@
   (ensure-directories-exist (output-dir clptr) :verbose verbose)
   ;; move all assets to the asset-base-dir in the output-dir
   (when verbose
-    (format t "- moving assets: ~%"))
+    (format t "- moving assets... ~%"))
   (let* ((assets (assets (site clptr)))
          ;; the absolute path to the asset-base-dir
          (assets-base (concatenate 'string
@@ -210,7 +210,7 @@
              (uiop:copy-file source destination)))
   ;; move all files
   (when verbose
-    (format t "- moving files: ~%"))
+    (format t "- moving files... ~%"))
   (let* ((files (files (site clptr)))
          (base (output-dir clptr)))
     (loop for key being the hash-keys of files
@@ -226,7 +226,7 @@
              (uiop:copy-file source destination)))
   ;; now generate and save the pages
   (when verbose
-    (format t "- parsing and saving the pages: ~%"))
+    (format t "- parsing and saving the pages... ~%"))
   (let* ((site (site clptr))
          (output-suffix (output-suffix clptr))
          (base (output-dir clptr))
@@ -253,7 +253,7 @@
                                      :if-does-not-exist :create)
                (format stream "~a" (do-template template page site)))))
   (when verbose
-    (format t "- creating the .htaccess file: ~%"))
+    (format t "- creating the .htaccess file... ~%"))
   (let ((error-page (concatenate 'string
                                  (output-dir clptr)
                                  (error-page clptr)
