@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  23:17:14 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  00:29:11 Wed Jul 26 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -347,7 +347,7 @@
 ;;; 2023-07-24
 ;;; 
 ;;; DESCRIPTION
-;;; This macro (to be used in the context of define-template) is part of the
+;;; This macro -- to be used in the context of define-template -- is part of the
 ;;; implementation of colportage, a markdown-variant which implements
 ;;; features specific to colporter. Its main purpose is to make snippets and
 ;;; files available in the page source files (e.g. the YAML files used to
