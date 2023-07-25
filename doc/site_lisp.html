@@ -46,15 +46,106 @@
  A <strong>site</strong> object holds all information (i.e. meta-data, objects as pages
  templates etc.) that are relevant for assembling a <strong>site</strong> via colporter.
 
+ NB: Information like the <strong>site</strong> title resides in the data slot (which
+     holds a hash table). 
+
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>site</strong>
 
- $$ Last modified:  00:01:02 Tue Jul 25 2023 CEST
+ $$ Last modified:  11:29:07 Tue Jul 25 2023 CEST
+</pre>
+
+<hr />
+<a name="site2fmake2dsite"></a>
+<a name="robo18"></a><h2>site/make-site [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function is a shortcut to instantiate a <a href="#robo12">site</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The available <a href="./snippet_lisp.html#robo13">snippet</a> objects. Could be given either as a list of
+   <a href="./snippet_lisp.html#robo13">snippet</a> objects, an alist or a hash table (the latter being the definitive
+   structure in which the values will be stored).
+   - If the argument is of type list, the keyword for the hash-table will be
+     the id of the respective <a href="./snippet_lisp.html#robo13">snippet</a> object.
+     NB: Make sure that, in this case, all object's IDs are unique.
+   - If the argument is of type alist or hash-table, the key will be set
+     according to the structure of the alist/hash-table.
+ - The available <a href="./asset_lisp.html#robo3">asset</a> objects. Data type is analogous to the snippets
+   argument.
+ - The available <a href="./template_lisp.html#robo14">template</a> objects. Data type is analogous to the snippets
+   argument.
+ - The available <a href="./page_lisp.html#robo11">page</a> objects. Data type is analogous to the snippets
+   argument.
+ - The available <a href="./file_lisp.html#robo10">file</a> objects. Data type is analogous to the snippets
+   argument.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :data. The data of the <a href="#robo12">site</a> (e.g. title, author etc.) as an alist or
+   hash-table. Default = nil.
+ - :description. A short textual description of the <a href="#robo12">site</a>. Default = ""
+ - :id. The id of the <a href="#robo12">site</a> object. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The <a href="#robo12">site</a> object. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(let* ((snippets (list
+                    (<a href="./snippet_lisp.html#robo21">make-snippet</a> #'(lambda (x y) (+ x y))
+                                             :id 'sn1
+                                             :description "addition")
+                    (<a href="./snippet_lisp.html#robo21">make-snippet</a> #'(lambda (x) (print x))
+                                             :id 'sn2
+                                             :description "just print")))
+         (assets (list
+                  (<a href="./asset_lisp.html#robo1">make-asset</a>
+                   "/assets/style.css"
+                   "style.css")))
+         (templates (list
+                     (cons 'home
+                           (<a href="./template_lisp.html#robo24">make-template</a>
+                            (<a href="./template_lisp.html#robo22">define-template</a>
+                              "home")))
+                     (cons 'project
+                           (<a href="./template_lisp.html#robo24">make-template</a>
+                            (<a href="./template_lisp.html#robo22">define-template</a>
+                              "project")))))
+         (base "/content/")
+         (pages (list
+                 (<a href="./page_lisp.html#robo16">make-page</a>
+                  "/content/home.yaml"
+                  base)
+                 (<a href="./page_lisp.html#robo16">make-page</a>
+                  "/content/projects/opus-1.yaml"
+                  base)))
+         (files (list
+                 (<a href="./file_lisp.html#robo5">make-file</a>
+                  "/content/projects/testb.jpg")
+                 (<a href="./file_lisp.html#robo5">make-file</a>
+                  "/content/test.jpg")))
+       (<a href="#robo12">site</a> (<strong>make-site</strong> snippets assets templates
+                        pages files :data '((title . "Test")))))
+  <a href="#robo12">site</a>)
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>make-site</strong> (snippets assets templates pages files
+                  &amp;key
+                    (data nil)
+                    (description "")
+                    (id nil))
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 00:04:45</p>
+<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 11:29:13</p>
 </div> <!-- footer -->
 </body>
 </html>

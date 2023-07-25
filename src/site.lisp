@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  11:27:30 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  11:29:07 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -148,7 +148,7 @@
                                              :description "just print")))
          (assets (list
                   (make-asset
-                   "/Users/rubenphilipp/lisp/colporter/tests/assets/style.css"
+                   "/assets/style.css"
                    "style.css")))
          (templates (list
                      (cons 'home
@@ -159,19 +159,19 @@
                            (make-template
                             (define-template
                               "project")))))
-         (base "/Users/rubenphilipp/lisp/colporter/tests/content/")
+         (base "/content/")
          (pages (list
                  (make-page
-                  "/Users/rubenphilipp/lisp/colporter/tests/content/home.yaml"
+                  "/content/home.yaml"
                   base)
                  (make-page
-                  "/Users/rubenphilipp/lisp/colporter/tests/content/projects/opus-1.yaml"
+                  "/content/projects/opus-1.yaml"
                   base)))
          (files (list
                  (make-file
-                  "/Users/rubenphilipp/lisp/colporter/tests/content/projects/testb.jpg")
+                  "/content/projects/testb.jpg")
                  (make-file
-                  "/Users/rubenphilipp/lisp/colporter/tests/content/test.jpg")))
+                  "/content/test.jpg")))
        (site (make-site snippets assets templates
                         pages files :data '((title . "Test")))))
   site)
