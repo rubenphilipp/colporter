@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  16:36:43 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  01:12:20 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -71,9 +71,10 @@
 ;;; The template object. 
 ;;; 
 ;;; SYNOPSIS
-(defun make-template (template &key
-                                     (description "")
-                                     (id nil))
+(defun make-template (template
+                      &key
+                        (description "")
+                        (id nil))
   ;;; ****
   (make-instance 'template
                  :template template

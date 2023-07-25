@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  00:02:57 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  11:27:52 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -125,6 +125,46 @@
          (eq 'home (colporter::template page))
          (typep (colporter::data page) 'hash-table)
          (equal "home" (colporter::uid page))))))
+
+;;; test make-site
+;;; RP  Tue Jul 25 01:08:28 2023
+(test test-make-site
+  (let* ((snippets (list
+                    (colporter::make-snippet #'(lambda (x y) (+ x y))
+                                             :id 'sn1
+                                             :description "addition")
+                    (colporter::make-snippet #'(lambda (x) (print x))
+                                             :id 'sn2
+                                             :description "just print")))
+         (assets (list
+                  (colporter::make-asset
+                   (test-pathname "assets/style.css")
+                   "style.css")))
+         (templates (list
+                     (cons 'home
+                           (colporter::make-template
+                            (colporter::define-template
+                              "home")))
+                     (cons 'project
+                           (colporter::make-template
+                            (colporter::define-template
+                              "project")))))
+         (base (test-pathname "content/"))
+         (pages (list
+                 (colporter::make-page
+                  (test-pathname "content/home.yaml")
+                  base)
+                 (colporter::make-page
+                  (test-pathname "content/projects/opus-1.yaml")
+                  base)))
+         (files (list
+                 (colporter::make-file
+                  (test-pathname "content/projects/testb.jpg"))
+                 (colporter::make-file
+                  (test-pathname "content/test.jpg"))))
+         (site (colporter::make-site snippets assets templates
+                                     pages files :data '((title . "Test")))))
+    (is (equal "Test" (gethash 'title (colporter::data site))))))
 
 
 
