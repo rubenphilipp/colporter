@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  12:49:17 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  12:54:05 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -383,9 +383,124 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-assets
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns either a list of all keys related to the assets objects in the
+;;; assets hash-table or, when :objects is T, a list of the objects
+;;; themselves. 
+;;;
+;;; ARGUMENTS
+;;; - A site object.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :objects. A boolean indicating whether returning a list of keys (NIL) or
+;;;   a list of objects (T). Default = NIL
+;;; 
+;;; RETURN VALUE
+;;; Either a list of keys or snippet objects. 
+;;;
+;;; SYNOPSIS
+(defmethod get-assets ((obj site) &key (objects nil))
+  ;;; ****
+  (get-keys-or-objects obj assets objects))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-templates
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns either a list of all keys related to the templates objects in the
+;;; templates hash-table or, when :objects is T, a list of the objects
+;;; themselves. 
+;;;
+;;; ARGUMENTS
+;;; - A site object.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :objects. A boolean indicating whether returning a list of keys (NIL) or
+;;;   a list of objects (T). Default = NIL
+;;; 
+;;; RETURN VALUE
+;;; Either a list of keys or snippet objects. 
+;;;
+;;; SYNOPSIS
+(defmethod get-templates ((obj site) &key (objects nil))
+  ;;; ****
+  (get-keys-or-objects obj templates objects))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-pages
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns either a list of all keys related to the pages objects in the
+;;; pages hash-table or, when :objects is T, a list of the objects
+;;; themselves. 
+;;;
+;;; ARGUMENTS
+;;; - A site object.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :objects. A boolean indicating whether returning a list of keys (NIL) or
+;;;   a list of objects (T). Default = NIL
+;;; 
+;;; RETURN VALUE
+;;; Either a list of keys or snippet objects. 
+;;;
+;;; SYNOPSIS
+(defmethod get-pages ((obj site) &key (objects nil))
+  ;;; ****
+  (get-keys-or-objects obj pages objects))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-files
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns either a list of all keys related to the files objects in the
+;;; files hash-table or, when :objects is T, a list of the objects
+;;; themselves. 
+;;;
+;;; ARGUMENTS
+;;; - A site object.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :objects. A boolean indicating whether returning a list of keys (NIL) or
+;;;   a list of objects (T). Default = NIL
+;;; 
+;;; RETURN VALUE
+;;; Either a list of keys or snippet objects. 
+;;;
+;;; SYNOPSIS
+(defmethod get-files ((obj site) &key (objects nil))
+  ;;; ****
+  (get-keys-or-objects obj files objects))
    
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -52,12 +52,43 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>site</strong>
 
- $$ Last modified:  12:49:17 Tue Jul 25 2023 CEST
+ $$ Last modified:  12:54:05 Tue Jul 25 2023 CEST
+</pre>
+
+<hr />
+<a name="site2fget2dassets"></a>
+<a name="robo18"></a><h2>site/get-assets [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns either a list of all keys related to the assets objects in the
+ assets hash-table or, when :objects is T, a list of the objects
+ themselves. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="#robo12">site</a> object.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :objects. A boolean indicating whether returning a list of keys (NIL) or
+   a list of objects (T). Default = NIL
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>get-assets</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
 </pre>
 
 <hr />
 <a name="site2fget2ddata"></a>
-<a name="robo18"></a><h2>site/get-data [ Methods ]</h2>
+<a name="robo19"></a><h2>site/get-data [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -82,8 +113,39 @@
 </pre>
 
 <hr />
+<a name="site2fget2dfiles"></a>
+<a name="robo20"></a><h2>site/get-files [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns either a list of all keys related to the files objects in the
+ files hash-table or, when :objects is T, a list of the objects
+ themselves. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="#robo12">site</a> object.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :objects. A boolean indicating whether returning a list of keys (NIL) or
+   a list of objects (T). Default = NIL
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>get-files</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+</pre>
+
+<hr />
 <a name="site2fget2dkeys2dor2dobjects"></a>
-<a name="robo19"></a><h2>site/get-keys-or-objects [ Methods ]</h2>
+<a name="robo21"></a><h2>site/get-keys-or-objects [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -119,8 +181,39 @@
 </pre>
 
 <hr />
+<a name="site2fget2dpages"></a>
+<a name="robo22"></a><h2>site/get-pages [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns either a list of all keys related to the pages objects in the
+ pages hash-table or, when :objects is T, a list of the objects
+ themselves. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="#robo12">site</a> object.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :objects. A boolean indicating whether returning a list of keys (NIL) or
+   a list of objects (T). Default = NIL
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>get-pages</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+</pre>
+
+<hr />
 <a name="site2fget2dsnippet"></a>
-<a name="robo20"></a><h2>site/get-snippet [ Methods ]</h2>
+<a name="robo23"></a><h2>site/get-snippet [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -146,7 +239,7 @@
 
 <hr />
 <a name="site2fget2dsnippets"></a>
-<a name="robo21"></a><h2>site/get-snippets [ Methods ]</h2>
+<a name="robo24"></a><h2>site/get-snippets [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -176,8 +269,39 @@
 </pre>
 
 <hr />
+<a name="site2fget2dtemplates"></a>
+<a name="robo25"></a><h2>site/get-templates [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns either a list of all keys related to the templates objects in the
+ templates hash-table or, when :objects is T, a list of the objects
+ themselves. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="#robo12">site</a> object.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :objects. A boolean indicating whether returning a list of keys (NIL) or
+   a list of objects (T). Default = NIL
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>get-templates</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+</pre>
+
+<hr />
 <a name="site2fmake2dsite"></a>
-<a name="robo22"></a><h2>site/make-site [ Functions ]</h2>
+<a name="robo26"></a><h2>site/make-site [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -219,10 +343,10 @@
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(let* ((snippets (list
-                    (<a href="./snippet_lisp.html#robo27">make-snippet</a> #'(lambda (x y) (+ x y))
+                    (<a href="./snippet_lisp.html#robo31">make-snippet</a> #'(lambda (x y) (+ x y))
                                              :id 'sn1
                                              :description "addition")
-                    (<a href="./snippet_lisp.html#robo27">make-snippet</a> #'(lambda (x) (print x))
+                    (<a href="./snippet_lisp.html#robo31">make-snippet</a> #'(lambda (x) (print x))
                                              :id 'sn2
                                              :description "just print")))
          (assets (list
@@ -231,12 +355,12 @@
                    "style.css")))
          (templates (list
                      (cons 'home
-                           (<a href="./template_lisp.html#robo30">make-template</a>
-                            (<a href="./template_lisp.html#robo28">define-template</a>
+                           (<a href="./template_lisp.html#robo34">make-template</a>
+                            (<a href="./template_lisp.html#robo32">define-template</a>
                               "home")))
                      (cons 'project
-                           (<a href="./template_lisp.html#robo30">make-template</a>
-                            (<a href="./template_lisp.html#robo28">define-template</a>
+                           (<a href="./template_lisp.html#robo34">make-template</a>
+                            (<a href="./template_lisp.html#robo32">define-template</a>
                               "project")))))
          (base "/content/")
          (pages (list
@@ -265,7 +389,7 @@
 
 <hr />
 <a name="site2fremove2ddata"></a>
-<a name="robo23"></a><h2>site/remove-data [ Methods ]</h2>
+<a name="robo27"></a><h2>site/remove-data [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -291,7 +415,7 @@
 
 <hr />
 <a name="site2fset2ddata"></a>
-<a name="robo24"></a><h2>site/set-data [ Methods ]</h2>
+<a name="robo28"></a><h2>site/set-data [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -324,7 +448,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 12:51:21</p>
+<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 12:54:24</p>
 </div> <!-- footer -->
 </body>
 </html>
