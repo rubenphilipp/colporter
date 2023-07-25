@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  23:44:46 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  23:59:33 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -254,7 +254,29 @@
                (format stream "~a" (do-template template page site)))))
   (when verbose
     (format t "- creating the .htaccess file: ~%"))
-  
+  (let ((error-page (concatenate 'string
+                                 (output-dir clptr)
+                                 (error-page clptr)
+                                 "."
+                                 (output-suffix clptr))))
+    ;; test if error page exists
+    (unless (probe-file error-page)
+      (error "colporter::build: The error page ~a does not exist."
+             error-page))
+    (let ((htaccess-data (concatenate 'string
+                                      "ErrorDocument 404 "
+                                      "/"
+                                      (error-page clptr)
+                                      "."
+                                      (output-suffix clptr))))
+      (with-open-file (stream (concatenate 'string
+                                           (output-dir clptr)
+                                           ".htaccess")
+                              :direction :output
+                              :if-does-not-exist :create
+                              :if-exists :supersede)
+        (format stream "~a" htaccess-data))))
+                                   
   (format t "~% BUILD DONE ~%********** ~%")
   (output-dir clptr))
   
