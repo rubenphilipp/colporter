@@ -50,7 +50,7 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <strong>template</strong>
 
- $$ Last modified:  23:14:10 Tue Jul 25 2023 CEST
+ $$ Last modified:  23:17:14 Tue Jul 25 2023 CEST
 </pre>
 
 <hr />
@@ -297,6 +297,45 @@
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>with-colportage</strong> "Test [[<a href="./file_lisp.html#robo18">file</a> projects/img.jpg]] or [[<a href="./asset_lisp.html#robo8">asset</a> logo.png]]")
 ;; =&gt;
+;; (LET* ((MD
+;;          (PARSE-MARKDOWN
+;;           "Test [[<a href="./file_lisp.html#robo18">file</a> projects/img.jpg]] or [[<a href="./asset_lisp.html#robo8">asset</a> logo.png]]"))
+;;        (RESULT MD))
+;;   (SETF RESULT
+;;         (CL-PPCRE:REGEX-REPLACE-ALL
+;;       "\\[\\[<a href="./file_lisp.html#robo18">file</a>\\s(.*?)\\]\\]" RESULT
+;;          #'(LAMBDA
+;;                (TARGET START END MATCH-START
+;;                 MATCH-END
+;;                 &amp;REST ARGS)
+;;              (DECLARE (IGNORE START END ARGS))
+;;              (LET* ((REGEX
+;;                       "(?:\\[\\[<a href="./file_lisp.html#robo18">file</a>\\s)|(?:\\]\\])")
+;;                     (MATCH
+;;                         (SUBSEQ TARGET MATCH-START
+;;                                 MATCH-END))
+;;                     (UID
+;;                       (CL-PPCRE:REGEX-REPLACE-ALL
+;;                        REGEX MATCH "")))
+;;                (INSERT-FILE-PATH UID)))))
+;;   (SETF RESULT
+;;         (CL-PPCRE:REGEX-REPLACE-ALL
+;;       "\\[\\[<a href="./asset_lisp.html#robo8">asset</a>\\s(.*?)\\]\\]" RESULT
+;;          #'(LAMBDA
+;;                (TARGET START END MATCH-START
+;;                 MATCH-END
+;;                 &amp;REST ARGS)
+;;              (DECLARE (IGNORE START END ARGS))
+;;              (LET* ((REGEX
+;;                       "(?:\\[\\[<a href="./asset_lisp.html#robo8">asset</a>\\s)|(?:\\]\\])")
+;;                     (MATCH
+;;                         (SUBSEQ TARGET MATCH-START
+;;                                 MATCH-END))
+;;                     (UID
+;;                       (CL-PPCRE:REGEX-REPLACE-ALL
+;;                        REGEX MATCH "")))
+;;                (INSERT-ASSET-PATH UID)))))
+;;   RESULT)
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defmacro <strong>with-colportage</strong> (string)
@@ -360,7 +399,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 23:14:56</p>
+<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 23:17:22</p>
 </div> <!-- footer -->
 </body>
 </html>

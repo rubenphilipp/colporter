@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  23:14:10 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  23:17:14 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -367,7 +367,45 @@
 #|
 (with-colportage "Test [[file projects/img.jpg]] or [[asset logo.png]]")
 ;; =>
-
+;; (LET* ((MD
+;;          (PARSE-MARKDOWN
+;;           "Test [[file projects/img.jpg]] or [[asset logo.png]]"))
+;;        (RESULT MD))
+;;   (SETF RESULT
+;;         (CL-PPCRE:REGEX-REPLACE-ALL
+;;       "\\[\\[file\\s(.*?)\\]\\]" RESULT
+;;          #'(LAMBDA
+;;                (TARGET START END MATCH-START
+;;                 MATCH-END
+;;                 &REST ARGS)
+;;              (DECLARE (IGNORE START END ARGS))
+;;              (LET* ((REGEX
+;;                       "(?:\\[\\[file\\s)|(?:\\]\\])")
+;;                     (MATCH
+;;                         (SUBSEQ TARGET MATCH-START
+;;                                 MATCH-END))
+;;                     (UID
+;;                       (CL-PPCRE:REGEX-REPLACE-ALL
+;;                        REGEX MATCH "")))
+;;                (INSERT-FILE-PATH UID)))))
+;;   (SETF RESULT
+;;         (CL-PPCRE:REGEX-REPLACE-ALL
+;;       "\\[\\[asset\\s(.*?)\\]\\]" RESULT
+;;          #'(LAMBDA
+;;                (TARGET START END MATCH-START
+;;                 MATCH-END
+;;                 &REST ARGS)
+;;              (DECLARE (IGNORE START END ARGS))
+;;              (LET* ((REGEX
+;;                       "(?:\\[\\[asset\\s)|(?:\\]\\])")
+;;                     (MATCH
+;;                         (SUBSEQ TARGET MATCH-START
+;;                                 MATCH-END))
+;;                     (UID
+;;                       (CL-PPCRE:REGEX-REPLACE-ALL
+;;                        REGEX MATCH "")))
+;;                (INSERT-ASSET-PATH UID)))))
+;;   RESULT)
 |#
 ;;; SYNOPSIS
 (defmacro with-colportage (string)
