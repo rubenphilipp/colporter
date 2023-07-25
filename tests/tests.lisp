@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  11:27:52 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  11:39:58 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -164,7 +164,11 @@
                   (test-pathname "content/test.jpg"))))
          (site (colporter::make-site snippets assets templates
                                      pages files :data '((title . "Test")))))
-    (is (equal "Test" (gethash 'title (colporter::data site))))))
+    ;; test adding a value
+    (colporter::set-data site 'author "RP")
+    (is (and
+         (equal "Test" (colporter::get-data site 'title))
+         (equal "RP" (colporter::get-data site 'author))))))
 
 
 

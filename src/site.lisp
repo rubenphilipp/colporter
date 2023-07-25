@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  11:29:07 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  11:39:11 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -196,6 +196,72 @@
                          :data data
                          :description description
                          :id id)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-data
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This method returns the value of a field in the hash-table in the data slot
+;;; of the given site object. 
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The key to the value of the field in the data slot of the site object. 
+;;; 
+;;; RETURN VALUE
+;;; The data stored in the field of the hash table. 
+;;;
+;;; SYNOPSIS
+(defmethod get-data ((st site) key)
+  ;;; ****
+  (gethash key (data st)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/set-data
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Sets the value of a field in the data hash-table. When the key is not,
+;;; it will add a new key to the hash table. 
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The key of the value to change / add.
+;;; - The new value of the field in the hash-table.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :warn. Issues a warning when the field in the hash-table is not present,
+;;;   thus adding a new key to the list. Default = NIL. 
+;;; 
+;;; RETURN VALUE
+;;; The value of the changed/added field.
+;;;
+;;; SYNOPSIS
+(defmethod set-data ((st site) key value
+                     &key (warn nil))
+  ;;; ****
+  (when (and warn
+             (not (gethash key (data st))))
+    (warn "site::set-data: The key ~a is not present in the :data of the ~
+           site object and will be added." key))
+  (setf (gethash key (data st)) value)
+  value)
+
+
+
+
+
 
    
 
