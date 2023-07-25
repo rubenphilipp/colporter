@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  15:43:13 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  16:07:23 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -43,7 +43,7 @@
    (output-suffix :accessor output-suffix :initarg :output-suffix :initform nil)
    ;; the default template to be used when no template is given or the desired
    ;; template is not available in the site (i.e. a key to one template in the
-   ;; templates hash-table in the site object
+   ;; templates hash-table in the site object)
    (default-template :accessor default-template :initarg :default-template
                      :initform nil)))
 
@@ -87,8 +87,6 @@
             site object. " (error-page cp)))
   ;; ensure trailing slash of output-dir
   (setf (slot-value cp 'output-dir) (trailing-slash (output-dir cp)))
-  ;; ensure trailing slash of asset-base-dir
-  (setf (slot-value cp 'asset-base-dir) (trailing-slash (asset-base-dir cp)))
   ;; ensure output suffix is a string
   (unless (stringp (output-suffix cp))
     (error "colporter::update: The output-suffix must be of type STRING, ~
@@ -98,7 +96,7 @@
     (error "colporter::update: The default-template ~a does not exist in ~
             the site object. " (default-template cp)))
   ;; set output-dir as data
-  (setf (slot-value cp 'data) (output-dir p))
+  (setf (slot-value cp 'data) (output-dir cp))
   cp)
 
 
@@ -120,23 +118,41 @@
 ;;;
 ;;; ARGUMENTS
 ;;; - A site object.
-;;; - A key to an element in the hash-table contained in the pages slot of the
-;;;   site object which will be used as the standard error-page (e.g. for 404s).
-;;; - A string which is the output directory / base path of the site to be
-;;;   generated via related methods.
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
+;;; - :output-dir. The output directory. This is a string which is the output
+;;;   directory / base path of the site to be generated via related methods.
+;;;   Default = The :output-dir as set in +clptr-config-data+.
+;;; - :error-page. This is a key to an element in the hash-table
+;;;   contained in the pages slot of the site object which will be used as the
+;;;   standard error-page (e.g. for 404s). Default = "error"
+;;; - :output-suffix. The suffix for html files generated from page objects.
+;;;   Default = The :html-out-suffix as set in +clptr-config-data+.
+;;; - :default-template. The default template to be used when no template is
+;;;   given or the desired template (i.e. a key to one template in the
+;;;   templates hash-table in the site object). Default = The :default-template
+;;;   according to +clptr-config-data+.
 ;;; - :description. A short textual description of the object. Default = ""
 ;;; 
 ;;; RETURN VALUE
-;;; 
+;;; A colporter object.
 ;;;
 ;;; SYNOPSIS
-(defun make-colporter ()
+(defun make-colporter (site &key
+                              (output-dir (get-clptr-config :output-dir))
+                              (error-page "error")
+                              (output-suffix (get-clptr-config :output-suffix))
+                              (default-template
+                               (get-clptr-config :default-template))
+                              (description ""))
   ;;; ****
-  )
-
+  (make-instance 'colporter :default-template default-template
+                            :output-suffix output-suffix
+                            :output-dir output-dir
+                            :error-page error-page
+                            :site site
+                            :description description))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

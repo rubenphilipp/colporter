@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  15:32:08 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  16:07:43 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -239,13 +239,69 @@
                        (colporter::get-template site 'project-b)
                      (colporter::get-page site "projects/opus-1")
                      site)))
-    (print pages)
     (is (and
          (equal "assets/style.css" result-c)
          (equal "Home" (colporter::get-data
                         (colporter::get-page site "home") "title"))
          (eq result-a 3)
          (equal "style.css" result-b)))))
+
+;;; test make-colporter
+;;; RP  Tue Jul 25 15:56:27 2023
+(test test-make-colporter
+  (let* ((snippets (list
+                    (colporter::make-snippet #'(lambda (x y) (+ x y))
+                                             :id "sn1"
+                                             :description "addition")
+                    (colporter::make-snippet #'(lambda (x) (print x))
+                                             :id "sn2"
+                                             :description "just print")))
+         (assets (list
+                  (colporter::make-asset
+                   (test-pathname "assets/style.css")
+                   "style.css")))
+         (templates (list
+                     (cons 'home
+                           (colporter::make-template
+                            (colporter::define-template
+                              "home")))
+                     (cons "default"
+                           (colporter::make-template
+                            (colporter::define-template
+                              "default")))
+                     (cons 'project
+                           (colporter::make-template
+                            (colporter::define-template
+                              "project")))))
+         (base (test-pathname "content/"))
+         (pages (list
+                 (colporter::make-page
+                  (test-pathname "content/home.yaml")
+                  base)
+                 (colporter::make-page
+                  (test-pathname "content/error.yaml")
+                  base)
+                 (colporter::make-page
+                  (test-pathname "content/projects/opus-1.yaml")
+                  base)))
+         (files (list
+                 (colporter::make-file
+                  (test-pathname "content/projects/testb.jpg")
+                  "projects/testb.jpg")
+                 (colporter::make-file
+                  (test-pathname "content/test.jpg")
+                  "test.jpg")))
+         (site (colporter::make-site snippets assets templates
+                                     pages files
+                                     :description "clptr test"
+                                     :data '((title . "Test"))
+                                     :asset-base-dir "assets/"))
+         (colporter (colporter::make-colporter
+                     site
+                     :output-dir "/tmp/test-site/"
+                     :error-page "error"
+                     :output-suffix "html")))
+    (is (equal "/tmp/test-site/" (colporter::data colporter)))))
 
 
 
