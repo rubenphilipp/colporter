@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-24
 ;;;
-;;; $$ Last modified:  18:15:49 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  19:28:10 Tue Jul 25 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter.tests)
@@ -23,10 +23,11 @@
  (gethash "header" +clptr-test-snippets+)
  (colporter::make-snippet
   (colporter::define-snippet (title)
-    (:head
-     (:title title)))
+    (colporter::with-html
+      (:head
+       (:title title))))
   :id "header"))
-  
+ 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF header.lisp

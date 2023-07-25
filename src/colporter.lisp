@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  18:32:31 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  19:35:24 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -186,18 +186,72 @@
     (format t "~%**********~% ~
                  COLPORT BUILD STARTED ~%~%"))
   ;; test if output directory exists
-  (ensure-directories-exist output-dir :verbose verbose)
+  (ensure-directories-exist (output-dir clptr) :verbose verbose)
   ;; move all assets to the asset-base-dir in the output-dir
   (when verbose
-    (format t "- moving assets ~%"))
-  (let* (;; the absolute path to the asset-base-dir
+    (format t "- moving assets: ~%"))
+  (let* ((assets (assets (site clptr)))
+         ;; the absolute path to the asset-base-dir
          (assets-base (concatenate 'string
                                    (output-dir clptr)
                                    (asset-base-dir
                                     (site clptr)))))
-    (print assets-base)))
-
-
+    (ensure-directories-exist assets-base :verbose verbose)
+    (loop for key being the hash-keys of assets
+            using (hash-value asset)
+          for source = (path asset)
+          for destination = (concatenate 'string
+                                         assets-base
+                                         (uid asset))
+          do
+             (when verbose
+               (format t "  - ~a~%" destination))
+             (ensure-directories-exist (directory-namestring destination))
+             (uiop:copy-file source destination)))
+  ;; move all files
+  (when verbose
+    (format t "- moving files: ~%"))
+  (let* ((files (files (site clptr)))
+         (base (output-dir clptr)))
+    (loop for key being the hash-keys of files
+            using (hash-value file)
+          for source = (path file)
+          for destination = (concatenate 'string
+                                         base
+                                         (uid file))
+          do
+             (when verbose
+               (format t "  - ~a~%" destination))
+             (ensure-directories-exist (directory-namestring destination))
+             (uiop:copy-file source destination)))
+  ;; now generate and save the pages
+  (when verbose
+    (format t "- parsing and saving the pages: ~%"))
+  (let* ((site (site clptr))
+         (output-suffix (output-suffix clptr))
+         (base (output-dir clptr))
+         (default-template (default-template clptr))
+         (pages (pages site))
+         (templates (templates site)))
+    (loop for page being the hash-values of pages
+          for desired-template = (template page)
+          for template = (if (get-template site desired-template)
+                             (get-template site desired-template)
+                             (get-template site default-template))
+          for destination = (concatenate 'string
+                                         base
+                                         (uid page)
+                                         "."
+                                         output-suffix)
+          do
+             (format t "  - ~a~%" destination)
+             (ensure-directories-exist (directory-namestring destination))
+             ;;(format t "~a ~%" template)
+             (with-open-file (stream destination
+                                     :direction :output
+                                     :if-exists :supersede
+                                     :if-does-not-exist :create)
+               (format stream "~a" (do-template template page site))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF colporter.lisp

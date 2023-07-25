@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  17:18:48 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  19:10:28 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -89,10 +89,7 @@
     (let ((template-id (gethash (get-clptr-config :template-key)
                                 (data pg))))
       (when template-id
-        (setf (slot-value pg 'template)
-              (if (stringp template-id)
-                  (read-from-string template-id)
-                  template-id)))))
+        (setf (slot-value pg 'template) template-id))))
   ;; set uid
   (unless (uid pg)
     (setf (slot-value pg 'uid) (uid-from-path (path pg) (base pg))))

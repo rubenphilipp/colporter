@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-24
 ;;;
-;;; $$ Last modified:  18:20:53 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  19:36:10 Tue Jul 25 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter.tests)
@@ -23,16 +23,19 @@
  (gethash "project" +clptr-test-templates+)
  (colporter::make-template
   (colporter::define-template
-    (colporter::with-html
+    (colporter::with-html-string
       (:doctype)
       (:html
        (colporter::insert-snippet "header"
                                   (concatenate
                                    'string
                                    "PROJECT: "
-                                   (colporter::get-data page "title")))
+                                   (colporter::get-data
+                                    colporter::page "title")))
        (:body
-        ((colporter::get-data page "content"))))))
+        (:raw
+         (colporter::parse-as-markdown
+          (colporter::get-data colporter::page "content")))))))
   :id "project"))
 
 
