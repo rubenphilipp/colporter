@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  12:21:36 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  16:57:29 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -175,6 +175,69 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* page/make-pages-from-dir
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This function recursively scans a given directory for all files that match
+;;; the common page suffix (e.g. "yaml") and instantiates page objects with
+;;; the respective uid set according to the given (base) path. Finally, the
+;;; generated objects will be returned as a hash-table with keys set to the
+;;; uids to be further used in a site object. 
+;;; 
+;;; ARGUMENTS
+;;; A string being the path to the directory to recursively scan for page files.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :page-suffix. A string being the file suffix of pages which will be
+;;;   included from the search. Default = The :page-suffix from
+;;;   +clptr-config-data+. 
+;;; 
+;;; RETURN VALUE
+;;; A hash-table with page objects (see above and cf. site).
+;;;
+;;; EXAMPLE
+#|
+(let ((pgs (make-pages-from-dir
+            "/Users/rubenphilipp/lisp/colporter/tests/content"
+            :page-suffix "yaml")))
+  (hash-table-keys pgs))
+;; => ("error" "home" "projects/bla/dings" "projects/opus-1")
+|#
+;;; SYNOPSIS
+(defun make-pages-from-dir (dir
+                            &key
+                              (page-suffix (get-clptr-config :page-suffix)))
+  ;;; ****
+  (let ((dir (trailing-slash dir))
+        (page-file-paths nil)
+        (pages (make-hash-table :test 'equal)))
+    ;; scan page files
+    (cl-fad:walk-directory dir
+                           #'(lambda (name)
+                               (when (and
+                                      (equal (pathname-type name)
+                                                  page-suffix)
+                                      ;; do not include hidden files
+                                      (not (equal "."
+                                                  (subseq
+                                                   (file-namestring name)
+                                                   0 1))))
+                                 (push name page-file-paths)))
+                           :directories nil)
+    ;; generate file objects
+    (loop for path in page-file-paths
+          for uid = (uid-from-path path dir)
+          for page = (make-page path dir :uid uid)
+          do
+             (setf (gethash uid pages) page))
+    pages))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

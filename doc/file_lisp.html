@@ -126,12 +126,14 @@
    <a href="./globals_lisp.html#robo10">+clptr-config-data+</a>. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> A hash-table with <a href="./page_lisp.html#robo15">page</a> objects (see above and cf. <a href="./site_lisp.html#robo16">site</a>).
+<pre> A hash-table with <a href="#robo14">file</a> objects (see above and cf. <a href="./site_lisp.html#robo16">site</a>).
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(<strong>make-files-from-dir</strong> "/Users/rubenphilipp/lisp/<a href="./colporter_lisp.html#robo13">colporter</a>/tests/content"
-                     :<a href="./page_lisp.html#robo15">page</a>-suffix "yaml")
-;; =&gt; #&lt;HASH-TABLE :TEST EQUAL :COUNT 3 {700881DD13}&gt;
+<pre class="source">(let ((fls (<strong>make-files-from-dir</strong>
+            "/Users/rubenphilipp/lisp/<a href="./colporter_lisp.html#robo13">colporter</a>/tests/content"
+            :<a href="./page_lisp.html#robo15">page</a>-suffix "yaml")))
+  (hash-table-keys fls))
+;; =&gt; ("projects/bla/dingsdo.css" "projects/testb.jpg" "test.jpg")
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defun <strong>make-files-from-dir</strong> (dir
@@ -187,12 +189,12 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo3">named-object</a> -&gt; <strong>file</strong>
 
- $$ Last modified:  16:45:47 Tue Jul 25 2023 CEST
+ $$ Last modified:  16:57:27 Tue Jul 25 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/file.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 16:47:35</p>
+<p>Generated from ./src/file.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 16:57:36</p>
 </div> <!-- footer -->
 </body>
 </html>

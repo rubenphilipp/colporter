@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  16:45:47 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  16:57:27 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -200,13 +200,15 @@
 ;;;   +clptr-config-data+. 
 ;;; 
 ;;; RETURN VALUE
-;;; A hash-table with page objects (see above and cf. site).
+;;; A hash-table with file objects (see above and cf. site).
 ;;;
 ;;; EXAMPLE
 #|
-(make-files-from-dir "/Users/rubenphilipp/lisp/colporter/tests/content"
-                     :page-suffix "yaml")
-;; => #<HASH-TABLE :TEST EQUAL :COUNT 3 {700881DD13}>
+(let ((fls (make-files-from-dir
+            "/Users/rubenphilipp/lisp/colporter/tests/content"
+            :page-suffix "yaml")))
+  (hash-table-keys fls))
+;; => ("projects/bla/dingsdo.css" "projects/testb.jpg" "test.jpg")
 |#
 ;;; SYNOPSIS
 (defun make-files-from-dir (dir
