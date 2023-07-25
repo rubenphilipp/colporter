@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  11:39:11 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  12:21:49 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -259,7 +259,29 @@
   value)
 
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/remove-data
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Removes a data field from the hash-table in the data slot of a site
+;;; object. 
+;;;
+;;; ARGUMENTS
+;;; - A site object
+;;; - The key of the field to be removed. 
+;;; 
+;;; RETURN VALUE
+;;; T when removal was successful, otherwise NIL.
+;;;
+;;; SYNOPSIS
+(defmethod remove-data ((obj site) key)
+  ;;; ****
+  (remhash key (data obj)))
 
 
 

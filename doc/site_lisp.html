@@ -52,7 +52,7 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>site</strong>
 
- $$ Last modified:  11:39:11 Tue Jul 25 2023 CEST
+ $$ Last modified:  12:21:49 Tue Jul 25 2023 CEST
 </pre>
 
 <hr />
@@ -125,10 +125,10 @@
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(let* ((snippets (list
-                    (<a href="./snippet_lisp.html#robo23">make-snippet</a> #'(lambda (x y) (+ x y))
+                    (<a href="./snippet_lisp.html#robo24">make-snippet</a> #'(lambda (x y) (+ x y))
                                              :id 'sn1
                                              :description "addition")
-                    (<a href="./snippet_lisp.html#robo23">make-snippet</a> #'(lambda (x) (print x))
+                    (<a href="./snippet_lisp.html#robo24">make-snippet</a> #'(lambda (x) (print x))
                                              :id 'sn2
                                              :description "just print")))
          (assets (list
@@ -137,12 +137,12 @@
                    "style.css")))
          (templates (list
                      (cons 'home
-                           (<a href="./template_lisp.html#robo26">make-template</a>
-                            (<a href="./template_lisp.html#robo24">define-template</a>
+                           (<a href="./template_lisp.html#robo27">make-template</a>
+                            (<a href="./template_lisp.html#robo25">define-template</a>
                               "home")))
                      (cons 'project
-                           (<a href="./template_lisp.html#robo26">make-template</a>
-                            (<a href="./template_lisp.html#robo24">define-template</a>
+                           (<a href="./template_lisp.html#robo27">make-template</a>
+                            (<a href="./template_lisp.html#robo25">define-template</a>
                               "project")))))
          (base "/content/")
          (pages (list
@@ -170,8 +170,34 @@
 </pre>
 
 <hr />
+<a name="site2fremove2ddata"></a>
+<a name="robo20"></a><h2>site/remove-data [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Removes a data field from the hash-table in the data slot of a <a href="#robo12">site</a>
+ object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="#robo12">site</a> object
+ - The key of the field to be removed. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> T when removal was successful, otherwise NIL.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>remove-data</strong> ((obj <a href="#robo12">site</a>) key)
+</pre>
+
+<hr />
 <a name="site2fset2ddata"></a>
-<a name="robo20"></a><h2>site/set-data [ Methods ]</h2>
+<a name="robo21"></a><h2>site/set-data [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -204,7 +230,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 11:40:10</p>
+<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 12:22:30</p>
 </div> <!-- footer -->
 </body>
 </html>

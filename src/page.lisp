@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  23:46:12 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  12:21:36 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -162,16 +162,16 @@
 ;;; data slot of a page object. 
 ;;;
 ;;; ARGUMENTS
+;;; - The page object.
 ;;; - The key to the data field.
-;;; - The page object. 
 ;;; 
 ;;; RETURN VALUE
 ;;; The data contained in the slot of the data hash-table. 
 ;;; 
 ;;; SYNOPSIS
-(defmethod get-data (key (pg page))
+(defmethod get-data ((obj page) key)
   ;;; ****
-  (gethash key (data pg)))
+  (gethash key (data obj)))
 
 
 
