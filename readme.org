@@ -3,8 +3,8 @@
 #+date: 2023-07-09
 #+startup: showall 
 
-/colporter/ is a static-site generator written in Common Lisp, loosely modeled
-after [[https://github.com/jekyll/jekyll][Jekyll]]. Its HTML generation is partly based on [[https://github.com/ruricolist/spinneret][Spinneret]].
+/colporter/ is a static-site generator written in Common Lisp.
+Its HTML generation is able to take advantage of [[https://github.com/ruricolist/spinneret][Spinneret]] (cf. examples).
 
 Tested with SBCL.
 
@@ -35,5 +35,5 @@ A tutorial and example projects are coming up soon. For now, refer to
 
 
 #+begin_comment
-$$ Last modified:  23:50:09 Tue Jul 25 2023 CEST
+$$ Last modified:  00:50:23 Wed Jul 26 2023 CEST
 #+end_comment
