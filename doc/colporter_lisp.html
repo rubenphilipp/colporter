@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>colporter.lisp</title>
+<!-- Source: ./src/colporter.lisp -->
+<!-- Generated with ROBODoc Version 4.99.44 (Nov 13 2022) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="./masterindex.html#top">Index</a>
+<a class="menuitem" href="./robo_generics.html#top">Generics</a>
+<a class="menuitem" href="./robo_classes.html#top">Classes</a>
+<a class="menuitem" href="./robo_functions.html#top">Functions</a>
+<a class="menuitem" href="./robo_modules.html#top">Modules</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_variables.html#top">Variables</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="colporter2fmake2dcolporter"></a>
+<a name="robo4"></a><h2>colporter/make-colporter [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">colporter</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> A helper function to make a <a href="#robo12">colporter</a> object.
+ NB: Making an instance of a <a href="#robo12">colporter</a> object does not imply the generation
+ of a <a href="./site_lisp.html#robo15">site</a> but just assembling the respective data. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="./site_lisp.html#robo15">site</a> object.
+ - A key to an element in the hash-table contained in the pages slot of the
+   <a href="./site_lisp.html#robo15">site</a> object which will be used as the standard error-<a href="./page_lisp.html#robo14">page</a> (e.g. for 404s).
+ - A string which is the output directory / base path of the <a href="./site_lisp.html#robo15">site</a> to be
+   generated via related methods.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :description. A short textual description of the object. Default = ""
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>make-colporter</strong> ()
+</pre>
+
+<hr />
+<a name="named2dobject2fcolporter"></a>
+<a name="robo12"></a><h2>named-object/colporter [ Classes ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo3">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p class="item_name">NAME</p>
+<pre> <strong>colporter</strong>
+</pre>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">PURPOSE</p>
+<pre> Implementation of the <strong>colporter</strong> class and related methods and functions.
+ This class is the main class used for "assembling" websites.
+
+ A <strong>colporter</strong> object holds gathers a <a href="./site_lisp.html#robo15">site</a> object and the data related to
+ the output options of the project (e.g. output location, output location
+ for <a href="./asset_lisp.html#robo5">asset</a> files, a default error <a href="./page_lisp.html#robo14">page</a> etc.).
+ Its output methods eventually build the <a href="./page_lisp.html#robo14">page</a> and create/move the respective
+ files to the desired output location, which could then be used as a source
+ for publishing the <a href="./site_lisp.html#robo15">site</a>.
+
+ CLASS HIERARCHY
+ <a href="./named-object_lisp.html#robo3">named-object</a> -&gt; <strong>colporter</strong>
+
+ $$ Last modified:  15:43:13 Tue Jul 25 2023 CEST
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/colporter.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 15:45:46</p>
+</div> <!-- footer -->
+</body>
+</html>

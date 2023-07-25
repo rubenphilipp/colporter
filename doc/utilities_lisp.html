@@ -29,7 +29,7 @@
 <div id="content">
 <hr />
 <a name="utilities2falistp"></a>
-<a name="robo41"></a><h2>utilities/alistp [ Functions ]</h2>
+<a name="robo45"></a><h2>utilities/alistp [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -59,7 +59,7 @@
 
 <hr />
 <a name="utilities2fassoc2dkeys"></a>
-<a name="robo42"></a><h2>utilities/assoc-keys [ Functions ]</h2>
+<a name="robo46"></a><h2>utilities/assoc-keys [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -91,7 +91,7 @@
 
 <hr />
 <a name="utilities2fpath2dfrom2dsame2ddir"></a>
-<a name="robo43"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
+<a name="robo47"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -101,26 +101,26 @@
 <pre> 2023-07-09
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This function returns the full path to a <a href="./file_lisp.html#robo10">file</a> reilative to the directory of
- the current lisp <a href="./file_lisp.html#robo10">file</a>.
+<pre> This function returns the full path to a <a href="./file_lisp.html#robo13">file</a> reilative to the directory of
+ the current lisp <a href="./file_lisp.html#robo13">file</a>.
  NB: This function is borrowed from Michael Edwards's slippery-chicken.
  NB2: This function does not work with files which have been loaded via
       ASDF/quicklisp.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A string indicating the filename (or pathname) to the <a href="./file_lisp.html#robo10">file</a> relative to
-   the current lisp <a href="./file_lisp.html#robo10">file</a>.
+<pre> - A string indicating the filename (or pathname) to the <a href="./file_lisp.html#robo13">file</a> relative to
+   the current lisp <a href="./file_lisp.html#robo13">file</a>.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> A string with the full path to the <a href="./file_lisp.html#robo10">file</a>.
+<pre> A string with the full path to the <a href="./file_lisp.html#robo13">file</a>.
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defun <strong>path-from-same-dir</strong> (<a href="./file_lisp.html#robo10">file</a>)
+<pre class="source">(defun <strong>path-from-same-dir</strong> (<a href="./file_lisp.html#robo13">file</a>)
 </pre>
 
 <hr />
 <a name="utilities2fpath2dfrom2dsrc2ddir"></a>
-<a name="robo44"></a><h2>utilities/path-from-src-dir [ Functions ]</h2>
+<a name="robo48"></a><h2>utilities/path-from-src-dir [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -135,19 +135,19 @@
  NB: This function requires ASDF. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A string indicating the filename (or pathname) to the <a href="./file_lisp.html#robo10">file</a> relative to
-   the src directory <a href="./file_lisp.html#robo10">file</a>.
+<pre> - A string indicating the filename (or pathname) to the <a href="./file_lisp.html#robo13">file</a> relative to
+   the src directory <a href="./file_lisp.html#robo13">file</a>.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> A string with the full path to the <a href="./file_lisp.html#robo10">file</a>.
+<pre> A string with the full path to the <a href="./file_lisp.html#robo13">file</a>.
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defun <strong>path-from-src-dir</strong> (<a href="./file_lisp.html#robo10">file</a>)
+<pre class="source">(defun <strong>path-from-src-dir</strong> (<a href="./file_lisp.html#robo13">file</a>)
 </pre>
 
 <hr />
 <a name="utilities2fshell"></a>
-<a name="robo45"></a><h2>utilities/shell [ Functions ]</h2>
+<a name="robo49"></a><h2>utilities/shell [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -180,7 +180,7 @@
 
 <hr />
 <a name="utilities2fsimple2dshell"></a>
-<a name="robo46"></a><h2>utilities/simple-shell [ Functions ]</h2>
+<a name="robo50"></a><h2>utilities/simple-shell [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -190,14 +190,14 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Run a <a href="#robo45">shell</a> command from lisp and return the exit code.
+<pre> Run a <a href="#robo49">shell</a> command from lisp and return the exit code.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo45">shell</a> command (i.e., most likely, path to the binary)
+<pre> - The <a href="#robo49">shell</a> command (i.e., most likely, path to the binary)
  
  OPTIONAL ARGUMENTS:
  rest:
- - The arguments to the <a href="#robo45">shell</a> program.
+ - The arguments to the <a href="#robo49">shell</a> program.
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> The the exit-code of the process.
@@ -207,8 +207,33 @@
 </pre>
 
 <hr />
+<a name="utilities2ftrailing2dslash"></a>
+<a name="robo51"></a><h2>utilities/trailing-slash [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-09
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function ensures that a (path) string ends with a trailing slash.
+ NB: This function is borrowed from Michael Edward's slippery-chicken.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A string containing the path to be checked and corrected.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The path with a trailing slash.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>trailing-slash</strong> (path)
+</pre>
+
+<hr />
 <a name="utilities2fuid2dfrom2dpath"></a>
-<a name="robo47"></a><h2>utilities/uid-from-path [ Functions ]</h2>
+<a name="robo52"></a><h2>utilities/uid-from-path [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -222,7 +247,7 @@
  When base is set, the uid will be relative to the path given as base.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> A path to a <a href="./file_lisp.html#robo10">file</a> as a string. 
+<pre> A path to a <a href="./file_lisp.html#robo13">file</a> as a string. 
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> - base. The root directory, which serves as the base for retrieving a
@@ -243,7 +268,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 13:39:26</p>
+<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 15:45:46</p>
 </div> <!-- footer -->
 </body>
 </html>

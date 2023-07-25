@@ -29,9 +29,9 @@
 <div id="content">
 <hr />
 <a name="named2dobject2fsite"></a>
-<a name="robo12"></a><h2>named-object/site [ Classes ]</h2>
+<a name="robo15"></a><h2>named-object/site [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo2">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo3">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>site</strong>
 </pre>
@@ -44,22 +44,22 @@
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>site</strong> class and related methods and functions.
  A <strong>site</strong> object holds all information (i.e. meta-data, objects as pages
- templates etc.) that are relevant for assembling a <strong>site</strong> via colporter.
+ templates etc.) that are relevant for assembling a <strong>site</strong> via <a href="./colporter_lisp.html#robo12">colporter</a>.
 
  NB: Information like the <strong>site</strong> title resides in the data slot (which
      holds a hash table). 
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo2">named-object</a> -&gt; <strong>site</strong>
+ <a href="./named-object_lisp.html#robo3">named-object</a> -&gt; <strong>site</strong>
 
- $$ Last modified:  13:37:58 Tue Jul 25 2023 CEST
+ $$ Last modified:  15:27:37 Tue Jul 25 2023 CEST
 </pre>
 
 <hr />
 <a name="site2fget2dasset"></a>
-<a name="robo18"></a><h2>site/get-asset [ Methods ]</h2>
+<a name="robo21"></a><h2>site/get-asset [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -67,25 +67,25 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Returns a <a href="./asset_lisp.html#robo3">asset</a> object from the <a href="./asset_lisp.html#robo3">asset</a> hash-table of a <a href="#robo12">site</a> object by
+<pre> Returns a <a href="./asset_lisp.html#robo5">asset</a> object from the <a href="./asset_lisp.html#robo5">asset</a> hash-table of a <a href="#robo15">site</a> object by
  its key. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo12">site</a> object.
- - The key of the <a href="./asset_lisp.html#robo3">asset</a> according to the hash-table. 
+<pre> - The <a href="#robo15">site</a> object.
+ - The key of the <a href="./asset_lisp.html#robo5">asset</a> according to the hash-table. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="./asset_lisp.html#robo3">asset</a>-object. 
+<pre> The <a href="./asset_lisp.html#robo5">asset</a>-object. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-asset</strong> ((obj <a href="#robo12">site</a>) key)
+<pre class="source">(defmethod <strong>get-asset</strong> ((obj <a href="#robo15">site</a>) key)
 </pre>
 
 <hr />
 <a name="site2fget2dassets"></a>
-<a name="robo19"></a><h2>site/get-assets [ Methods ]</h2>
+<a name="robo22"></a><h2>site/get-assets [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -98,7 +98,7 @@
  themselves. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="#robo12">site</a> object.
+<pre> - A <a href="#robo15">site</a> object.
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
@@ -106,17 +106,17 @@
    a list of objects (T). Default = NIL
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo16">snippet</a> objects. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-assets</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+<pre class="source">(defmethod <strong>get-assets</strong> ((obj <a href="#robo15">site</a>) &amp;key (objects nil))
 </pre>
 
 <hr />
 <a name="site2fget2ddata"></a>
-<a name="robo20"></a><h2>site/get-data [ Methods ]</h2>
+<a name="robo23"></a><h2>site/get-data [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -125,24 +125,24 @@
 </pre>
 <p class="item_name">DESCRIPTION</p>
 <pre> This method returns the value of a field in the hash-table in the data slot
- of the given <a href="#robo12">site</a> object. 
+ of the given <a href="#robo15">site</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo12">site</a> object.
- - The key to the value of the field in the data slot of the <a href="#robo12">site</a> object. 
+<pre> - The <a href="#robo15">site</a> object.
+ - The key to the value of the field in the data slot of the <a href="#robo15">site</a> object. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> The data stored in the field of the hash table. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-data</strong> ((obj <a href="#robo12">site</a>) key)
+<pre class="source">(defmethod <strong>get-data</strong> ((obj <a href="#robo15">site</a>) key)
 </pre>
 
 <hr />
 <a name="site2fget2dfiles"></a>
-<a name="robo21"></a><h2>site/get-files [ Methods ]</h2>
+<a name="robo24"></a><h2>site/get-files [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -155,7 +155,7 @@
  themselves. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="#robo12">site</a> object.
+<pre> - A <a href="#robo15">site</a> object.
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
@@ -163,17 +163,17 @@
    a list of objects (T). Default = NIL
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo16">snippet</a> objects. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-files</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+<pre class="source">(defmethod <strong>get-files</strong> ((obj <a href="#robo15">site</a>) &amp;key (objects nil))
 </pre>
 
 <hr />
 <a name="site2fget2dkeys2dor2dobjects"></a>
-<a name="robo22"></a><h2>site/get-keys-or-objects [ Methods ]</h2>
+<a name="robo25"></a><h2>site/get-keys-or-objects [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -186,13 +186,13 @@
  or the objects themselves (also cf. get-snippets). 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="#robo12">site</a> object.
+<pre> - A <a href="#robo15">site</a> object.
  - The accessor of the slot containing the hash-table.
  - A boolean which indicates whether a list of keys (NIL) or objects (T)
    should be returned.
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(<strong>get-keys-or-objects</strong> <a href="#robo12">site</a> assets nil)
+<pre class="source">(<strong>get-keys-or-objects</strong> <a href="#robo15">site</a> assets nil)
 ;; =&gt; 
 ;; (LET ((DATA (GETHASH (ASSETS SITE))))
 ;;   (IF NIL
@@ -208,9 +208,9 @@
 
 <hr />
 <a name="site2fget2dpage"></a>
-<a name="robo23"></a><h2>site/get-page [ Methods ]</h2>
+<a name="robo26"></a><h2>site/get-page [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -218,25 +218,25 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Returns a <a href="./page_lisp.html#robo11">page</a> object from the <a href="./page_lisp.html#robo11">page</a> hash-table of a <a href="#robo12">site</a> object by
+<pre> Returns a <a href="./page_lisp.html#robo14">page</a> object from the <a href="./page_lisp.html#robo14">page</a> hash-table of a <a href="#robo15">site</a> object by
  its key. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo12">site</a> object.
- - The key of the <a href="./page_lisp.html#robo11">page</a> according to the hash-table. 
+<pre> - The <a href="#robo15">site</a> object.
+ - The key of the <a href="./page_lisp.html#robo14">page</a> according to the hash-table. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="./page_lisp.html#robo11">page</a>-object. 
+<pre> The <a href="./page_lisp.html#robo14">page</a>-object. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-page</strong> ((obj <a href="#robo12">site</a>) key)
+<pre class="source">(defmethod <strong>get-page</strong> ((obj <a href="#robo15">site</a>) key)
 </pre>
 
 <hr />
 <a name="site2fget2dpages"></a>
-<a name="robo24"></a><h2>site/get-pages [ Methods ]</h2>
+<a name="robo27"></a><h2>site/get-pages [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -249,7 +249,7 @@
  themselves. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="#robo12">site</a> object.
+<pre> - A <a href="#robo15">site</a> object.
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
@@ -257,17 +257,17 @@
    a list of objects (T). Default = NIL
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo16">snippet</a> objects. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-pages</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+<pre class="source">(defmethod <strong>get-pages</strong> ((obj <a href="#robo15">site</a>) &amp;key (objects nil))
 </pre>
 
 <hr />
 <a name="site2fget2dsnippet"></a>
-<a name="robo25"></a><h2>site/get-snippet [ Methods ]</h2>
+<a name="robo28"></a><h2>site/get-snippet [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -275,25 +275,25 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Returns a <a href="./snippet_lisp.html#robo13">snippet</a> object from the <a href="./snippet_lisp.html#robo13">snippet</a> hash-table of a <a href="#robo12">site</a> object by
+<pre> Returns a <a href="./snippet_lisp.html#robo16">snippet</a> object from the <a href="./snippet_lisp.html#robo16">snippet</a> hash-table of a <a href="#robo15">site</a> object by
  its key. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo12">site</a> object.
- - The key of the <a href="./snippet_lisp.html#robo13">snippet</a> according to the hash-table. 
+<pre> - The <a href="#robo15">site</a> object.
+ - The key of the <a href="./snippet_lisp.html#robo16">snippet</a> according to the hash-table. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="./snippet_lisp.html#robo13">snippet</a>-object. 
+<pre> The <a href="./snippet_lisp.html#robo16">snippet</a>-object. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-snippet</strong> ((obj <a href="#robo12">site</a>) key)
+<pre class="source">(defmethod <strong>get-snippet</strong> ((obj <a href="#robo15">site</a>) key)
 </pre>
 
 <hr />
 <a name="site2fget2dsnippets"></a>
-<a name="robo26"></a><h2>site/get-snippets [ Methods ]</h2>
+<a name="robo29"></a><h2>site/get-snippets [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -306,7 +306,7 @@
  themselves. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="#robo12">site</a> object.
+<pre> - A <a href="#robo15">site</a> object.
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
@@ -314,17 +314,17 @@
    a list of objects (T). Default = NIL
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo16">snippet</a> objects. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-snippets</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+<pre class="source">(defmethod <strong>get-snippets</strong> ((obj <a href="#robo15">site</a>) &amp;key (objects nil))
 </pre>
 
 <hr />
 <a name="site2fget2dtemplate"></a>
-<a name="robo27"></a><h2>site/get-template [ Methods ]</h2>
+<a name="robo30"></a><h2>site/get-template [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -332,25 +332,25 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Returns a <a href="./template_lisp.html#robo14">template</a> object from the <a href="./template_lisp.html#robo14">template</a> hash-table of a <a href="#robo12">site</a> object by
+<pre> Returns a <a href="./template_lisp.html#robo17">template</a> object from the <a href="./template_lisp.html#robo17">template</a> hash-table of a <a href="#robo15">site</a> object by
  its key. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo12">site</a> object.
- - The key of the <a href="./template_lisp.html#robo14">template</a> according to the hash-table. 
+<pre> - The <a href="#robo15">site</a> object.
+ - The key of the <a href="./template_lisp.html#robo17">template</a> according to the hash-table. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="./template_lisp.html#robo14">template</a>-object. 
+<pre> The <a href="./template_lisp.html#robo17">template</a>-object. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-template</strong> ((obj <a href="#robo12">site</a>) key)
+<pre class="source">(defmethod <strong>get-template</strong> ((obj <a href="#robo15">site</a>) key)
 </pre>
 
 <hr />
 <a name="site2fget2dtemplates"></a>
-<a name="robo28"></a><h2>site/get-templates [ Methods ]</h2>
+<a name="robo31"></a><h2>site/get-templates [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -363,7 +363,7 @@
  themselves. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="#robo12">site</a> object.
+<pre> - A <a href="#robo15">site</a> object.
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
@@ -371,17 +371,17 @@
    a list of objects (T). Default = NIL
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> Either a list of keys or <a href="./snippet_lisp.html#robo13">snippet</a> objects. 
+<pre> Either a list of keys or <a href="./snippet_lisp.html#robo16">snippet</a> objects. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-templates</strong> ((obj <a href="#robo12">site</a>) &amp;key (objects nil))
+<pre class="source">(defmethod <strong>get-templates</strong> ((obj <a href="#robo15">site</a>) &amp;key (objects nil))
 </pre>
 
 <hr />
 <a name="site2fmake2dsite"></a>
-<a name="robo29"></a><h2>site/make-site [ Functions ]</h2>
+<a name="robo32"></a><h2>site/make-site [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -389,77 +389,80 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This function is a shortcut to instantiate a <a href="#robo12">site</a> object. 
+<pre> This function is a shortcut to instantiate a <a href="#robo15">site</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The available <a href="./snippet_lisp.html#robo13">snippet</a> objects. Could be given either as a list of
-   <a href="./snippet_lisp.html#robo13">snippet</a> objects, an alist or a hash table (the latter being the definitive
+<pre> - The available <a href="./snippet_lisp.html#robo16">snippet</a> objects. Could be given either as a list of
+   <a href="./snippet_lisp.html#robo16">snippet</a> objects, an alist or a hash table (the latter being the definitive
    structure in which the values will be stored).
    - If the argument is of type list, the keyword for the hash-table will be
-     the id of the respective <a href="./snippet_lisp.html#robo13">snippet</a> object.
+     the id of the respective <a href="./snippet_lisp.html#robo16">snippet</a> object.
      NB: Make sure that, in this case, all object's IDs are unique.
    - If the argument is of type alist or hash-table, the key will be set
      according to the structure of the alist/hash-table.
- - The available <a href="./asset_lisp.html#robo3">asset</a> objects. Data type is analogous to the snippets
+ - The available <a href="./asset_lisp.html#robo5">asset</a> objects. Data type is analogous to the snippets
    argument.
- - The available <a href="./template_lisp.html#robo14">template</a> objects. Data type is analogous to the snippets
+ - The available <a href="./template_lisp.html#robo17">template</a> objects. Data type is analogous to the snippets
    argument.
- - The available <a href="./page_lisp.html#robo11">page</a> objects. Data type is analogous to the snippets
+ - The available <a href="./page_lisp.html#robo14">page</a> objects. Data type is analogous to the snippets
    argument.
- - The available <a href="./file_lisp.html#robo10">file</a> objects. Data type is analogous to the snippets
+ - The available <a href="./file_lisp.html#robo13">file</a> objects. Data type is analogous to the snippets
    argument.
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
- - :data. The data of the <a href="#robo12">site</a> (e.g. title, author etc.) as an alist or
+ - :<a href="./asset_lisp.html#robo5">asset</a>-base-dir. A string being the base directory for the assets
+   (relative to the output-dir; cf. <a href="./colporter_lisp.html#robo12">colporter</a>). Default = "assets/"
+ - :data. The data of the <a href="#robo15">site</a> (e.g. title, author etc.) as an alist or
    hash-table. Default = nil.
- - :description. A short textual description of the <a href="#robo12">site</a>. Default = ""
- - :id. The id of the <a href="#robo12">site</a> object. 
+ - :description. A short textual description of the <a href="#robo15">site</a>. Default = ""
+ - :id. The id of the <a href="#robo15">site</a> object. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="#robo12">site</a> object. 
+<pre> The <a href="#robo15">site</a> object. 
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(let* ((snippets (list
-                    (<a href="./snippet_lisp.html#robo34">make-snippet</a> #'(lambda (x y) (+ x y))
+                    (<a href="./snippet_lisp.html#robo37">make-snippet</a> #'(lambda (x y) (+ x y))
                                              :id 'sn1
                                              :description "addition")
-                    (<a href="./snippet_lisp.html#robo34">make-snippet</a> #'(lambda (x) (print x))
+                    (<a href="./snippet_lisp.html#robo37">make-snippet</a> #'(lambda (x) (print x))
                                              :id 'sn2
                                              :description "just print")))
          (assets (list
-                  (<a href="./asset_lisp.html#robo1">make-asset</a>
+                  (<a href="./asset_lisp.html#robo2">make-asset</a>
                    "/assets/style.css"
                    "style.css")))
          (templates (list
                      (cons 'home
-                           (<a href="./template_lisp.html#robo38">make-template</a>
-                            (<a href="./template_lisp.html#robo35">define-template</a>
+                           (<a href="./template_lisp.html#robo42">make-template</a>
+                            (<a href="./template_lisp.html#robo38">define-template</a>
                               "home")))
                      (cons 'project
-                           (<a href="./template_lisp.html#robo38">make-template</a>
-                            (<a href="./template_lisp.html#robo35">define-template</a>
+                           (<a href="./template_lisp.html#robo42">make-template</a>
+                            (<a href="./template_lisp.html#robo38">define-template</a>
                               "project")))))
          (base "/content/")
          (pages (list
-                 (<a href="./page_lisp.html#robo16">make-page</a>
+                 (<a href="./page_lisp.html#robo19">make-page</a>
                   "/content/home.yaml"
                   base)
-                 (<a href="./page_lisp.html#robo16">make-page</a>
+                 (<a href="./page_lisp.html#robo19">make-page</a>
                   "/content/projects/opus-1.yaml"
                   base)))
          (files (list
-                 (<a href="./file_lisp.html#robo5">make-file</a>
+                 (<a href="./file_lisp.html#robo7">make-file</a>
                   "/content/projects/testb.jpg")
-                 (<a href="./file_lisp.html#robo5">make-file</a>
+                 (<a href="./file_lisp.html#robo7">make-file</a>
                   "/content/test.jpg")))
-       (<a href="#robo12">site</a> (<strong>make-site</strong> snippets assets templates
+       (<a href="#robo15">site</a> (<strong>make-site</strong> snippets assets templates
                         pages files :data '((title . "Test")))))
-  <a href="#robo12">site</a>)
+  <a href="#robo15">site</a>)
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defun <strong>make-site</strong> (snippets assets templates pages files
                   &amp;key
+                    (<a href="./asset_lisp.html#robo5">asset</a>-base-dir "assets/")
                     (data nil)
                     (description "")
                     (id nil))
@@ -467,9 +470,9 @@
 
 <hr />
 <a name="site2fremove2ddata"></a>
-<a name="robo30"></a><h2>site/remove-data [ Methods ]</h2>
+<a name="robo33"></a><h2>site/remove-data [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -477,25 +480,25 @@
 <pre> 2023-07-24
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Removes a data field from the hash-table in the data slot of a <a href="#robo12">site</a>
+<pre> Removes a data field from the hash-table in the data slot of a <a href="#robo15">site</a>
  object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="#robo12">site</a> object
+<pre> - A <a href="#robo15">site</a> object
  - The key of the field to be removed. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> T when removal was successful, otherwise NIL.
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>remove-data</strong> ((obj <a href="#robo12">site</a>) key)
+<pre class="source">(defmethod <strong>remove-data</strong> ((obj <a href="#robo15">site</a>) key)
 </pre>
 
 <hr />
 <a name="site2fset2ddata"></a>
-<a name="robo31"></a><h2>site/set-data [ Methods ]</h2>
+<a name="robo34"></a><h2>site/set-data [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo15">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -507,7 +510,7 @@
  it will add a new key to the hash table. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo12">site</a> object.
+<pre> - The <a href="#robo15">site</a> object.
  - The key of the value to change / add.
  - The new value of the field in the hash-table.
 </pre>
@@ -520,13 +523,13 @@
 <pre> The value of the changed/added field.
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>set-data</strong> ((st <a href="#robo12">site</a>) key value
+<pre class="source">(defmethod <strong>set-data</strong> ((st <a href="#robo15">site</a>) key value
                      &amp;key (warn nil))
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 13:39:26</p>
+<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-25 15:45:46</p>
 </div> <!-- footer -->
 </body>
 </html>

@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****c* colporter/named-object
+;;; ****c* clptr/named-object
 ;;; NAME
 ;;; named-object
 ;;; 
@@ -16,7 +16,7 @@
 ;;; CLASS HIERARCHY
 ;;; None, as this is the base class for all colporter classes.
 ;;;
-;;; $$ Last modified:  21:55:50 Sun Jul 23 2023 CEST
+;;; $$ Last modified:  15:45:22 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  14:45:06 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  15:43:13 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -132,11 +132,10 @@
 ;;; RETURN VALUE
 ;;; 
 ;;;
-;;; EXAMPLE
-
-
 ;;; SYNOPSIS
-
+(defun make-colporter ()
+  ;;; ****
+  )
 
 
 

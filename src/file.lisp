@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  15:14:21 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  15:41:44 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -131,7 +131,7 @@
 ;;;
 ;;; EXAMPLE
 #|
-(let ((file (make-file "image.jpg" "~/image.jpg")))
+(let ((file (make-file "~/image.jpg" "image.jpg")))
   (type file))
 ;; => ("image" "jpeg")
 |#
