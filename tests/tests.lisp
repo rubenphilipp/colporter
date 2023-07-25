@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  17:51:14 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  18:44:29 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -383,6 +383,27 @@
          (equal "projects/testb.jpg"
                 result-b)))))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; test build-colporter
+;;; RP  Tue Jul 25 18:32:44 2023
+(test build-colporter
+  ;; load snippets
+  (load (test-pathname "snippets/all.lisp"))
+  ;; load templates
+  (load (test-pathname "templates/all.lisp"))
+  (let* ((snippets +clptr-test-snippets+)
+         (assets (colporter::make-assets-from-dir (test-pathname "assets/")))
+         (templates +clptr-test-templates+)
+         (pages (colporter::make-pages-from-dir (test-pathname "content/")
+                                                :page-suffix "yaml"))
+         (files (colporter::make-files-from-dir (test-pathname "content/")
+                                                :page-suffix "yaml"))
+         (site (colporter::make-site snippets assets templates
+                                     pages files
+                                     :asset-base-dir "assets/"
+                                     :data '(("title" . "Test")))))
+    (is (typep site 'colporter::site))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

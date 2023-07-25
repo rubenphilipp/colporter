@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  16:07:23 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  18:32:31 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -153,6 +153,50 @@
                             :error-page error-page
                             :site site
                             :description description))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* colporter/build
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This method builds the html site based on a colporter object.
+;;; It generates and moves all files to the respective output locations. 
+;;;
+;;; ARGUMENTS
+;;; A colporter-object. 
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :verbose. Print occasional status messages to the stream. Default = t.
+;;; 
+;;; RETURN VALUE
+;;; The output-dir. 
+;;;
+;;; SYNOPSIS
+(defmethod build ((clptr colporter)
+                  &key
+                    (verbose t))
+  ;;; ****
+  (when verbose
+    (format t "~%**********~% ~
+                 COLPORT BUILD STARTED ~%~%"))
+  ;; test if output directory exists
+  (ensure-directories-exist output-dir :verbose verbose)
+  ;; move all assets to the asset-base-dir in the output-dir
+  (when verbose
+    (format t "- moving assets ~%"))
+  (let* (;; the absolute path to the asset-base-dir
+         (assets-base (concatenate 'string
+                                   (output-dir clptr)
+                                   (asset-base-dir
+                                    (site clptr)))))
+    (print assets-base)))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
