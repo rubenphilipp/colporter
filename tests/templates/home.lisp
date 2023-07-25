@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-24
 ;;;
-;;; $$ Last modified:  19:36:27 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  19:43:58 Tue Jul 25 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter.tests)
@@ -33,6 +33,8 @@
                                    (colporter::get-data
                                     colporter::page "title")))
        (:body
+        (:img :src (colporter::insert-asset-path "test.jpg")
+              :style "width: 300px; height: auto;")
         (:raw
          (colporter::parse-as-markdown
           (colporter::get-data colporter::page "content")))))))

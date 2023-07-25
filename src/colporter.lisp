@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  19:35:24 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  19:39:41 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -184,7 +184,7 @@
   ;;; ****
   (when verbose
     (format t "~%**********~% ~
-                 COLPORT BUILD STARTED ~%~%"))
+               COLPORTER BUILD STARTED ~%~%"))
   ;; test if output directory exists
   (ensure-directories-exist (output-dir clptr) :verbose verbose)
   ;; move all assets to the asset-base-dir in the output-dir
@@ -251,7 +251,10 @@
                                      :direction :output
                                      :if-exists :supersede
                                      :if-does-not-exist :create)
-               (format stream "~a" (do-template template page site))))))
+               (format stream "~a" (do-template template page site)))))
+  (format t "~% BUILD DONE ~%********** ~%")
+  (output-dir clptr))
+  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF colporter.lisp
