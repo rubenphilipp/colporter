@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  19:13:15 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  20:10:01 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -388,29 +388,36 @@
 ;;; test build-colporter
 ;;; RP  Tue Jul 25 18:32:44 2023
 (test build-colporter
-  ;; load snippets
-  (load (test-pathname "snippets/all.lisp"))
-  ;; load templates
-  (load (test-pathname "templates/all.lisp"))
-  (let* ((snippets +clptr-test-snippets+)
-         (assets (colporter::make-assets-from-dir (test-pathname "assets/")))
-         (templates +clptr-test-templates+)
-         (pages (colporter::make-pages-from-dir (test-pathname "content/")
-                                                :page-suffix "yaml"))
-         (files (colporter::make-files-from-dir (test-pathname "content/")
-                                                :page-suffix "yaml"))
-         (site (colporter::make-site snippets assets templates
-                                     pages files
-                                     :asset-base-dir "assets/"
-                                     :data '(("title" . "Test"))))
-         (colporter (colporter::make-colporter
-                     site
-                     :output-dir "/tmp/testsite/"
-                     :error-page "error"
-                     :output-suffix "html"
-                     :default-template "default")))
-    (colporter::build colporter)
-    (is (typep colporter 'colporter::colporter))))
+  (let ((testdir "/tmp/testsite/"))
+    ;; delete testsite
+    (cl-fad::delete-directory-and-files testdir :if-does-not-exist :ignore)
+    ;; load snippets
+    (load (test-pathname "snippets/all.lisp"))
+    ;; load templates
+    (load (test-pathname "templates/all.lisp"))
+    (let* ((snippets +clptr-test-snippets+)
+           (assets (colporter::make-assets-from-dir (test-pathname "assets/")))
+           (templates +clptr-test-templates+)
+           (pages (colporter::make-pages-from-dir (test-pathname "content/")
+                                                  :page-suffix "yaml"))
+           (files (colporter::make-files-from-dir (test-pathname "content/")
+                                                  :page-suffix "yaml"))
+           (site (colporter::make-site snippets assets templates
+                                       pages files
+                                       :asset-base-dir "assets/"
+                                       :data '(("title" . "Test"))))
+           (colporter (colporter::make-colporter
+                       site
+                       :output-dir testdir
+                       :error-page "error"
+                       :output-suffix "html"
+                       :default-template "default")))
+      (colporter::build colporter)
+      (is (and
+           (typep colporter 'colporter::colporter)
+           (probe-file (concatenate 'string
+                                    testdir
+                                    "home.html")))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

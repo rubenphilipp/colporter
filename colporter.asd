@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  15:46:00 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  20:05:53 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -29,6 +29,7 @@
   :depends-on ("alexandria"
                "spinneret"
                "spinneret/cl-markdown"
+               "cl-markdown"
                "cl-ppcre"
                "file-types"
                "osicat"
