@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  00:17:49 Wed Jul 26 2023 CEST
+;;; $$ Last modified:  00:25:27 Wed Jul 26 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -287,8 +287,10 @@
                               :direction :output
                               :if-does-not-exist :create
                               :if-exists :supersede)
-        (format stream "~a" htaccess-data))))
-                                   
+        (format stream "~a" htaccess-data)))
+    (format t "  - ~a" (concatenate 'string
+                                         (output-dir clptr)
+                                         ".htaccess")))
   (format t "~% BUILD DONE ~%********** ~%")
   (output-dir clptr))
   
