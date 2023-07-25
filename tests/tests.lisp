@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  13:39:16 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  14:02:45 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -227,6 +227,8 @@
                      (colporter::get-page site "projects/opus-1")
                      site)))
     (is (and
+         (equal "Home" (colporter::get-data
+                        (colporter::get-page site "home") "title"))
          (eq result-a 3)
          (equal "style.css" result-b)))))
 
