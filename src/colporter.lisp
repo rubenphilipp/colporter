@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  19:39:41 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  23:44:46 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -252,6 +252,9 @@
                                      :if-exists :supersede
                                      :if-does-not-exist :create)
                (format stream "~a" (do-template template page site)))))
+  (when verbose
+    (format t "- creating the .htaccess file: ~%"))
+  
   (format t "~% BUILD DONE ~%********** ~%")
   (output-dir clptr))
   

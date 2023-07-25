@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  20:10:01 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  23:50:00 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -387,7 +387,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; test build-colporter
 ;;; RP  Tue Jul 25 18:32:44 2023
-(test build-colporter
+(test test-build-colporter
   (let ((testdir "/tmp/testsite/"))
     ;; delete testsite
     (cl-fad::delete-directory-and-files testdir :if-does-not-exist :ignore)

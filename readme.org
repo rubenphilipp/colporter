@@ -6,9 +6,13 @@
 /colporter/ is a static-site generator written in Common Lisp, loosely modeled
 after [[https://github.com/jekyll/jekyll][Jekyll]]. Its HTML generation is partly based on [[https://github.com/ruricolist/spinneret][Spinneret]].
 
+Tested with SBCL.
+
 * Usage notes
 
-- TODO
+A tutorial and example projects are coming up soon. For now, refer to
+[[https://rubenphilipp.com/colporter]] and the tests (in ~tests/tests.lisp~; esp.
+~test-build-colporter~).
 
 ** Project structure
 
@@ -17,7 +21,19 @@ after [[https://github.com/jekyll/jekyll][Jekyll]]. Its HTML generation is partl
 - ~/tests~. Regression tests via [[https://github.com/lispci/fiveam][fiveam]].
 - ~/examples~. Example files for demonstration purposes.
 
+* Requirements
+
+** Lisp-wise
+
+- [[https://www.sbcl.org][SBCL]] (or comparable)
+  - currently, /colporter/ is only tested on MacOS with SBCL
+- [[https://asdf.common-lisp.dev][ASDF]]
+
+** Server
+
+- Apache 2 (for htaccess support, e.g. for custom error pages and mod_rewrite)
+
 
 #+begin_comment
-$$ Last modified:  21:05:20 Sun Jul  9 2023 CEST
+$$ Last modified:  23:50:09 Tue Jul 25 2023 CEST
 #+end_comment
