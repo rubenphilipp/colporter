@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  12:51:11 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  13:32:25 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -177,6 +177,52 @@
          (equal "Test" (colporter::get-data site 'title))
          (typep (colporter::get-snippet site "sn1") 'colporter::snippet)
          (equal "RP" (colporter::get-data site 'author))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; test insert-snippet
+;;; RP  Tue Jul 25 13:20:46 2023
+(test test-insert-snippet
+  (let* ((snippets (list
+                    (colporter::make-snippet #'(lambda (x y) (+ x y))
+                                             :id "sn1"
+                                             :description "addition")
+                    (colporter::make-snippet #'(lambda (x) (print x))
+                                             :id "sn2"
+                                             :description "just print")))
+         (assets (list
+                  (colporter::make-asset
+                   (test-pathname "assets/style.css")
+                   "style.css")))
+         (templates (list
+                     (cons 'home
+                           (colporter::make-template
+                            (colporter::define-template
+                              (colporter::insert-snippet "sn1" 1 2))))
+                     (cons 'project
+                           (colporter::make-template
+                            (colporter::define-template
+                              "project")))))
+         (base (test-pathname "content/"))
+         (pages (list
+                 (colporter::make-page
+                  (test-pathname "content/home.yaml")
+                  base)
+                 (colporter::make-page
+                  (test-pathname "content/projects/opus-1.yaml")
+                  base)))
+         (files (list
+                 (colporter::make-file
+                  (test-pathname "content/projects/testb.jpg"))
+                 (colporter::make-file
+                  (test-pathname "content/test.jpg"))))
+         (site (colporter::make-site snippets assets templates
+                                     pages files :data '((title . "Test"))))
+         (result (colporter::do-template
+                     (colporter::get-template site 'home)
+                   (colporter::get-page site "home")
+                   site)))
+    (is (eq result 3))))
+
 
 
 

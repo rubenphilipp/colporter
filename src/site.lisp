@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  12:54:05 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  13:26:24 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -49,7 +49,7 @@
            (cond ((typep (,slot ,object) 'hash-table)
                   (,slot ,object))
                  ((alistp (,slot ,object))
-                  (alist-hash-table (,slot ,object)))
+                  (alist-hash-table (,slot ,object) :test 'equal))
                  ((null (,slot ,object))
                   nil)
                  (t (error "site::init-alist?-hash-table: The given value ~a ~
@@ -92,7 +92,7 @@
                      (alistp ,obj))))
        (loop for item in ,obj
              for id = (id item)
-             with result = (make-hash-table)
+             with result = (make-hash-table :test 'equal)
              do
                 (setf (gethash id result) item)
              finally (return result))
@@ -307,6 +307,55 @@
 (defmethod get-snippet ((obj site) key)
   ;;; ****
   (gethash key (snippets obj)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-template
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns a template object from the template hash-table of a site object by
+;;; its key. 
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The key of the template according to the hash-table. 
+;;; 
+;;; RETURN VALUE
+;;; The template-object. 
+;;;
+;;; SYNOPSIS
+(defmethod get-template ((obj site) key)
+  ;;; ****
+  (gethash key (templates obj)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-page
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; Returns a page object from the page hash-table of a site object by
+;;; its key. 
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The key of the page according to the hash-table. 
+;;; 
+;;; RETURN VALUE
+;;; The page-object. 
+;;;
+;;; SYNOPSIS
+(defmethod get-page ((obj site) key)
+  ;;; ****
+  (gethash key (pages obj)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* site/get-keys-or-objects

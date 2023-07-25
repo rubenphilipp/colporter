@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> snippet
 ;;;
-;;; $$ Last modified:  16:27:57 Mon Jul 24 2023 CEST
+;;; $$ Last modified:  13:01:59 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -132,6 +132,9 @@
 ;;;
 ;;; ARGUMENTS
 ;;; - A snippet object.
+;;;
+;;; OPTIONAL ARGUMENTS
+;;; rest:
 ;;; - The arguments to the snippet.
 ;;; 
 ;;; RETURN VALUE

@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  01:12:20 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  13:32:11 Tue Jul 25 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -118,7 +118,7 @@
 ;;; SYNOPSIS
 (defmacro define-template (&body body)
   ;;; ****
-  `(lambda (site page)
+  `(lambda (page site)
      (eval ,@body)))
 
 
@@ -151,7 +151,78 @@
   (unless (typep site 'site)
     (error "template::do-template: The site must be of type SITE, not ~a."
            (type-of site)))
-  (funcall (template tp) pg st))
+  (funcall (template template) page site))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/yield-snippet
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro can be used within define-template in order to retrieve a 
+;;; snippet object available to the (implicitly given) site object by solely
+;;; referring to the id by which the respective snippet object is stored in
+;;; the snippets slot of the site object. 
+;;;
+;;; ARGUMENTS
+;;; - The snippet id (see above).
+;;;
+;;; EXAMPLE
+#|
+(yield-snippet "sn1")
+;; => (GET-SNIPPET SITE "sn1")
+|#
+;;; SYNOPSIS
+(defmacro yield-snippet (id)
+  ;;; ****
+  `(get-snippet site ,id))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/insert-snippet
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro can be used within define-template in order to insert a snippet
+;;; available to the (implicitly given) site object by solely referring to
+;;; the id by which the respective snippet object is stored in the snippets
+;;; slot of the site object. 
+;;;
+;;; ARGUMENTS
+;;; - The snippet id (see above). 
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; rest:
+;;; - All other arguments required by the snippet according to its definition
+;;;   (cf. define-snippet). 
+;;; 
+;;; EXAMPLE
+#|
+(insert-snippet "sn1" 1 'test)
+;; =>
+;; (LET ((SNIPPET (GET-SNIPPET SITE "sn1")))
+;;   (APPLY #'DO-SNIPPET (LIST "sn1" 1 'TEST)))
+|#
+;;; SYNOPSIS
+(defmacro insert-snippet (id &rest args)
+  ;;; ****
+  `(let ((snippet (get-snippet site ,id)))
+     (apply #'do-snippet (list snippet ,@args))))
+
+
 
 
 
