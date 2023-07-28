@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  20:16:56 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  23:51:14 Fri Jul 28 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -47,7 +47,8 @@
                (:file "template")
                (:file "page")
                (:file "site")
-               (:file "colporter")))
+               (:file "colporter")
+               (:file "export")))
 
 
 ;;; regression tests
@@ -66,12 +67,12 @@
 ;;; Export all symbols
 ;;; RP  Sun Jul 23 21:50:54 2023
 
-(let ((package (find-package :colporter)))
-  (do-all-symbols (symb package)
-    (when (and (or (find-class symb nil)
-                   (fboundp symb))
-               (eql (symbol-package symb) package))
-      (export symb package))))
+;; (let ((package (find-package :colporter)))
+;;   (do-all-symbols (symb package)
+;;     (when (and (or (find-class symb nil)
+;;                    (fboundp symb))
+;;                (eql (symbol-package symb) package))
+;;       (export symb package))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
