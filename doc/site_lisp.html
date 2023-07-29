@@ -52,7 +52,7 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <strong>site</strong>
 
- $$ Last modified:  17:38:08 Tue Jul 25 2023 CEST
+ $$ Last modified:  01:01:27 Sun Jul 30 2023 CEST
 </pre>
 
 <hr />
@@ -259,8 +259,34 @@
 </pre>
 
 <hr />
+<a name="site2fget2dpage2dby2duuid"></a>
+<a name="robo34"></a><h2>site/get-page-by-uuid [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-30
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This method returns a <a href="./page_lisp.html#robo19">page</a> object from the <a href="./page_lisp.html#robo19">page</a> hash-table of a <a href="#robo20">site</a> object
+ by its uuid data slot.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The <a href="#robo20">site</a> object.
+ - The uuid (cf. make-<a href="./page_lisp.html#robo19">page</a>) of the <a href="./page_lisp.html#robo19">page</a>.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The <a href="./page_lisp.html#robo19">page</a> object. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>get-page-by-uuid</strong> ((obj <a href="#robo20">site</a>) uuid)
+</pre>
+
+<hr />
 <a name="site2fget2dpages"></a>
-<a name="robo34"></a><h2>site/get-pages [ Methods ]</h2>
+<a name="robo35"></a><h2>site/get-pages [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -291,7 +317,7 @@
 
 <hr />
 <a name="site2fget2dsnippet"></a>
-<a name="robo35"></a><h2>site/get-snippet [ Methods ]</h2>
+<a name="robo36"></a><h2>site/get-snippet [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -317,7 +343,7 @@
 
 <hr />
 <a name="site2fget2dsnippets"></a>
-<a name="robo36"></a><h2>site/get-snippets [ Methods ]</h2>
+<a name="robo37"></a><h2>site/get-snippets [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -348,7 +374,7 @@
 
 <hr />
 <a name="site2fget2dtemplate"></a>
-<a name="robo37"></a><h2>site/get-template [ Methods ]</h2>
+<a name="robo38"></a><h2>site/get-template [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -374,7 +400,7 @@
 
 <hr />
 <a name="site2fget2dtemplates"></a>
-<a name="robo38"></a><h2>site/get-templates [ Methods ]</h2>
+<a name="robo39"></a><h2>site/get-templates [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -405,7 +431,7 @@
 
 <hr />
 <a name="site2fmake2dsite"></a>
-<a name="robo39"></a><h2>site/make-site [ Functions ]</h2>
+<a name="robo40"></a><h2>site/make-site [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -449,10 +475,10 @@
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(let* ((snippets (list
-                    (<a href="./snippet_lisp.html#robo44">make-snippet</a> #'(lambda (x y) (+ x y))
+                    (<a href="./snippet_lisp.html#robo45">make-snippet</a> #'(lambda (x y) (+ x y))
                                              :id 'sn1
                                              :description "addition")
-                    (<a href="./snippet_lisp.html#robo44">make-snippet</a> #'(lambda (x) (print x))
+                    (<a href="./snippet_lisp.html#robo45">make-snippet</a> #'(lambda (x) (print x))
                                              :id 'sn2
                                              :description "just print")))
          (assets (list
@@ -461,12 +487,12 @@
                    "style.css")))
          (templates (list
                      (cons 'home
-                           (<a href="./template_lisp.html#robo50">make-template</a>
-                            (<a href="./template_lisp.html#robo45">define-template</a>
+                           (<a href="./template_lisp.html#robo51">make-template</a>
+                            (<a href="./template_lisp.html#robo46">define-template</a>
                               "home")))
                      (cons 'project
-                           (<a href="./template_lisp.html#robo50">make-template</a>
-                            (<a href="./template_lisp.html#robo45">define-template</a>
+                           (<a href="./template_lisp.html#robo51">make-template</a>
+                            (<a href="./template_lisp.html#robo46">define-template</a>
                               "project")))))
          (base "/content/")
          (pages (list
@@ -496,7 +522,7 @@
 
 <hr />
 <a name="site2fremove2ddata"></a>
-<a name="robo40"></a><h2>site/remove-data [ Methods ]</h2>
+<a name="robo41"></a><h2>site/remove-data [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -522,7 +548,7 @@
 
 <hr />
 <a name="site2fset2ddata"></a>
-<a name="robo41"></a><h2>site/set-data [ Methods ]</h2>
+<a name="robo42"></a><h2>site/set-data [ Methods ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">site</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -555,7 +581,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-30 00:45:49</p>
+<p>Generated from ./src/site.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-30 01:02:10</p>
 </div> <!-- footer -->
 </body>
 </html>

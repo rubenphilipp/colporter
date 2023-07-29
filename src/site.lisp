@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  17:38:08 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  01:01:27 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -425,6 +425,36 @@
 (defmethod get-page ((obj site) key)
   ;;; ****
   (gethash key (pages obj)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* site/get-page-by-uuid
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-30
+;;; 
+;;; DESCRIPTION
+;;; This method returns a page object from the page hash-table of a site object
+;;; by its uuid data slot.
+;;;
+;;; ARGUMENTS
+;;; - The site object.
+;;; - The uuid (cf. make-page) of the page.
+;;; 
+;;; RETURN VALUE
+;;; The page object. 
+;;; 
+;;; SYNOPSIS
+(defmethod get-page-by-uuid ((obj site) uuid)
+  ;;; ****
+  (loop for page being the hash-values of (pages obj)
+        when (equal uuid (uuid page))
+          do
+             (return page)))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* site/get-keys-or-objects
