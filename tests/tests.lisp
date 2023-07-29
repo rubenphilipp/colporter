@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  23:50:00 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  00:45:23 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -414,6 +414,8 @@
                        :default-template "default")))
       (colporter::build colporter)
       (is (and
+           (equal "778425df-7450-4a18-b58b-9448f1de9b7a"
+                  (colporter::uuid (colporter::get-page site "home")))
            (typep colporter 'colporter::colporter)
            (probe-file (concatenate 'string
                                     testdir

@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  00:42:11 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  00:43:25 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -103,6 +103,7 @@
   ;; set id according to uid
   (setf (slot-value pg 'id) (uid pg))
   ;; set uuid when the YAML file contains a "uuid" element
+  ;; RP  Sun Jul 30 00:43:20 2023
   (when (gethash "uuid" (data pg))
     (setf (slot-value pg 'uuid) (gethash "uuid" (data pg))))
   pg)
