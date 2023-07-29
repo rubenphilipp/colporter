@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  19:39:32 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  00:32:49 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -39,6 +39,13 @@
    ;; output file (e.g. "content/projects/opus-1.yaml" =>
    ;; "projects/opus-1"). 
    (uid :accessor uid :initarg :uid :initform nil)
+   ;; a Universally Unique IDentifier for the page (optional) which could be
+   ;; used for creating permalinks or referencing to a page independent of the
+   ;; uid / hierarchical page structure
+   ;; a uuid should be explicitly assigned to a page object and be -- for the
+   ;; sake of consistency -- persisted e.g. in the page-consituent file (e.g.
+   ;; a YAML file)
+   (uuid :accessor uuid :initarg :uuid :initform nil)
    ;; a base path used for uid-generation
    ;; this is most likely the root path for the site content (e.g. "content/")
    (base :accessor base :initarg :base :initform nil)
@@ -123,6 +130,16 @@
 ;;;   E.g.: "/sites/rubenphilipp/content/projects/opus-1.yaml"
 ;;;   with base="/sites/rubenphilipp/content/" => "projects/opus-1"
 ;;;   (cf. uid-from-path).
+;;; - :uuid. The Unique IDentifier for the page. This value could be used for
+;;;   creating permalinks or referencing to a page independent of the uid /
+;;;   hierarchical page structure of a site. A uuid should be explicitly
+;;;   assigned to a page object and be -- for the sake of consistency --
+;;;   persisted, e.g. in the page-constituing file (i.e. most likely a YAML
+;;;   file).
+;;;   NB: In case when working on page's contents with Emacs, uuidgen might
+;;;   be helpful when creating uuids to be stored, e.g. in a "uuid"-field in
+;;;   the YAML file of a page. (cf. https://github.com/kanru/uuidgen-el)
+;;;   Default = nil.
 ;;; - :template. A template id referring to the template object which will be
 ;;;   used to render the page. If NIL, the template will be automatically
 ;;;   selected based on the data of the page or the default template.
@@ -137,10 +154,12 @@
 ;;; SYNOPSIS
 (defun make-page (path base-path &key
                                    (uid nil)
+                                   (uuid nil)
                                    (template nil))
   ;;; ****
   (make-instance 'page :path path
                        :base base-path
+                       :uuid uuid
                        :uid uid
                        :template template))
 
