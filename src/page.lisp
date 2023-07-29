@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  00:32:49 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  00:35:17 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -247,7 +247,7 @@
                                                    0 1))))
                                  (push name page-file-paths)))
                            :directories nil)
-    ;; generate file objects
+    ;; generate page objects
     (loop for path in page-file-paths
           for uid = (uid-from-path path dir)
           for page = (make-page path dir :uid uid)
