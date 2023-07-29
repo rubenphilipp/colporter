@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  00:35:17 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  00:42:11 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -102,6 +102,9 @@
     (setf (slot-value pg 'uid) (uid-from-path (path pg) (base pg))))
   ;; set id according to uid
   (setf (slot-value pg 'id) (uid pg))
+  ;; set uuid when the YAML file contains a "uuid" element
+  (when (gethash "uuid" (data pg))
+    (setf (slot-value pg 'uuid) (gethash "uuid" (data pg))))
   pg)
 
 
@@ -136,7 +139,10 @@
 ;;;   assigned to a page object and be -- for the sake of consistency --
 ;;;   persisted, e.g. in the page-constituing file (i.e. most likely a YAML
 ;;;   file).
-;;;   NB: In case when working on page's contents with Emacs, uuidgen might
+;;;   NB: colporter will automatically look for a value in the page data
+;;;   hash-table field "uuid". When given, it will be automatically assigned,
+;;;   unless a different value has been assigned, e.g. via this method. 
+;;;   NB 2: In case when working on page's contents with Emacs, uuidgen might
 ;;;   be helpful when creating uuids to be stored, e.g. in a "uuid"-field in
 ;;;   the YAML file of a page. (cf. https://github.com/kanru/uuidgen-el)
 ;;;   Default = nil.
