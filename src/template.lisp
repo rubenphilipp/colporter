@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  00:29:11 Wed Jul 26 2023 CEST
+;;; $$ Last modified:  14:19:41 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -287,6 +287,35 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/yield-page-by-uuid
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-24
+;;; 
+;;; DESCRIPTION
+;;; This macro can be used within define-template in order to retrieve a 
+;;; page object available to the (implicitly given) site object by solely
+;;; referring to the uuid by which the respective asset object is stored in
+;;; the assets slot of the site object. 
+;;;
+;;; ARGUMENTS
+;;; - The asset id (see above).
+;;;
+;;; EXAMPLE
+#|
+(yield-page-by-uuid "778425df-7450-4a18-b58b-9448f1de9b7a")
+;; => (GET-PAGE-BY-UUID SITE "778425df-7450-4a18-b58b-9448f1de9b7a")
+|#
+;;; SYNOPSIS
+(defmacro yield-page-by-uuid (uuid)
+  ;;; ****
+  `(get-page-by-uuid site ,uuid))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****** template/insert-file-path
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
@@ -336,6 +365,9 @@
                                     ,uid)))
          (data (get-file site file-id)))
       `(data (get-file site ,uid))))
+
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

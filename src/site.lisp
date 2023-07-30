@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  01:01:27 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  14:30:57 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -352,7 +352,11 @@
 ;;; SYNOPSIS
 (defmethod get-asset ((obj site) key)
   ;;; ****
-  (gethash key (assets obj)))
+  (let ((asset (gethash key (assets obj))))
+    (unless asset
+      (error "site::get-asset: The asset with the key \"~a\" does not exist."
+             key))
+    asset))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* site/get-file
@@ -376,7 +380,11 @@
 ;;; SYNOPSIS
 (defmethod get-file ((obj site) key)
   ;;; ****
-  (gethash key (files obj)))
+  (let ((file (gethash key (files obj))))
+    (unless file
+      (error "site::get-file: The file with the key \"~a\" does not exist."
+             key))
+    file))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****m* site/get-template
