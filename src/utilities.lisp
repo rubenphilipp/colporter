@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  15:34:00 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  15:16:20 Sun Jul 30 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -292,6 +292,53 @@
                      (concatenate 'string result uid-e "/"))
           finally
              (return result))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/relative-path
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-30
+;;; 
+;;; DESCRIPTION
+;;; Returns a path to the file indicated by the target path relative to the
+;;; location directory.
+;;; E.g.:
+;;; location: "/tmp/project/"
+;;; target: "/tmp/image.jpg"
+;;; => result: "../image.jpg"
+;;;
+;;; ARGUMENTS
+;;; - The location from which the relative link to the target has to be
+;;;   constructed. Must be a string.
+;;; - The target path (e.g. to a file). 
+;;; 
+;;; RETURN VALUE
+;;; A pathname being the path to the target relative to the location.
+;;;
+;;; EXAMPLE
+#|
+(let ((ln "tmp/project/")
+      (tg "tmp/images/test.jpg"))
+  (relative-path ln tg))
+;; => #P"../images/test.jpg"
+|#
+;;; SYNOPSIS
+(defun relative-path (location target)
+  ;;; ****
+  (loop for ln on (pathname-directory location)
+        for tg on (pathname-directory target)
+        while (string= (first ln) (first tg))
+        finally
+           (return
+             (make-pathname
+              :directory (append (list :relative)
+                                 (substitute :up t ln :test (constantly t))
+                                 tg)
+              :defaults target))))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

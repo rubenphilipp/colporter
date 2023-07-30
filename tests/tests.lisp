@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  01:01:50 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  15:18:12 Sun Jul 30 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -426,6 +426,16 @@
                                     testdir
                                     "home.html")))))))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; test relative-path
+;;; RP  Sun Jul 30 15:16:46 2023
+
+(test test-relative-path
+  (let* ((location "tmp/project/")
+         (target "tmp/images/test.jpg")
+         (result (colporter::relative-path location target)))
+    (is (equal #P"../images/test.jpg" result))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

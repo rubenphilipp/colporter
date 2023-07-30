@@ -50,7 +50,7 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <strong>template</strong>
 
- $$ Last modified:  00:29:11 Wed Jul 26 2023 CEST
+ $$ Last modified:  14:19:41 Sun Jul 30 2023 CEST
 </pre>
 
 <hr />
@@ -370,8 +370,36 @@
 </pre>
 
 <hr />
+<a name="template2fyield2dpage2dby2duuid"></a>
+<a name="robo54"></a><h2>template/yield-page-by-uuid [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro can be used within <a href="#robo46">define-template</a> in order to retrieve a 
+ <a href="./page_lisp.html#robo19">page</a> object available to the (implicitly given) <a href="./site_lisp.html#robo20">site</a> object by solely
+ referring to the uuid by which the respective <a href="./asset_lisp.html#robo8">asset</a> object is stored in
+ the assets slot of the <a href="./site_lisp.html#robo20">site</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The <a href="./asset_lisp.html#robo8">asset</a> id (see above).
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>yield-page-by-uuid</strong> "778425df-7450-4a18-b58b-9448f1de9b7a")
+;; =&gt; (GET-PAGE-BY-UUID SITE "778425df-7450-4a18-b58b-9448f1de9b7a")
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>yield-page-by-uuid</strong> (uuid)
+</pre>
+
+<hr />
 <a name="template2fyield2dsnippet"></a>
-<a name="robo54"></a><h2>template/yield-snippet [ Generics ]</h2>
+<a name="robo55"></a><h2>template/yield-snippet [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -399,7 +427,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-30 01:02:10</p>
+<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-30 15:18:20</p>
 </div> <!-- footer -->
 </body>
 </html>
