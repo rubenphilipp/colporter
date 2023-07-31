@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  14:19:41 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  09:20:28 Mon Jul 31 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -280,10 +280,13 @@
 (defmacro insert-asset-path (id)
   ;;; ****
   `(let ((asset (get-asset site ,id))
-         (asset-base-dir (asset-base-dir site)))
-     (concatenate 'string
-                  asset-base-dir
-                  (data asset))))
+         (asset-base-dir (asset-base-dir site))
+         (page-location (uid page)))
+     (relative-path
+      (directory-namestring page-location)
+      (concatenate 'string
+                   asset-base-dir
+                   (data asset)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -312,6 +315,42 @@
 (defmacro yield-page-by-uuid (uuid)
   ;;; ****
   `(get-page-by-uuid site ,uuid))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** template/insert-page-path-by-uuid
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-31
+;;; 
+;;; DESCRIPTION
+;;; This macro can be used within define-template in order to insert the
+;;; path to a page by its uuid. The path retrieved will be relative to the
+;;; current page. 
+;;;
+;;; ARGUMENTS
+;;; - The uuid of the page to insert. 
+;;;
+;;; EXAMPLE
+#|
+(insert-page-path-by-uuid "778425df-7450-4a18-b58b-9448f1de9b7a")
+;; =>
+;; (LET ((PAGE-TO-INSERT
+;;        (GET-PAGE-BY-UUID SITE "778425df-7450-4a18-b58b-9448f1de9b7a"))
+;;       (THIS-PAGE-LOCATION (UID PAGE)))
+;;   (RELATIVE-PATH (DIRECTORY-NAMESTRING THIS-PAGE-LOCATION)
+;;               (UID PAGE-TO-INSERT)))
+|#
+;;; SYNOPSIS
+(defmacro insert-page-path-by-uuid (uuid)
+  ;;; ****
+  `(let ((page-to-insert (get-page-by-uuid site ,uuid))
+         (this-page-location (uid page)))
+     (relative-path
+      (directory-namestring this-page-location)
+      (uid page-to-insert))))
 
 
 
@@ -363,8 +402,12 @@
                                    (directory-namestring
                                     (uid page))
                                     ,uid)))
-         (data (get-file site file-id)))
-      `(data (get-file site ,uid))))
+         (relative-path
+          (directory-namestring (uid page))
+          (data (get-file site file-id))))
+      `(relative-path
+        (directory-namestring (uid page))
+        (data (get-file site ,uid)))))
 
 
 
@@ -466,6 +509,17 @@
                        (match (subseq target match-start match-end))
                        (uid (cl-ppcre:regex-replace-all regex match "")))
                   (insert-asset-path uid)))))
+     ;; parse page-uuid
+     (setf result
+           (cl-ppcre::regex-replace-all
+            "\\[\\[page-uuid\\s(.*?)\\]\\]"
+            result
+            #'(lambda (target start end match-start match-end &rest args)
+                (declare (ignore start end args))
+                (let* ((regex "(?:\\[\\[page-uuid\\s)\|(?:\\]\\])")
+                       (match (subseq target match-start match-end))
+                       (uuid (cl-ppcre:regex-replace-all regex match "")))
+                  (insert-page-path-by-uuid uuid)))))
      result))
 
 

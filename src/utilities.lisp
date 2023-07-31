@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  15:16:20 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  08:56:45 Mon Jul 31 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -41,10 +41,11 @@
 ;;; SYNOPSIS
 (defun trailing-slash (path)
   ;;; ****
-  (when (> (length path) 0)
+  (if (> (length path) 0)
     (if (char= #\/ (elt path (1- (length path))))
         path
-        (format nil "~a/" path))))
+        (format nil "~a/" path))
+    ""))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -293,6 +294,46 @@
           finally
              (return result))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/leading-slash
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-31
+;;; 
+;;; DESCRIPTION
+;;; This function ensures that a string starts with a slash (e.g. useful when
+;;; treating relative as absolute paths).
+;;;
+;;; ARGUMENTS
+;;; A string.
+;;;
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :dot. When T, also adds a "." to the leading path (i.e. "./").
+;;;   Default = NIL.
+;;; 
+;;; RETURN VALUE
+;;; The string with a leading slash.
+;;;
+;;; EXAMPLE
+#|
+(leading-slash "hello/world")
+;; => "/hello/world"
+|#
+;;; SYNOPSIS
+(defun leading-slash (string &key dot)
+  ;;; ****
+  (let ((result 
+          (if (or (string= "/" (subseq string 0 1))
+                  (string= "./" (subseq string 0 2)))
+              string
+              (concatenate 'string "/" string))))
+    (if dot
+        (concatenate 'string "." result)
+        result)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* utilities/relative-path
@@ -311,33 +352,43 @@
 ;;; => result: "../image.jpg"
 ;;;
 ;;; ARGUMENTS
-;;; - The location from which the relative link to the target has to be
-;;;   constructed. Must be a string.
+;;; - The location directory from which the relative link to the target has to
+;;;   be constructed. Must be a string.
 ;;; - The target path (e.g. to a file). 
 ;;; 
 ;;; RETURN VALUE
-;;; A pathname being the path to the target relative to the location.
+;;; A pathname namestring being the path to the target relative to the location.
 ;;;
 ;;; EXAMPLE
 #|
 (let ((ln "tmp/project/")
       (tg "tmp/images/test.jpg"))
   (relative-path ln tg))
-;; => #P"../images/test.jpg"
+;; => "../images/test.jpg"
 |#
 ;;; SYNOPSIS
 (defun relative-path (location target)
   ;;; ****
-  (loop for ln on (pathname-directory location)
-        for tg on (pathname-directory target)
-        while (string= (first ln) (first tg))
-        finally
-           (return
-             (make-pathname
-              :directory (append (list :relative)
-                                 (substitute :up t ln :test (constantly t))
-                                 tg)
-              :defaults target))))
+  ;;; when location is empty / nil or "/", assume that it is the root / base
+  ;;; RP  Mon Jul 31 07:51:56 2023
+  (if (eq nil (pathname-directory (trailing-slash location)))
+      target
+      (let* ((loc (trailing-slash (leading-slash location :dot t)))
+             (targ (leading-slash target :dot t))
+             (result 
+              (loop for ln on (pathname-directory loc)
+                    for tg on (pathname-directory targ)
+                    while (string= (first ln) (first tg))
+                    finally
+                       (return
+                         (make-pathname
+                          :directory (append (list :relative)
+                                             (substitute :up t ln :test
+                                                         (constantly t))
+                                             tg)
+                          :defaults targ)))))
+        (namestring result))))
+        
 
 
 

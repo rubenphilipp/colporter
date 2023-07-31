@@ -50,7 +50,7 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <strong>template</strong>
 
- $$ Last modified:  14:19:41 Sun Jul 30 2023 CEST
+ $$ Last modified:  09:20:28 Mon Jul 31 2023 CEST
 </pre>
 
 <hr />
@@ -197,8 +197,40 @@
 </pre>
 
 <hr />
+<a name="template2finsert2dpage2dpath2dby2duuid"></a>
+<a name="robo50"></a><h2>template/insert-page-path-by-uuid [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-31
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro can be used within <a href="#robo46">define-template</a> in order to insert the
+ path to a <a href="./page_lisp.html#robo19">page</a> by its uuid. The path retrieved will be relative to the
+ current <a href="./page_lisp.html#robo19">page</a>. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The uuid of the <a href="./page_lisp.html#robo19">page</a> to insert. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>insert-page-path-by-uuid</strong> "778425df-7450-4a18-b58b-9448f1de9b7a")
+;; =&gt;
+;; (LET ((PAGE-TO-INSERT
+;;        (GET-PAGE-BY-UUID SITE "778425df-7450-4a18-b58b-9448f1de9b7a"))
+;;       (THIS-PAGE-LOCATION (UID PAGE)))
+;;   (RELATIVE-PATH (DIRECTORY-NAMESTRING THIS-PAGE-LOCATION)
+;;               (UID PAGE-TO-INSERT)))
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>insert-page-path-by-uuid</strong> (uuid)
+</pre>
+
+<hr />
 <a name="template2finsert2dsnippet"></a>
-<a name="robo50"></a><h2>template/insert-snippet [ Generics ]</h2>
+<a name="robo51"></a><h2>template/insert-snippet [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -233,7 +265,7 @@
 
 <hr />
 <a name="template2fmake2dtemplate"></a>
-<a name="robo51"></a><h2>template/make-template [ Functions ]</h2>
+<a name="robo52"></a><h2>template/make-template [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -268,7 +300,7 @@
 
 <hr />
 <a name="template2fwith2dcolportage"></a>
-<a name="robo52"></a><h2>template/with-colportage [ Generics ]</h2>
+<a name="robo53"></a><h2>template/with-colportage [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -343,7 +375,7 @@
 
 <hr />
 <a name="template2fyield2dasset"></a>
-<a name="robo53"></a><h2>template/yield-asset [ Generics ]</h2>
+<a name="robo54"></a><h2>template/yield-asset [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -371,7 +403,7 @@
 
 <hr />
 <a name="template2fyield2dpage2dby2duuid"></a>
-<a name="robo54"></a><h2>template/yield-page-by-uuid [ Generics ]</h2>
+<a name="robo55"></a><h2>template/yield-page-by-uuid [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -399,7 +431,7 @@
 
 <hr />
 <a name="template2fyield2dsnippet"></a>
-<a name="robo55"></a><h2>template/yield-snippet [ Generics ]</h2>
+<a name="robo56"></a><h2>template/yield-snippet [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -427,7 +459,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-30 15:18:20</p>
+<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-31 09:23:13</p>
 </div> <!-- footer -->
 </body>
 </html>

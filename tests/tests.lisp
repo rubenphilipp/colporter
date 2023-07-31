@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  15:18:12 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  09:04:49 Mon Jul 31 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -240,7 +240,7 @@
                      (colporter::get-page site "projects/opus-1")
                      site)))
     (is (and
-         (equal "assets/style.css" result-c)
+         (equal "../assets/style.css" result-c)
          (equal "Home" (colporter::get-data
                         (colporter::get-page site "home") "title"))
          (eq result-a 3)
@@ -435,7 +435,7 @@
   (let* ((location "tmp/project/")
          (target "tmp/images/test.jpg")
          (result (colporter::relative-path location target)))
-    (is (equal #P"../images/test.jpg" result))))
+    (is (equal "../images/test.jpg" result))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

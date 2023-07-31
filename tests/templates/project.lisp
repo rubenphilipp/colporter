@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-24
 ;;;
-;;; $$ Last modified:  19:36:10 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  09:22:02 Mon Jul 31 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter.tests)
@@ -34,7 +34,7 @@
                                     colporter::page "title")))
        (:body
         (:raw
-         (colporter::parse-as-markdown
+         (colporter::with-colportage
           (colporter::get-data colporter::page "content")))))))
   :id "project"))
 
