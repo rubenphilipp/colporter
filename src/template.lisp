@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  09:20:28 Mon Jul 31 2023 CEST
+;;; $$ Last modified:  23:26:22 Tue Aug  1 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -119,7 +119,7 @@
 (defmacro define-template (&body body)
   ;;; ****
   `(lambda (page site)
-     (eval ,@body)))
+     ,@body))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -408,8 +408,6 @@
       `(relative-path
         (directory-namestring (uid page))
         (data (get-file site ,uid)))))
-
-
 
 
 
