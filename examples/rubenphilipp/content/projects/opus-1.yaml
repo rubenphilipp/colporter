@@ -9,6 +9,8 @@ keywords:
     - schluessel
 content: |
     # Dies ist eine Seite…
+
+    <img src="[[asset test.jpg]]" style="width:200px; height: auto;">
     
     *Bla* bli blub. <b>Fett</b> [Ein Link](http://www.rubenphilipp.com)
     

@@ -14,19 +14,26 @@
 ;;; CREATED
 ;;; 2023-07-24
 ;;;
-;;; $$ Last modified:  16:23:06 Sat Jul 29 2023 CEST
+;;; $$ Last modified:  00:29:19 Wed Aug  2 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
 
-(setf
- (gethash "header" rp-web::+rp-snippets+)
- (make-snippet
-  (define-snippet (title)
-    (with-html
-      (:head
-       (:title title))))
-  :id "header"))
+(rp-web::add-snippet ("header" site page title)
+  (with-html
+    (:head
+     (:meta :charset "utf-8")
+     (:title title)
+     ;; META
+     (:meta :name "author" :content "Ruben Philipp")
+     (:meta :name "viewport" :content "width=device-width, initial-scale=1")
+     ;; CSS
+     ;; purecss
+     (:link :rel "stylesheet"
+            :href (insert-asset-path "css/pure/pure-min.css"))
+     ;; main stylesheet
+     (:link :rel "stylesheet"
+            :href (insert-asset-path "css/main.css")))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

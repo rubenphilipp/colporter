@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> snippet
 ;;;
-;;; $$ Last modified:  23:49:56 Tue Aug  1 2023 CEST
+;;; $$ Last modified:  00:07:14 Wed Aug  2 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

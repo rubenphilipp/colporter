@@ -14,29 +14,25 @@
 ;;; CREATED
 ;;; 2023-07-24
 ;;;
-;;; $$ Last modified:  16:25:08 Sat Jul 29 2023 CEST
+;;; $$ Last modified:  00:11:21 Wed Aug  2 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
 
-(setf
- (gethash "project" rp-web::+rp-templates+)
- (make-template
-  (define-template
-    (spinneret:with-html-string
-      (:doctype)
-      (:html
-       (insert-snippet "header"
-                       (concatenate
-                        'string
-                        "PROJECT: "
-                        (get-data
-                         page "title")))
-       (:body
-        (:raw
-         (parse-as-markdown
-          (get-data page "content")))))))
-  :id "project"))
+(rp-web::add-template ("project")
+  (spinneret:with-html-string
+    (:doctype)
+    (:html
+     (insert-snippet "header"
+                     site page (concatenate
+                                'string
+                                "PROJECT: "
+                                (get-data
+                                 page "title")))
+     (:body
+      (:raw
+       (with-colportage
+           (get-data page "content")))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
