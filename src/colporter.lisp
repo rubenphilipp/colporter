@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  00:25:27 Wed Jul 26 2023 CEST
+;;; $$ Last modified:  13:36:29 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -173,6 +173,12 @@
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
 ;;; - :verbose. Print occasional status messages to the stream. Default = t.
+;;; - :make-htaccess. A boolean indicating whether a .htaccess file should be
+;;;   generated. This file is necessary for correctly parsing redirects in
+;;;   Apache servers.
+;;; - :site-base. This is a string indicating the path directing to the base
+;;;   path of the site on the server it will is hosted on. It will be used
+;;;   mainly as the RewriteBase in .htaccess files generated via colporter.
 ;;; 
 ;;; RETURN VALUE
 ;;; The output-dir. 
@@ -180,6 +186,8 @@
 ;;; SYNOPSIS
 (defmethod build ((clptr colporter)
                   &key
+                    (make-htaccess t)
+                    (site-base "/")
                     (verbose t))
   ;;; ****
   (when verbose
@@ -252,47 +260,44 @@
                                      :if-exists :supersede
                                      :if-does-not-exist :create)
                (format stream "~a" (do-template template page site)))))
-  (when verbose
-    (format t "- creating the .htaccess file... ~%"))
-  (let ((error-page (concatenate 'string
-                                 (output-dir clptr)
-                                 (error-page clptr)
-                                 "."
-                                 (output-suffix clptr))))
-    ;; test if error page exists
-    (unless (probe-file error-page)
-      (error "colporter::build: The error page ~a does not exist."
-             error-page))
-    (let ((htaccess-data
-            (concatenate 'string
-                         "RewriteCond %{REQUEST_FILENAME} !-d"
-                         (format nil "~%")
-                         "RewriteCond %{REQUEST_FILENAME}\."
-                         (output-suffix clptr)
-                         " -f"
-                         (format nil "~%")
-                         "RewriteRule ^(.*)$ $1."
-                         (output-suffix clptr)
-                         " [NC,L]"
-                         (format nil "~%")
-                         (format nil "~%")
-                         "ErrorDocument 404 "
-                         "/"
-                         (error-page clptr)
-                         "."
-                         (output-suffix clptr))))
+  (when make-htaccess
+    (when verbose
+      (format t "- creating the .htaccess file... ~%"))
+    (let ((error-page (concatenate 'string
+                                   (output-dir clptr)
+                                   (error-page clptr)
+                                   "."
+                                   (output-suffix clptr))))
+      ;; test if error page exists
+      (unless (probe-file error-page)
+        (error "colporter::build: The error page ~a does not exist."
+               error-page))
       (with-open-file (stream (concatenate 'string
                                            (output-dir clptr)
                                            ".htaccess")
                               :direction :output
                               :if-does-not-exist :create
                               :if-exists :supersede)
-        (format stream "~a" htaccess-data)))
-    (format t "  - ~a" (concatenate 'string
-                                         (output-dir clptr)
-                                         ".htaccess")))
-  (format t "~% BUILD DONE ~%********** ~%")
-  (output-dir clptr))
+        (format stream "<IfModule mod_rewrite.c>~%~%~
+                        RewriteEngine On~%~%~
+                        # It might be necessary to set the RewriteBase:~%~
+                        RewriteBase: ~a ~%~%" (trailing-slash site-base))
+        (format stream "RewriteCond %{REQUEST_FILENAME} !-d ~%")
+        (format stream "RewriteCond %{REQUEST_FILENAME}\.~a -f ~%"
+                (output-suffix clptr))
+        (format stream "RewriteRule ^(.*)$ $1.~a [NC,L] ~%~%"
+                (output-suffix clptr))
+        (format stream "# Error Page ~%~
+                        RewriteCond %{REQUEST_FILENAME} !-f  ~%~
+                        RewriteCond %{REQUEST_FILENAME} !-d ~%~
+                        RewriteRule .* ~a.~a [L] ~%~%"
+                (error-page clptr) (output-suffix clptr))
+        (format stream "</IfModule> ~%")
+        (format t "  - ~a" (concatenate 'string
+                                        (output-dir clptr)
+                                        ".htaccess"))))
+    (format t "~% BUILD DONE ~%********** ~%")
+    (output-dir clptr)))
   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
