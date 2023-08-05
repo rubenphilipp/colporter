@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  13:36:29 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  13:38:49 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -281,7 +281,7 @@
         (format stream "<IfModule mod_rewrite.c>~%~%~
                         RewriteEngine On~%~%~
                         # It might be necessary to set the RewriteBase:~%~
-                        RewriteBase: ~a ~%~%" (trailing-slash site-base))
+                        RewriteBase ~a ~%~%" (trailing-slash site-base))
         (format stream "RewriteCond %{REQUEST_FILENAME} !-d ~%")
         (format stream "RewriteCond %{REQUEST_FILENAME}\.~a -f ~%"
                 (output-suffix clptr))
