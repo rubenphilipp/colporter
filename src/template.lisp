@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  23:07:08 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  23:42:25 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -352,6 +352,15 @@
       (directory-namestring this-page-location)
       (uid page-to-insert))))
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; RP  Sat Aug  5 23:40:46 2023
+
+(defmacro insert-page-path (uid)
+  `(relative-path (directory-namestring
+                   (uid page))
+                  ,uid))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
