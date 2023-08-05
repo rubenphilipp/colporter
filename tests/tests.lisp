@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  14:34:51 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  23:12:00 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -377,10 +377,11 @@
                        (colporter::get-template site 'project)
                      (colporter::get-page site "projects/opus-1")
                      site)))
+    (format t "TESTA ~a" result-a)
     (is (and
          (equal "projects/testb.jpg"
                 result-a)
-         (equal "projects/testb.jpg"
+         (equal "testb.jpg"
                 result-b)))))
 
 
@@ -446,6 +447,16 @@
                     "2023-08-01 16:00:22"))
          (results (mapcar #'colporter::string-to-timestamp strings)))
     (is (every #'(lambda (e) (typep e 'local-time::timestamp)) results))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; test relative-path-2
+;;; RP  Sat Aug  5 23:10:08 2023
+
+(test test-relative-path2
+  (let* ((p1 "about")
+         (p2 "about/dings")
+         (result (colporter::relative-path p1 p2)))
+    (is (equal result "dings"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

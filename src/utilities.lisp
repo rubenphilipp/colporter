@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  14:30:06 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  23:17:48 Sat Aug  5 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -387,8 +387,14 @@
                                                          (constantly t))
                                              tg)
                           :defaults targ)))))
-        (namestring result))))
-        
+        (if (equal (enough-namestring result location) target)
+            ;; remove leading slash
+            (let ((res (second (split location (namestring result)))))
+              (if (string= (subseq res 0 1) "/")
+                  (subseq res 1)
+                  res))
+            (namestring result)))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* utilities/string-to-timestamp

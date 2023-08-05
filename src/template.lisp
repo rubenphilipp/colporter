@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  00:25:02 Wed Aug  2 2023 CEST
+;;; $$ Last modified:  23:07:08 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -363,8 +363,8 @@
 ;;; 2023-07-24
 ;;; 
 ;;; DESCRIPTION
-;;; This macro inserts the path of a file object relative to the site base
-;;; directory. 
+;;; This macro inserts the path of a file object, relative to the current
+;;; page object. 
 ;;; NB: This macro is intended to be used in the context of define-template. 
 ;;;
 ;;; ARGUMENTS
@@ -373,7 +373,7 @@
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; - A boolean indicating whether the given uid path is relative of the current
-;;;   file or relative (i.e. "absolute") to the site base path.
+;;;   page or relative (i.e. "absolute") to the site base path.
 ;;;   Examples:
 ;;;   A) relative:
 ;;;      page-uid: "projects/opus-1"
