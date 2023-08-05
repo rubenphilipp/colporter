@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  23:51:14 Fri Jul 28 2023 CEST
+;;; $$ Last modified:  13:51:38 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -34,7 +34,8 @@
                "file-types"
                "osicat"
                "cl-fad"
-               "cl-yaml")
+               "cl-yaml"
+               "local-time")
   :pathname "src/"
   :components ((:file "package")
                (:file "named-object")

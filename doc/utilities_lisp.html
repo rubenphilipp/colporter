@@ -278,8 +278,70 @@
 </pre>
 
 <hr />
+<a name="utilities2fstring2dto2dtimestamp"></a>
+<a name="robo65"></a><h2>utilities/string-to-timestamp [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-08-05
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Parses a string (e.g. "2023-02-03 15:05" or "2023-08-03 15:35:00")
+ to a timestamp, extending local-time:parse-timestring with default key
+ arguments as well as tolerance for times seconds padded to the end of
+ the timestring (e.g. "15:00" instead of "15:00:00").
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A string to be parsed as a timestamp. 
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :fail-on-error. A boolean indicating whether to interrupt the program
+   with an error message when the conversion fails. Default = t
+ - :date-time-separator. A char being the seperator between date and
+   time values. Defaule = #\space
+ - :time-separator. A char being the seperator between time elements.
+   Default = #\:
+ - :date-separator. A char being the separator between date elements.
+   Default = #\-
+ - :fract-time-separators. A list of chars being the separators between
+   fractionals of time (i.e. milliseconds etc.). Defaul = '(#\. #\,)
+ - :allow-missing-elements. Allow time elements missing from the string.
+   Default = t
+ - :allow-missing-date-part. Tolerate a missing date part. Default = nil
+ - :allow-missing-time-part. Tolerate a missing time part. Default = t.
+ - :allow-missing-timezone-part. Tolerate a missing timezone indication.
+   Default = t.
+ - :offset. A number to be added as an offset to the timestamp.
+   Default = 0
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The parsed timestamp.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>string-to-timestamp</strong> "2023-05-03 16:00")
+;; =&gt; @2023-05-03T18:00:00.000000+02:00
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>string-to-timestamp</strong> (str &amp;key
+                                  (fail-on-error t)
+                                  (date-time-separator #\space)
+                                  (time-separator #\:)
+                                  (date-separator #\-)
+                                  (fract-time-separators '(#\. #\,))
+                                  (allow-missing-elements t)
+                                  (allow-missing-date-part nil)
+                                  (allow-missing-time-part t)
+                                  (allow-missing-timezone-part t)
+                                  (offset 0))
+</pre>
+
+<hr />
 <a name="utilities2ftrailing2dslash"></a>
-<a name="robo65"></a><h2>utilities/trailing-slash [ Functions ]</h2>
+<a name="robo66"></a><h2>utilities/trailing-slash [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -304,7 +366,7 @@
 
 <hr />
 <a name="utilities2fuid2dfrom2dpath"></a>
-<a name="robo66"></a><h2>utilities/uid-from-path [ Functions ]</h2>
+<a name="robo67"></a><h2>utilities/uid-from-path [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -339,7 +401,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-08-05 13:37:19</p>
+<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-08-05 14:30:17</p>
 </div> <!-- footer -->
 </body>
 </html>

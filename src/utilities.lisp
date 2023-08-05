@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  08:56:45 Mon Jul 31 2023 CEST
+;;; $$ Last modified:  14:30:06 Sat Aug  5 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -389,6 +389,84 @@
                           :defaults targ)))))
         (namestring result))))
         
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/string-to-timestamp
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-08-05
+;;; 
+;;; DESCRIPTION
+;;; Parses a string (e.g. "2023-02-03 15:05" or "2023-08-03 15:35:00")
+;;; to a timestamp, extending local-time:parse-timestring with default key
+;;; arguments as well as tolerance for times seconds padded to the end of
+;;; the timestring (e.g. "15:00" instead of "15:00:00").
+;;;
+;;; ARGUMENTS
+;;; A string to be parsed as a timestamp. 
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :fail-on-error. A boolean indicating whether to interrupt the program
+;;;   with an error message when the conversion fails. Default = t
+;;; - :date-time-separator. A char being the seperator between date and
+;;;   time values. Defaule = #\space
+;;; - :time-separator. A char being the seperator between time elements.
+;;;   Default = #\:
+;;; - :date-separator. A char being the separator between date elements.
+;;;   Default = #\-
+;;; - :fract-time-separators. A list of chars being the separators between
+;;;   fractionals of time (i.e. milliseconds etc.). Defaul = '(#\. #\,)
+;;; - :allow-missing-elements. Allow time elements missing from the string.
+;;;   Default = t
+;;; - :allow-missing-date-part. Tolerate a missing date part. Default = nil
+;;; - :allow-missing-time-part. Tolerate a missing time part. Default = t.
+;;; - :allow-missing-timezone-part. Tolerate a missing timezone indication.
+;;;   Default = t.
+;;; - :offset. A number to be added as an offset to the timestamp.
+;;;   Default = 0
+;;; 
+;;; RETURN VALUE
+;;; The parsed timestamp.
+;;;
+;;; EXAMPLE
+#|
+(string-to-timestamp "2023-05-03 16:00")
+;; => @2023-05-03T18:00:00.000000+02:00
+|#
+;;; SYNOPSIS
+(defun string-to-timestamp (str &key
+                                  (fail-on-error t)
+                                  (date-time-separator #\space)
+                                  (time-separator #\:)
+                                  (date-separator #\-)
+                                  (fract-time-separators '(#\. #\,))
+                                  (allow-missing-elements t)
+                                  (allow-missing-date-part nil)
+                                  (allow-missing-time-part t)
+                                  (allow-missing-timezone-part t)
+                                  (offset 0))
+  ;;; ****
+  ;; check if (very rudamentarily) if a time component is available and
+  ;; if it is lacking an indication of seconds
+  (let ((ts-split (split date-time-separator str)))
+    (when (and (< 1 (length ts-split))
+               (null (third (split time-separator (second ts-split)))))
+      (setf str (concatenate 'string str ":00"))))
+  (local-time:parse-timestring
+   str
+   :fail-on-error fail-on-error
+   :date-time-separator date-time-separator
+   :time-separator time-separator
+   :date-separator date-separator
+   :fract-time-separators fract-time-separators
+   :allow-missing-elements allow-missing-elements
+   :allow-missing-date-part allow-missing-date-part
+   :allow-missing-time-part allow-missing-time-part
+   :allow-missing-timezone-part allow-missing-timezone-part
+   :offset offset))
 
 
 

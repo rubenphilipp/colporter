@@ -13,7 +13,7 @@
 ;;; Package definition for colporter.
 ;;;
 ;;;
-;;; $$ Last modified:  16:16:21 Sat Jul 29 2023 CEST
+;;; $$ Last modified:  14:10:27 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -32,6 +32,15 @@
   (:import-from
    :cl-ppcre
    :split)
+  (:import-from
+   :local-time
+   ;;:parse-timestring
+   :timestamp>
+   :timestamp>=
+   :timestamp<
+   :timestamp<=
+   :timestamp/=
+   :timestamp=)
   (:import-from
    :spinneret
    :with-html
