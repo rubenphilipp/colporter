@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  09:04:49 Mon Jul 31 2023 CEST
+;;; $$ Last modified:  14:34:51 Sat Aug  5 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -436,6 +436,16 @@
          (target "tmp/images/test.jpg")
          (result (colporter::relative-path location target)))
     (is (equal "../images/test.jpg" result))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; test string-to-timestamp
+;;; RP  Sat Aug  5 14:31:01 2023+
+
+(test test-string-to-timestamp
+  (let* ((strings '("2023-05-03 15:00"
+                    "2023-08-01 16:00:22"))
+         (results (mapcar #'colporter::string-to-timestamp strings)))
+    (is (every #'(lambda (e) (typep e 'local-time::timestamp)) results))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp
