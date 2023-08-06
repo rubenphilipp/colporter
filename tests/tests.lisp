@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  22:14:25 Sun Aug  6 2023 CEST
+;;; $$ Last modified:  01:11:45 Mon Aug  7 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -449,7 +449,7 @@
     (is (every #'(lambda (e) (typep e 'local-time::timestamp)) results))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; test relative-path-2
+;;; test relative-path2
 ;;; RP  Sat Aug  5 23:10:08 2023
 
 (test test-relative-path2
@@ -457,6 +457,16 @@
          (p2 "about/dings")
          (result (colporter::relative-path p1 p2)))
     (is (equal result "dings"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; test relative-path3
+;;; RP  Mon Aug  7 01:10:55 2023
+
+(test test-relative-path3
+      (let* ((p1 "about/dings")
+             (p2 "about/dings/bla")
+             (result (colporter::relative-path p1 p2)))
+        (is (equal result "bla"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp
