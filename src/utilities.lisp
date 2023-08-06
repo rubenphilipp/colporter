@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  23:17:48 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  00:39:03 Mon Aug  7 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -381,12 +381,21 @@
                     while (string= (first ln) (first tg))
                     finally
                        (return
-                         (make-pathname
-                          :directory (append (list :relative)
-                                             (substitute :up t ln :test
-                                                         (constantly t))
-                                             tg)
-                          :defaults targ)))))
+                         (if (null ln)
+                             (file-namestring target)
+                             (namestring
+                              (make-pathname
+                               :directory (append (list :relative)
+                                                  (substitute :up t ln :test
+                                                              (constantly t))
+                                                  tg)
+                               :defaults targ)))))))
+        result)))
+
+#|
+        (print (directory-namestring result))
+        (print location)
+        (print target)
         (if (equal (enough-namestring result location) target)
             ;; remove leading slash
             (let ((res (second (split location (namestring result)))))
@@ -395,7 +404,7 @@
                   res))
             (namestring result)))))
 
-
+|#
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* utilities/string-to-timestamp
 ;;; AUTHOR
