@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  13:38:49 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  22:13:39 Sun Aug  6 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -95,8 +95,6 @@
   (unless (get-template (site cp) (default-template cp))
     (error "colporter::update: The default-template ~a does not exist in ~
             the site object. " (default-template cp)))
-  ;; set output-dir as data
-  (setf (slot-value cp 'data) (output-dir cp))
   cp)
 
 
