@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file
 ;;;
-;;; $$ Last modified:  17:18:14 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  08:03:42 Thu Aug 10 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -227,11 +227,15 @@
                                (when (and
                                       (not (equal (pathname-type name)
                                                   page-suffix))
-                                      ;; do not include hidden files
-                                      (not (equal "."
-                                                  (subseq
-                                                   (file-namestring name)
-                                                   0 1))))
+                                      ;; do not include hidden files,
+                                      ;; but include .htaccess
+                                      (or
+                                       (equal ".htaccess"
+                                              (file-namestring name))
+                                       (not (equal "."
+                                                   (subseq
+                                                    (file-namestring name)
+                                                    0 1)))))
                                  (push name file-paths)))
                            :directories nil)
     ;; generate file objects
