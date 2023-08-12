@@ -1,15 +1,23 @@
 #+CATEGORY: clptr
-#+title: colporter project structure
+#+title: colporter example #1
 #+author: Ruben Philipp
 #+date: 2023-07-23
 #+startup: showall 
 
 #+begin_comment
-$$ Last modified:  23:24:46 Sat Aug 12 2023 CEST
+$$ Last modified:  23:31:36 Sat Aug 12 2023 CEST
 #+end_comment
 
 * Introduction
 
+This is a simple example for using colporter in order to build a site based
+on .yaml-data.
+
+For convenient use within a multi-site-environment, a package is defined for
+this specific site limiting the scope of definitions (e.g. templates, snippets
+etc.) to the boundaries of the ~rp-web~ package. In order to grasp the mechanics
+of this example, inspect ~main.lisp~, which is also the file to be loaded in
+order to conveniently build the site.
 
 
 * Directory Structure
