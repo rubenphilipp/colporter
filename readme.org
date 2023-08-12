@@ -11,9 +11,10 @@ Tested with SBCL.
 
 * Usage notes
 
-A tutorial and example projects are coming up soon. For now, refer to
-[[https://rubenphilipp.com/colporter]] and the tests (in ~tests/tests.lisp~; esp.
-~test-build-colporter~).
+A tutorial is coming up soon. For now, refer to ~examples/~ and the
+code documentation, available in ~doc/~ or
+[[http://code.rubenphilipp.com/colporter]]. \\
+N.B.: [[http://rubenphilipp.com]] is built with /colporter/. 
 
 ** Project structure
 
@@ -21,6 +22,7 @@ A tutorial and example projects are coming up soon. For now, refer to
 - ~/doc~. Contains a documentation generated via [[https://github.com/gumpu/ROBODoc][ROBODoc]].
 - ~/tests~. Regression tests via [[https://github.com/lispci/fiveam][fiveam]].
 - ~/examples~. Example files for demonstration purposes.
+
 
 * Requirements
 
@@ -47,5 +49,5 @@ the root of the ~content/~ (or similarly named) directory of the site. The
 
 
 #+begin_comment
-$$ Last modified:  23:49:05 Sat Aug 12 2023 CEST
+$$ Last modified:  23:53:35 Sat Aug 12 2023 CEST
 #+end_comment
