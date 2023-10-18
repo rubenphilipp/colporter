@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  15:09:04 Wed Oct 18 2023 CEST
+;;; $$ Last modified:  15:28:01 Wed Oct 18 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -327,8 +327,8 @@
 ;;; 
 ;;; DESCRIPTION
 ;;; This macro can be used within define-template in order to insert the
-;;; path to a page by its uuid. The path retrieved will be relative to the
-;;; current page. 
+;;; path to a page by its uuid.
+;;; The retrieved path will be absolute to the document root.
 ;;;
 ;;; ARGUMENTS
 ;;; - The uuid of the page to insert. 
@@ -348,9 +348,14 @@
   ;;; ****
   `(let ((page-to-insert (get-page-by-uuid site ,uuid))
          (this-page-location (uid page)))
-     (relative-path
-      (directory-namestring this-page-location)
-      (uid page-to-insert))))
+     (concatenate 'string
+                  "/"
+                  (uid page-to-insert))))
+;;; changed to make path absolute
+;;; RP  Wed Oct 18 15:27:45 2023
+     ;; (relative-path
+     ;;  (directory-namestring this-page-location)
+     ;;  (uid page-to-insert))))
 
 
 
@@ -362,6 +367,8 @@
   `(concatenate 'string
                 "/"
                 ,uid))
+;;; changed to make path absolute
+;;; RP  Wed Oct 18 15:28:00 2023
   ;; `(relative-path (directory-namestring
   ;;                  (uid page))
   ;;                 ,uid))
