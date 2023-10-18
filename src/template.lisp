@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  23:42:25 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  14:34:47 Wed Oct 18 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -374,7 +374,11 @@
 ;;; DESCRIPTION
 ;;; This macro inserts the path of a file object, relative to the current
 ;;; page object. 
-;;; NB: This macro is intended to be used in the context of define-template. 
+;;; NB: This macro is intended to be used in the context of define-template.
+;;;     An object with the symbol page must be available in the lexical context.
+;;;
+;;; NB2: As of 2023-10-18, this macro returns an absolute path to the document
+;;;      root. 
 ;;;
 ;;; ARGUMENTS
 ;;; The (relative or absolute) uid of the file object, as referenced in the
@@ -410,13 +414,13 @@
       `(let ((file-id (concatenate 'string
                                    (directory-namestring
                                     (uid page))
-                                    ,uid)))
-         (relative-path
-          (directory-namestring (uid page))
-          (data (get-file site file-id))))
-      `(relative-path
-        (directory-namestring (uid page))
-        (data (get-file site ,uid)))))
+                                   ,uid)))
+         (concatenate 'string
+                      "/"
+                      (data (get-file site file-id))))
+      `(concatenate 'string
+                         "/"
+                         (data (get-file site ,uid)))))
 
 
 

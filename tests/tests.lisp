@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  01:11:45 Mon Aug  7 2023 CEST
+;;; $$ Last modified:  14:34:30 Wed Oct 18 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -377,11 +377,12 @@
                        (colporter::get-template site 'project)
                      (colporter::get-page site "projects/opus-1")
                      site)))
-    (format t "TESTA ~a" result-a)
+    (format t "~%TESTA ~a" result-a)
+    (format t "~%TESTB ~a" result-b)
     (is (and
-         (equal "projects/testb.jpg"
+         (equal "/projects/testb.jpg"
                 result-a)
-         (equal "testb.jpg"
+         (equal "/projects/testb.jpg"
                 result-b)))))
 
 

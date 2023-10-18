@@ -50,7 +50,7 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <strong>template</strong>
 
- $$ Last modified:  23:07:08 Sat Aug  5 2023 CEST
+ $$ Last modified:  14:34:47 Wed Oct 18 2023 CEST
 </pre>
 
 <hr />
@@ -164,7 +164,11 @@
 <p class="item_name">DESCRIPTION</p>
 <pre> This macro inserts the path of a <a href="./file_lisp.html#robo18">file</a> object, relative to the current
  <a href="./page_lisp.html#robo19">page</a> object. 
- NB: This macro is intended to be used in the context of <a href="#robo46">define-template</a>. 
+ NB: This macro is intended to be used in the context of <a href="#robo46">define-template</a>.
+     An object with the symbol <a href="./page_lisp.html#robo19">page</a> must be available in the lexical context.
+
+ NB2: As of 2023-10-18, this macro returns an absolute path to the document
+      root. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
 <pre> The (relative or absolute) uid of the <a href="./file_lisp.html#robo18">file</a> object, as referenced in the
@@ -459,7 +463,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-08-05 23:18:18</p>
+<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-10-18 14:36:00</p>
 </div> <!-- footer -->
 </body>
 </html>

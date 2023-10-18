@@ -48,12 +48,6 @@
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
  - :verbose. Print occasional status messages to the stream. Default = t.
- - :make-htaccess. A boolean indicating whether a .htaccess <a href="./file_lisp.html#robo18">file</a> should be
-   generated. This <a href="./file_lisp.html#robo18">file</a> is necessary for correctly parsing redirects in
-   Apache servers.
- - :<a href="./site_lisp.html#robo20">site</a>-base. This is a string indicating the path directing to the base
-   path of the <a href="./site_lisp.html#robo20">site</a> on the server it will is hosted on. It will be used
-   mainly as the RewriteBase in .htaccess files generated via <a href="#robo17">colporter</a>.
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> The output-dir. 
@@ -61,8 +55,6 @@
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defmethod <strong>build</strong> ((clptr <a href="#robo17">colporter</a>)
                   &amp;key
-                    (make-htaccess t)
-                    (<a href="./site_lisp.html#robo20">site</a>-base "/")
                     (verbose t))
 </pre>
 
@@ -142,12 +134,12 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <strong>colporter</strong>
 
- $$ Last modified:  13:38:49 Sat Aug  5 2023 CEST
+ $$ Last modified:  07:55:11 Thu Aug 10 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/colporter.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-08-05 23:18:18</p>
+<p>Generated from ./src/colporter.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-10-18 14:36:00</p>
 </div> <!-- footer -->
 </body>
 </html>
