@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  14:34:47 Wed Oct 18 2023 CEST
+;;; $$ Last modified:  15:09:04 Wed Oct 18 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -356,11 +356,15 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; RP  Sat Aug  5 23:40:46 2023
+;;; returns an absolute path as of 2023-10-18.
 
 (defmacro insert-page-path (uid)
-  `(relative-path (directory-namestring
-                   (uid page))
-                  ,uid))
+  `(concatenate 'string
+                "/"
+                ,uid))
+  ;; `(relative-path (directory-namestring
+  ;;                  (uid page))
+  ;;                 ,uid))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
