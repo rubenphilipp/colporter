@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  15:28:01 Wed Oct 18 2023 CEST
+;;; $$ Last modified:  17:35:54 Wed Oct 18 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -282,11 +282,10 @@
   `(let ((asset (get-asset site ,id))
          (asset-base-dir (asset-base-dir site))
          (page-location (uid page)))
-     (relative-path
-      (directory-namestring page-location)
-      (concatenate 'string
-                   asset-base-dir
-                   (data asset)))))
+     (concatenate 'string
+                  (page-root site)
+                  asset-base-dir
+                  (data asset))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -345,11 +344,11 @@
 |#
 ;;; SYNOPSIS
 (defmacro insert-page-path-by-uuid (uuid)
-  ;;; ****
+;;; ****
   `(let ((page-to-insert (get-page-by-uuid site ,uuid))
          (this-page-location (uid page)))
      (concatenate 'string
-                  "/"
+                  (page-root site)
                   (uid page-to-insert))))
 ;;; changed to make path absolute
 ;;; RP  Wed Oct 18 15:27:45 2023
@@ -365,7 +364,7 @@
 
 (defmacro insert-page-path (uid)
   `(concatenate 'string
-                "/"
+                (page-root site)
                 ,uid))
 ;;; changed to make path absolute
 ;;; RP  Wed Oct 18 15:28:00 2023
@@ -427,10 +426,10 @@
                                     (uid page))
                                    ,uid)))
          (concatenate 'string
-                      "/"
+                      (page-root site)
                       (data (get-file site file-id))))
       `(concatenate 'string
-                         "/"
+                         (page-root site)
                          (data (get-file site ,uid)))))
 
 

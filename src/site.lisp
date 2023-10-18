@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> site
 ;;;
-;;; $$ Last modified:  14:30:57 Sun Jul 30 2023 CEST
+;;; $$ Last modified:  17:31:39 Wed Oct 18 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -41,6 +41,10 @@
    (pages :accessor pages :initarg :pages :initform nil)
    ;; a hash table containing all file objects related to the site
    (files :accessor files :initarg :files :initform nil)
+   ;; the page root (will be added to all paths generated during the rendering
+   ;; processes)
+   ;; RP  Wed Oct 18 17:24:08 2023
+   (page-root :accessor page-root :initarg :page-root :initform "/")
    ;; an optional (short) description of the site
    (description :accessor description :initarg :description :initform "")))
 
@@ -82,6 +86,8 @@
 (defmethod update ((st site))
   ;; trailing slash for asset-base-dir
   (setf (slot-value st 'asset-base-dir) (trailing-slash (asset-base-dir st)))
+  ;; trailing slash for page-root
+  (setf (slot-value st 'page-root) (trailing-slash (page-root st)))
   st)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -152,7 +158,9 @@
 ;;; - :data. The data of the site (e.g. title, author etc.) as an alist or
 ;;;   hash-table. Default = nil.
 ;;; - :description. A short textual description of the site. Default = ""
-;;; - :id. The id of the site object. 
+;;; - :id. The id of the site object.
+;;; - :page-root. The root of the page. Will be added to any path generated
+;;;   via the rendering processes. Must be a string. Default = "/"
 ;;; 
 ;;; RETURN VALUE
 ;;; The site object. 
@@ -202,7 +210,8 @@
                     (asset-base-dir "assets/")
                     (data nil)
                     (description "")
-                    (id nil))
+                    (id nil)
+                    (page-root "/"))
   ;;; ****
   (let ((snippets (site-list?-to-hash snippets))
         (assets (site-list?-to-hash assets))
@@ -216,6 +225,7 @@
                          :pages pages
                          :files files
                          :data data
+                         :page-root page-root
                          :description description
                          :id id)))
 
