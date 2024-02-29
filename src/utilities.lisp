@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  00:41:10 Mon Aug  7 2023 CEST
+;;; $$ Last modified:  18:19:54 Fri Feb 23 2024 CET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -103,7 +103,7 @@
 (defun path-from-src-dir (file)
    ;;; ****
   (namestring (asdf::SYSTEM-RELATIVE-PATHNAME
-               :klitter
+               :colporter
                (concatenate 'string
                             "src/"
                             file))))

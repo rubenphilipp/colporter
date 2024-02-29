@@ -10,12 +10,12 @@
 ;;; 2023-07-28
 ;;; 
 ;;; PURPOSE
-;;; This module exports all symbols form the colporter package.
+;;; This module exports all symbols from the colporter package.
 ;;;
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  23:48:39 Fri Jul 28 2023 CEST
+;;; $$ Last modified:  17:58:26 Mon Feb 26 2024 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
