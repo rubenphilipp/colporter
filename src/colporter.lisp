@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  07:55:11 Thu Aug 10 2023 CEST
+;;; $$ Last modified:  19:10:40 Mon Mar 18 2024 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -229,8 +229,8 @@
          (output-suffix (output-suffix clptr))
          (base (output-dir clptr))
          (default-template (default-template clptr))
-         (pages (pages site))
-         (templates (templates site)))
+         (pages (pages site)))
+         ;;(templates (templates site)))
     (loop for page being the hash-values of pages
           for desired-template = (template page)
           for template = (if (get-template site desired-template)

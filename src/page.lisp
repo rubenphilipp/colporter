@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  01:12:18 Sun Aug  6 2023 CEST
+;;; $$ Last modified:  19:17:19 Mon Mar 18 2024 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -91,7 +91,7 @@
   (let* ((data-string (read-file-into-string (path pg)))
          (yaml-data (handler-case (cl-yaml::parse data-string)
                       (error (c)
-                        (error "page::update: YAML syntax is invalid. Check ~
+                        (format t "page::update: YAML syntax is invalid. Check ~
                                 your YAML data file.")
                         c))))
     (setf (slot-value pg 'data) yaml-data))

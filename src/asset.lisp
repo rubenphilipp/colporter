@@ -19,7 +19,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> file -> asset
 ;;;
-;;; $$ Last modified:  17:05:18 Tue Jul 25 2023 CEST
+;;; $$ Last modified:  19:06:32 Mon Mar 18 2024 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -33,7 +33,7 @@
   (declare (ignore initargs))
   (unless (uid as)
     (error "asset::initialize-instance: The uid for asset ~a is not ~
-            set.")))
+            set." (type-of as))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

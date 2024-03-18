@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  15:47:28 Sat Aug  5 2023 CEST
+;;; $$ Last modified:  19:37:01 Mon Mar 18 2024 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -24,7 +24,7 @@
   :version "0.0.1"
   :author "Ruben Philipp <me@rubenphilipp.com>"
   :license "GPL Version 2.0 or later"
-  :serial nil ;; could also be T; TODO: test/elaborate
+  :serial t
   :in-order-to ((test-op (test-op "colporter/tests")))
   :depends-on ("alexandria"
                "spinneret"
@@ -46,11 +46,12 @@
                (:file "file")
                (:file "asset")
                (:file "snippet")
-               (:file "template")
-               (:file "page")
                (:file "site")
+               (:file "page")
+               (:file "template")
                (:file "colporter")
-               (:file "export")))
+               ;; (:file "export")
+               ))
 
 
 ;;; regression tests
