@@ -13,10 +13,18 @@ Tested with SBCL.
 
 A tutorial is coming up soon. For now, refer to ~examples/~ and the
 code documentation, available in ~doc/~ or
-[[http://code.rubenphilipp.com/colporter]]. \\
-N.B.: [[http://rubenphilipp.com]] is built with /colporter/. 
+[[http://code.rubenphilipp.com/colporter]].
 
-** Project structure
+** Examples
+
+The ~examples/~ directory contains examples and a template to get started.
+
+A real-world example is [[http://rubenphilipp.com]] which has is created with
+/colporter/.
+
+
+
+* Project Structure
 
 - ~/src~. Contains the source code of the project.
 - ~/doc~. Contains a documentation generated via [[https://github.com/gumpu/ROBODoc][ROBODoc]].
@@ -49,5 +57,5 @@ the root of the ~content/~ (or similarly named) directory of the site. The
 
 
 #+begin_comment
-$$ Last modified:  23:53:35 Sat Aug 12 2023 CEST
+$$ Last modified:  23:32:47 Wed Mar 27 2024 CET
 #+end_comment
