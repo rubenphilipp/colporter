@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  18:19:54 Fri Feb 23 2024 CET
+;;; $$ Last modified:  21:49:13 Wed Mar 27 2024 CET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -102,11 +102,35 @@
 ;;; SYNOPSIS
 (defun path-from-src-dir (file)
    ;;; ****
-  (namestring (asdf::SYSTEM-RELATIVE-PATHNAME
+  (namestring (asdf::system-relative-pathname
                :colporter
                (concatenate 'string
                             "src/"
                             file))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/load-from-same-dir
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2024-02-26
+;;; 
+;;; DESCRIPTION
+;;; This function loads a lisp file from the file relative to the directory of
+;;; the current file (cf. path-from-same-dir).
+;;;
+;;; ARGUMENTS
+;;; - A string indicating the filename (or pathname) to the file relative to
+;;;   the current lisp file.
+;;; 
+;;; RETURN VALUE
+;;; The result of the #'load call.
+;;;
+;;; SYNOPSIS
+(defun load-from-same-dir (file)
+  ;;; ****
+  (load (path-from-same-dir file)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* utilities/simple-shell
@@ -471,6 +495,38 @@
    :allow-missing-timezone-part allow-missing-timezone-part
    :offset offset))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** utilities/load-files-by-extension
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2024-03-27
+;;; 
+;;; DESCRIPTION
+;;; This macro loads all files from a given directory ending with a given
+;;; file extension/suffix. 
+;;;
+;;; ARGUMENTS
+;;; - The search directory.
+;;; - The file extension/suffix (string).
+;;; 
+;;; RETURN VALUE
+;;; none. 
+;;; 
+;;; SYNOPSIS
+(defmacro load-files-by-extension (dir extension)
+  ;;; ****
+  `(let ((files (uiop:directory-files ,dir
+                                      (concatenate
+                                       'string
+                                       "*."
+                                       (if (equal "."
+                                                  (subseq ,extension 0 1))
+                                           (subseq ,extension 1)
+                                           ,extension)))))
+     (loop for file in files
+           do (load file))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

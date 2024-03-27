@@ -29,9 +29,9 @@
 <div id="content">
 <hr />
 <a name="asset2fmake2dasset"></a>
-<a name="robo3"></a><h2>asset/make-asset [ Functions ]</h2>
+<a name="robo4"></a><h2>asset/make-asset [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo8">asset</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo9">asset</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -39,25 +39,25 @@
 <pre> 2023-07-23
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This is a helper function to instantiate an <a href="#robo8">asset</a> object.
+<pre> This is a helper function to instantiate an <a href="#robo9">asset</a> object.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The path to the <a href="#robo8">asset</a> as a string.
- - The uid of the <a href="#robo8">asset</a>. This should be a string mirroring the path
-   to the <a href="#robo8">asset</a> relative to the <a href="./site_lisp.html#robo20">site</a> <a href="#robo8">asset</a> path (cf. <a href="./site_lisp.html#robo20">site</a> and <a href="./colporter_lisp.html#robo17">colporter</a>), as
-   this will  be used both for referencing the <a href="#robo8">asset</a> and for generating the
-   url which will be used e.g. in html output. For example, an <a href="#robo8">asset</a> with
+<pre> - The path to the <a href="#robo9">asset</a> as a string.
+ - The uid of the <a href="#robo9">asset</a>. This should be a string mirroring the path
+   to the <a href="#robo9">asset</a> relative to the <a href="./site_lisp.html#robo21">site</a> <a href="#robo9">asset</a> path (cf. <a href="./site_lisp.html#robo21">site</a> and <a href="./colporter_lisp.html#robo18">colporter</a>), as
+   this will  be used both for referencing the <a href="#robo9">asset</a> and for generating the
+   url which will be used e.g. in html output. For example, an <a href="#robo9">asset</a> with
    the path "/assets/css/main.css" should obtain the uid
    "css/main.css".
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
- - :id. The id of the <a href="#robo8">asset</a> object. Default = NIL. 
- - :description. A short textual description of the <a href="#robo8">asset</a>. Must be a string.
+ - :id. The id of the <a href="#robo9">asset</a> object. Default = NIL. 
+ - :description. A short textual description of the <a href="#robo9">asset</a>. Must be a string.
    Default = NIL. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="#robo8">asset</a> object. 
+<pre> The <a href="#robo9">asset</a> object. 
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>make-asset</strong> "~/screenshot1.png" "img/screenshot1.png")
@@ -71,9 +71,9 @@
 
 <hr />
 <a name="asset2fmake2dassets2dfrom2ddir"></a>
-<a name="robo4"></a><h2>asset/make-assets-from-dir [ Functions ]</h2>
+<a name="robo5"></a><h2>asset/make-assets-from-dir [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo8">asset</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo9">asset</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -82,20 +82,20 @@
 </pre>
 <p class="item_name">DESCRIPTION</p>
 <pre> This function recursively scans a given directory for all files contained
- therein and instantiates <a href="./file_lisp.html#robo18">file</a> objects with the respective uid set according
+ therein and instantiates <a href="./file_lisp.html#robo19">file</a> objects with the respective uid set according
  to the root of the given path. Finally, the generated objects will be
  returned as a hash-table with keys set to the uids to be further used in a
- <a href="./site_lisp.html#robo20">site</a> object. 
+ <a href="./site_lisp.html#robo21">site</a> object. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
 <pre> A string being the path to the directory to recursively scan for assets.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> A hash-table with <a href="#robo8">asset</a> objects (see above and cf. <a href="./site_lisp.html#robo20">site</a>).
+<pre> A hash-table with <a href="#robo9">asset</a> objects (see above and cf. <a href="./site_lisp.html#robo21">site</a>).
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(let ((ass (<strong>make-assets-from-dir</strong>
-            "/Users/rubenphilipp/lisp/<a href="./colporter_lisp.html#robo17">colporter</a>/tests/assets")))
+            "/Users/rubenphilipp/lisp/<a href="./colporter_lisp.html#robo18">colporter</a>/tests/assets")))
   (hash-table-keys ass))
 ;; =&gt; ("projects/bla/dingsdo.css" "projects/testb.jpg" "test.jpg")
 </pre>
@@ -105,9 +105,9 @@
 
 <hr />
 <a name="file2fasset"></a>
-<a name="robo8"></a><h2>file/asset [ Classes ]</h2>
+<a name="robo9"></a><h2>file/asset [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./file_lisp.html#robo18">file</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./file_lisp.html#robo19">file</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>asset</strong>
 </pre>
@@ -119,20 +119,20 @@
 </pre>
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>asset</strong> class and related methods. An <strong>asset</strong> is a static
- <a href="./file_lisp.html#robo18">file</a> which is available globally on all pages (...) of the <a href="./site_lisp.html#robo20">site</a>.
+ <a href="./file_lisp.html#robo19">file</a> which is available globally on all pages (...) of the <a href="./site_lisp.html#robo21">site</a>.
  
  NB: The contents of the files (esp. as they might be binaries) will not
- be stored in <strong>asset</strong> objects (cf. <a href="./file_lisp.html#robo18">file</a>). 
+ be stored in <strong>asset</strong> objects (cf. <a href="./file_lisp.html#robo19">file</a>). 
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <a href="./file_lisp.html#robo18">file</a> -&gt; <strong>asset</strong>
+ <a href="./named-object_lisp.html#robo6">named-object</a> -&gt; <a href="./file_lisp.html#robo19">file</a> -&gt; <strong>asset</strong>
 
- $$ Last modified:  17:05:18 Tue Jul 25 2023 CEST
+ $$ Last modified:  19:06:32 Mon Mar 18 2024 CET
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/asset.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-10-18 17:37:53</p>
+<p>Generated from ./src/asset.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-03-27 21:49:25</p>
 </div> <!-- footer -->
 </body>
 </html>
