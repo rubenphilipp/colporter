@@ -1,7 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****h* export
+;;; ****h* clptr/export-symbols
 ;;; NAME
-;;; export
+;;; export-symbols
 ;;; 
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
@@ -15,7 +15,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  17:58:26 Mon Feb 26 2024 CET
+;;; $$ Last modified:  15:05:46 Wed Mar 27 2024 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -35,4 +35,4 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; EOF export.lisp
+;;; EOF export-symbols.lisp
