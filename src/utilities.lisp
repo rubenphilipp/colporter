@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  22:38:35 Wed Mar 27 2024 CET
+;;; $$ Last modified:  22:42:54 Wed Mar 27 2024 CET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -645,6 +645,7 @@
 |#
 ;;; SYNOPSIS
 (defmacro add-template ((id place) &body body)
+  ;;; ****
   `(setf (gethash ,id ,place)
          (colporter::make-template
           (colporter::define-template
