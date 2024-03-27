@@ -28,8 +28,77 @@
 </div> <!-- navigation -->
 <div id="content">
 <hr />
+<a name="utilities2fadd2dsnippet"></a>
+<a name="robo58"></a><h2>utilities/add-snippet [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-03-27
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro creates a <a href="./snippet_lisp.html#robo22">snippet</a> (via <a href="./snippet_lisp.html#robo44">define-snippet</a> and make-<a href="./snippet_lisp.html#robo22">snippet</a>) with a
+ given id (in order to retrieve the <a href="./snippet_lisp.html#robo22">snippet</a> e.g. via insert-<a href="./snippet_lisp.html#robo22">snippet</a>) and an
+ arbitrary number of further arguments (&amp;rest) to be used in the body (cf.
+ define-<a href="./snippet_lisp.html#robo22">snippet</a>). This could be useful, e.g. in order to pass the <a href="./page_lisp.html#robo20">page</a> or
+ <a href="./site_lisp.html#robo21">site</a> object to the <a href="./snippet_lisp.html#robo22">snippet</a> (see example). 
+ The <a href="./snippet_lisp.html#robo22">snippet</a> will be written to a hash table which can later be used e.g. in
+ <a href="./site_lisp.html#robo41">make-site</a>.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The id of the <a href="./snippet_lisp.html#robo22">snippet</a> (e.g. to be used with insert-<a href="./snippet_lisp.html#robo22">snippet</a>).
+ - A symbol which must be a hash-table available in the scope of the
+   macroexpansion (see example).
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> Rest:
+ An arbitrary amount of additional arguments to be used in the context of the
+ body (see description and example). 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">;;; this could be placed in your snippets-load <a href="./file_lisp.html#robo19">file</a>
+(setf +<a href="./site_lisp.html#robo21">site</a>-snippets+ (make-hash-table :test #'equal))
+;;; this is an example for a <a href="./snippet_lisp.html#robo22">snippet</a> <a href="./file_lisp.html#robo19">file</a>
+(<strong>add-snippet</strong> ("about-header" +<a href="./site_lisp.html#robo21">site</a>-snippets+ <a href="./site_lisp.html#robo21">site</a> <a href="./page_lisp.html#robo20">page</a> title)
+  (with-html
+    (:header title)
+     (:h1 
+     (:nav
+      ;; list of pages related to the about section (see above)
+      (:ul :class "horizontal"
+           (let ((about-pages
+                   (loop for <a href="./page_lisp.html#robo20">page</a> in (<a href="./site_lisp.html#robo36">get-pages</a> <a href="./site_lisp.html#robo21">site</a> :objects t)
+                         with result = '()
+                         when (and
+                               (equal "about" (<a href="./site_lisp.html#robo30">get-data</a> <a href="./page_lisp.html#robo20">page</a> "type"))
+                               (numberp (<a href="./site_lisp.html#robo30">get-data</a> <a href="./page_lisp.html#robo20">page</a> "listed")))
+                           do (push <a href="./page_lisp.html#robo20">page</a> result)
+                         finally
+                            (return
+                              (sort result #'&lt;
+                                    :key #'(lambda (p)
+                                             (<a href="./site_lisp.html#robo30">get-data</a> p "listed")))))))
+             (loop for pg in about-pages
+                   do
+                      (:li
+                       (:a
+                        :class
+                        ;; mark active <a href="./page_lisp.html#robo20">page</a>
+                        (if (equal (uid <a href="./page_lisp.html#robo20">page</a>) (uid pg))
+                            "active"
+                            "inactive")
+                        :href (insert-<a href="./page_lisp.html#robo20">page</a>-path (uid pg))
+                        (<a href="./site_lisp.html#robo30">get-data</a> pg "title"))))))))))
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>add-snippet</strong> ((id place &amp;rest args) &amp;body body)
+</pre>
+
+<hr />
 <a name="utilities2falistp"></a>
-<a name="robo58"></a><h2>utilities/alistp [ Functions ]</h2>
+<a name="robo59"></a><h2>utilities/alistp [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -59,7 +128,7 @@
 
 <hr />
 <a name="utilities2fassoc2dkeys"></a>
-<a name="robo59"></a><h2>utilities/assoc-keys [ Functions ]</h2>
+<a name="robo60"></a><h2>utilities/assoc-keys [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -91,7 +160,7 @@
 
 <hr />
 <a name="utilities2fleading2dslash"></a>
-<a name="robo60"></a><h2>utilities/leading-slash [ Functions ]</h2>
+<a name="robo61"></a><h2>utilities/leading-slash [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -125,7 +194,7 @@
 
 <hr />
 <a name="utilities2fload2dfiles2dby2dextension"></a>
-<a name="robo61"></a><h2>utilities/load-files-by-extension [ Generics ]</h2>
+<a name="robo62"></a><h2>utilities/load-files-by-extension [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -151,7 +220,7 @@
 
 <hr />
 <a name="utilities2fload2dfrom2dsame2ddir"></a>
-<a name="robo62"></a><h2>utilities/load-from-same-dir [ Functions ]</h2>
+<a name="robo63"></a><h2>utilities/load-from-same-dir [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -177,7 +246,7 @@
 
 <hr />
 <a name="utilities2fpath2dfrom2dsame2ddir"></a>
-<a name="robo63"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
+<a name="robo64"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -206,7 +275,7 @@
 
 <hr />
 <a name="utilities2fpath2dfrom2dsrc2ddir"></a>
-<a name="robo64"></a><h2>utilities/path-from-src-dir [ Functions ]</h2>
+<a name="robo65"></a><h2>utilities/path-from-src-dir [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -233,7 +302,7 @@
 
 <hr />
 <a name="utilities2frelative2dpath"></a>
-<a name="robo65"></a><h2>utilities/relative-path [ Functions ]</h2>
+<a name="robo66"></a><h2>utilities/relative-path [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -270,7 +339,7 @@
 
 <hr />
 <a name="utilities2fshell"></a>
-<a name="robo66"></a><h2>utilities/shell [ Functions ]</h2>
+<a name="robo67"></a><h2>utilities/shell [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -303,7 +372,7 @@
 
 <hr />
 <a name="utilities2fsimple2dshell"></a>
-<a name="robo67"></a><h2>utilities/simple-shell [ Functions ]</h2>
+<a name="robo68"></a><h2>utilities/simple-shell [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -313,14 +382,14 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Run a <a href="#robo66">shell</a> command from lisp and return the exit code.
+<pre> Run a <a href="#robo67">shell</a> command from lisp and return the exit code.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The <a href="#robo66">shell</a> command (i.e., most likely, path to the binary)
+<pre> - The <a href="#robo67">shell</a> command (i.e., most likely, path to the binary)
  
  OPTIONAL ARGUMENTS:
  rest:
- - The arguments to the <a href="#robo66">shell</a> program.
+ - The arguments to the <a href="#robo67">shell</a> program.
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> The the exit-code of the process.
@@ -331,7 +400,7 @@
 
 <hr />
 <a name="utilities2fstring2dto2dtimestamp"></a>
-<a name="robo68"></a><h2>utilities/string-to-timestamp [ Functions ]</h2>
+<a name="robo69"></a><h2>utilities/string-to-timestamp [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -393,7 +462,7 @@
 
 <hr />
 <a name="utilities2ftrailing2dslash"></a>
-<a name="robo69"></a><h2>utilities/trailing-slash [ Functions ]</h2>
+<a name="robo70"></a><h2>utilities/trailing-slash [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -418,7 +487,7 @@
 
 <hr />
 <a name="utilities2fuid2dfrom2dpath"></a>
-<a name="robo70"></a><h2>utilities/uid-from-path [ Functions ]</h2>
+<a name="robo71"></a><h2>utilities/uid-from-path [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -453,7 +522,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-03-27 21:49:25</p>
+<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-03-27 22:41:55</p>
 </div> <!-- footer -->
 </body>
 </html>
