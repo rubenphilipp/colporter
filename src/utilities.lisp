@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  21:49:13 Wed Mar 27 2024 CET
+;;; $$ Last modified:  22:38:35 Wed Mar 27 2024 CET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -527,6 +527,129 @@
                                            ,extension)))))
      (loop for file in files
            do (load file))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** utilities/add-snippet
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2024-03-27
+;;; 
+;;; DESCRIPTION
+;;; This macro creates a snippet (via define-snippet and make-snippet) with a
+;;; given id (in order to retrieve the snippet e.g. via insert-snippet) and an
+;;; arbitrary number of further arguments (&rest) to be used in the body (cf.
+;;; define-snippet). This could be useful, e.g. in order to pass the page or
+;;; site object to the snippet (see example). 
+;;; The snippet will be written to a hash table which can later be used e.g. in
+;;; make-site.
+;;;
+;;; ARGUMENTS
+;;; - The id of the snippet (e.g. to be used with insert-snippet).
+;;; - A symbol which must be a hash-table available in the scope of the
+;;;   macroexpansion (see example).
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; Rest:
+;;; An arbitrary amount of additional arguments to be used in the context of the
+;;; body (see description and example). 
+;;;
+;;; EXAMPLE
+#|
+;;; this could be placed in your snippets-load file
+(setf +site-snippets+ (make-hash-table :test #'equal))
+;;; this is an example for a snippet file
+(add-snippet ("about-header" +site-snippets+ site page title)
+  (with-html
+    (:header title)
+     (:h1 
+     (:nav
+      ;; list of pages related to the about section (see above)
+      (:ul :class "horizontal"
+           (let ((about-pages
+                   (loop for page in (get-pages site :objects t)
+                         with result = '()
+                         when (and
+                               (equal "about" (get-data page "type"))
+                               (numberp (get-data page "listed")))
+                           do (push page result)
+                         finally
+                            (return
+                              (sort result #'<
+                                    :key #'(lambda (p)
+                                             (get-data p "listed")))))))
+             (loop for pg in about-pages
+                   do
+                      (:li
+                       (:a
+                        :class
+                        ;; mark active page
+                        (if (equal (uid page) (uid pg))
+                            "active"
+                            "inactive")
+                        :href (insert-page-path (uid pg))
+                        (get-data pg "title"))))))))))
+|#
+;;; SYNOPSIS
+(defmacro add-snippet ((id place &rest args) &body body)
+  ;;; ****
+  `(setf (gethash ,id ,place)
+         (colporter::make-snippet
+          (colporter::define-snippet (,@args)
+            ,@body)
+          :id ,id)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** utilities/add-template
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2024-03-27
+;;; 
+;;; DESCRIPTION
+;;; This macro creates a template (via define-template and make-template) with a
+;;; given id (in order to retrieve the template e.g. via make-site). 
+;;; The template will be written to a hash table which can later be used e.g. in
+;;; make-site.
+;;;
+;;; ARGUMENTS
+;;; - The id of the template.
+;;; - A symbol which must be a hash-table available in the scope of the
+;;;   macroexpansion (see example).
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; none. 
+;;;
+;;; EXAMPLE
+#|
+;;; this could be placed in your templates-load file
+(defvar +site-templates+ (make-hash-table :test #'equal))
+;;; this is an example for a template file
+(add-template ("default" +site-templates+)
+  (with-html-string
+    (:doctype)
+    (:html
+     (insert-snippet "head"
+                     site page (concatenate 'string
+                                            (get-data site "title")
+                                            " | "
+                                            (get-data page "title")))
+     (:body
+      (insert-snippet "header" site page)
+      (:main
+       (:raw
+        (with-colportage
+            (get-data page "content"))))))))
+|#
+;;; SYNOPSIS
+(defmacro add-template ((id place) &body body)
+  `(setf (gethash ,id ,place)
+         (colporter::make-template
+          (colporter::define-template
+            ,@body)
+          :id ,id)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
