@@ -19,8 +19,8 @@ code documentation, available in ~doc/~ or
 
 The ~examples/~ directory contains examples and a template to get started.
 
-A real-world example is [[http://rubenphilipp.com]] which is created with
-/colporter/.
+A real-world example is [[http://rubenphilipp.com]] which is created and maintained
+using /colporter/.
 
 
 
@@ -57,5 +57,5 @@ the root of the ~content/~ (or similarly named) directory of the site. The
 
 
 #+begin_comment
-$$ Last modified:  23:11:02 Thu Mar 28 2024 CET
+$$ Last modified:  23:11:44 Thu Mar 28 2024 CET
 #+end_comment
