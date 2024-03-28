@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  15:10:01 Wed Mar 27 2024 CET
+;;; $$ Last modified:  00:18:29 Thu Mar 28 2024 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -51,7 +51,7 @@
                (:file "template")
                (:file "colporter")
                ;; this needs to be loaded lastly
-               (:file "export-symbols")
+               ;;(:file "export-symbols")
                ))
 
 
