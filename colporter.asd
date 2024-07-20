@@ -13,7 +13,7 @@
 ;;; System definition for colporter. 
 ;;;
 ;;;
-;;; $$ Last modified:  00:18:29 Thu Mar 28 2024 CET
+;;; $$ Last modified:  21:34:58 Sat Jul 20 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -36,7 +36,8 @@
                "cl-fad"
                "parenscript"
                "cl-yaml"
-               "local-time")
+               "local-time"
+               "frugal-uuid/non-frugal")
   :pathname "src/"
   :components ((:file "package")
                (:file "named-object")
