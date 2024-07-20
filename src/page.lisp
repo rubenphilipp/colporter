@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  18:30:29 Sat Jul 20 2024 CEST
+;;; $$ Last modified:  20:29:36 Sat Jul 20 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -231,11 +231,11 @@
 ;;;
 ;;; EXAMPLE
 #|
-(let ((pgs (make-pages-from-dir         ; ; ; ;
-"/Users/rubenphilipp/lisp/colporter/tests/content" ; ; ; ;
-:page-suffix "yaml")))                  ; ; ; ;
-(hash-table-keys pgs))                  ; ; ; ;
-;; => ("error" "home" "projects/bla/dings" "projects/opus-1") ; ; ; ;
+(let ((pgs (make-pages-from-dir
+            "/Users/rubenphilipp/lisp/colporter/tests/content"
+            :page-suffix "yaml")))
+  (hash-table-keys pgs))
+;; => ("error" "home" "projects/bla/dings" "projects/opus-1")
 |#
 ;;; SYNOPSIS
 (defun make-pages-from-dir (dir
