@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  18:30:30 Sat Jul 20 2024 CEST
+;;; $$ Last modified:  21:34:23 Sat Jul 20 2024 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -673,6 +673,41 @@
 (defmethod get-data ((obj hash-table) key)
 ;;; ****
   (gethash key obj))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/get-random-uuid
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2024-07-20
+;;; 
+;;; DESCRIPTION
+;;; This method returns a UUIV v4 (random UUID), generated via frugal-uuid. 
+;;;
+;;; ARGUMENTS
+;;; none.
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :string. A boolean indicating whether a string (t) or fuuid-object schould
+;;;   be returned. Default = T
+;;; 
+;;; RETURN VALUE
+;;; The UUID as a string. 
+;;;
+;;; EXAMPLE
+#|
+(get-random-uuid)
+;; => "31db7363-f393-4fbc-ad26-10ffb6339640"
+|#
+;;; SYNOPSIS
+(defun get-random-uuid (&key (string t))
+  ;;; ****
+  (let ((uuid (fuuid:make-v4)))
+    (if string
+        (fuuid:to-string uuid)
+        uuid)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

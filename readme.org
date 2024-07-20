@@ -57,5 +57,5 @@ the root of the ~content/~ (or similarly named) directory of the site. The
 
 
 #+begin_comment
-$$ Last modified:  23:11:44 Thu Mar 28 2024 CET
+$$ Last modified:  21:35:10 Sat Jul 20 2024 CEST
 #+end_comment
