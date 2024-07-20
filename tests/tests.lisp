@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for colporter.
 ;;;
-;;; $$ Last modified:  17:37:35 Wed Oct 18 2023 CEST
+;;; $$ Last modified:  18:43:38 Sat Jul 20 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -468,6 +468,21 @@
              (p2 "about/dings/bla")
              (result (colporter::relative-path p1 p2)))
         (is (equal result "bla"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; test nested blocks in yaml
+;;; RP  Sat Jul 20 18:41:00 2024
+(test test-nested-yaml
+      (let ((page (colporter::make-page
+                   (test-pathname "content/home.yaml")
+                   (test-pathname "content/"))))
+        (is (and
+             (eq (colporter::get-data
+                  (colporter::get-data page "nested") "one")
+                 1)
+             (eq (colporter::get-data
+                  (colporter::get-data page "nested") "three")
+                 3)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

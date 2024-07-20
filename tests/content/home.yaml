@@ -3,6 +3,9 @@ title: Home
 date: 2023-07-03
 author: Ruben Philipp
 template: home
+nested:
+    one: 1
+    three: 3
 keywords:
     - home-page
     - a-test

@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> page
 ;;;
-;;; $$ Last modified:  19:17:19 Mon Mar 18 2024 CET
+;;; $$ Last modified:  18:30:29 Sat Jul 20 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -231,17 +231,17 @@
 ;;;
 ;;; EXAMPLE
 #|
-(let ((pgs (make-pages-from-dir
-            "/Users/rubenphilipp/lisp/colporter/tests/content"
-            :page-suffix "yaml")))
-  (hash-table-keys pgs))
-;; => ("error" "home" "projects/bla/dings" "projects/opus-1")
+(let ((pgs (make-pages-from-dir         ; ; ; ;
+"/Users/rubenphilipp/lisp/colporter/tests/content" ; ; ; ;
+:page-suffix "yaml")))                  ; ; ; ;
+(hash-table-keys pgs))                  ; ; ; ;
+;; => ("error" "home" "projects/bla/dings" "projects/opus-1") ; ; ; ;
 |#
 ;;; SYNOPSIS
 (defun make-pages-from-dir (dir
                             &key
                               (page-suffix (get-clptr-config :page-suffix)))
-  ;;; ****
+;;; ****
   (let ((dir (trailing-slash dir))
         (page-file-paths nil)
         (pages (make-hash-table :test 'equal)))
@@ -250,7 +250,7 @@
                            #'(lambda (name)
                                (when (and
                                       (equal (pathname-type name)
-                                                  page-suffix)
+                                             page-suffix)
                                       ;; do not include hidden files
                                       (not (equal "."
                                                   (subseq

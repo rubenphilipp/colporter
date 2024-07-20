@@ -14,7 +14,7 @@
 ;;; CREATED
 ;;; 2023-07-09
 ;;;
-;;; $$ Last modified:  22:42:54 Wed Mar 27 2024 CET
+;;; $$ Last modified:  18:30:30 Sat Jul 20 2024 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :colporter)
@@ -651,6 +651,28 @@
           (colporter::define-template
             ,@body)
           :id ,id)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+#|
+(string->html-chars "hallo")
+;; => "&#104;&#97;&#108;&#108;&#111;"
+|#
+(defun string->html-chars (string)
+  (let ((codes (loop for c across string
+                     collect (char-code c))))
+    (format nil "~{&#~a;~}" codes)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; We need this version of the page data contains a nested structure, which is
+;;; again a hash table.
+;;; 2024-07-20
+(defmethod get-data ((obj hash-table) key)
+;;; ****
+  (gethash key obj))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
