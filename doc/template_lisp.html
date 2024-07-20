@@ -50,7 +50,7 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo6">named-object</a> -&gt; <strong>template</strong>
 
- $$ Last modified:  17:35:54 Wed Oct 18 2023 CEST
+ $$ Last modified:  20:57:20 Sat Jul 20 2024 CEST
 </pre>
 
 <hr />
@@ -303,8 +303,86 @@
 </pre>
 
 <hr />
+<a name="template2fparse2dasset2dpaths"></a>
+<a name="robo54"></a><h2>template/parse-asset-paths [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-07-20
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro parses any given string and replaces [[<a href="./asset_lisp.html#robo9">asset</a> ...]]
+ placeholders/tags with the actual path to the <a href="./asset_lisp.html#robo9">asset</a>-<a href="./file_lisp.html#robo19">file</a>
+ (cf. insert-<a href="./asset_lisp.html#robo9">asset</a>-path) relative to the current <a href="./page_lisp.html#robo20">page</a>. 
+
+ NB: This macro is intended to be used in the context of <a href="#robo47">define-template</a>.
+     An object with the symbol <a href="./page_lisp.html#robo20">page</a> must be available in the lexical context.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The string to be parsed. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>parse-asset-paths</strong> (string)
+</pre>
+
+<hr />
+<a name="template2fparse2dfile2dpaths"></a>
+<a name="robo55"></a><h2>template/parse-file-paths [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-07-20
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro parses any given string and replaces [[<a href="./file_lisp.html#robo19">file</a> ...]]
+ placeholders/tags with the actual path to the <a href="./file_lisp.html#robo19">file</a> (cf. insert-<a href="./file_lisp.html#robo19">file</a>-path)
+ relative to the current <a href="./page_lisp.html#robo20">page</a>. 
+
+ NB: This macro is intended to be used in the context of <a href="#robo47">define-template</a>.
+     An object with the symbol <a href="./page_lisp.html#robo20">page</a> must be available in the lexical context.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The string to be parsed. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>parse-file-paths</strong> (string)
+</pre>
+
+<hr />
+<a name="template2fparse2dpage2duuids"></a>
+<a name="robo56"></a><h2>template/parse-page-uuids [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-07-20
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro parses any given string and replaces [[<a href="./page_lisp.html#robo20">page</a>-uuid ...]]
+ placeholders/tags with the actual path to the given <a href="./page_lisp.html#robo20">page</a> by its uuid
+ (cf. insert-<a href="./page_lisp.html#robo20">page</a>-path-by-uuid), always relative to the current <a href="./page_lisp.html#robo20">page</a>. 
+
+ NB: This macro is intended to be used in the context of <a href="#robo47">define-template</a>.
+     An object with the symbol <a href="./page_lisp.html#robo20">page</a> must be available in the lexical context.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The string to be parsed. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>parse-page-uuids</strong> (string)
+</pre>
+
+<hr />
 <a name="template2fwith2dcolportage"></a>
-<a name="robo54"></a><h2>template/with-colportage [ Generics ]</h2>
+<a name="robo57"></a><h2>template/with-colportage [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -331,47 +409,16 @@
 <pre> The string to be parsed.
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(<strong>with-colportage</strong> "Test [[<a href="./file_lisp.html#robo19">file</a> projects/img.jpg]] or [[<a href="./asset_lisp.html#robo9">asset</a> logo.png]]")
+<pre class="source">(<strong>with-colportage</strong> "Test [[<a href="./file_lisp.html#robo19">file</a> projects/img.jpg]] or [[<a href="./asset_lisp.html#robo9">asset</a> logo.png]]") 
 ;; =&gt;
-;; (LET* ((MD
-;;          (PARSE-MARKDOWN
-;;           "Test [[<a href="./file_lisp.html#robo19">file</a> projects/img.jpg]] or [[<a href="./asset_lisp.html#robo9">asset</a> logo.png]]"))
-;;        (RESULT MD))
-;;   (SETF RESULT
-;;         (CL-PPCRE:REGEX-REPLACE-ALL
-;;       "\\[\\[<a href="./file_lisp.html#robo19">file</a>\\s(.*?)\\]\\]" RESULT
-;;          #'(LAMBDA
-;;                (TARGET START END MATCH-START
-;;                 MATCH-END
-;;                 &amp;REST ARGS)
-;;              (DECLARE (IGNORE START END ARGS))
-;;              (LET* ((REGEX
-;;                       "(?:\\[\\[<a href="./file_lisp.html#robo19">file</a>\\s)|(?:\\]\\])")
-;;                     (MATCH
-;;                         (SUBSEQ TARGET MATCH-START
-;;                                 MATCH-END))
-;;                     (UID
-;;                       (CL-PPCRE:REGEX-REPLACE-ALL
-;;                        REGEX MATCH "")))
-;;                (INSERT-FILE-PATH UID)))))
-;;   (SETF RESULT
-;;         (CL-PPCRE:REGEX-REPLACE-ALL
-;;       "\\[\\[<a href="./asset_lisp.html#robo9">asset</a>\\s(.*?)\\]\\]" RESULT
-;;          #'(LAMBDA
-;;                (TARGET START END MATCH-START
-;;                 MATCH-END
-;;                 &amp;REST ARGS)
-;;              (DECLARE (IGNORE START END ARGS))
-;;              (LET* ((REGEX
-;;                       "(?:\\[\\[<a href="./asset_lisp.html#robo9">asset</a>\\s)|(?:\\]\\])")
-;;                     (MATCH
-;;                         (SUBSEQ TARGET MATCH-START
-;;                                 MATCH-END))
-;;                     (UID
-;;                       (CL-PPCRE:REGEX-REPLACE-ALL
-;;                        REGEX MATCH "")))
-;;                (INSERT-ASSET-PATH UID)))))
-;;   RESULT)
+;; (let* ((md
+;;         (<a href="./markdown_lisp.html#robo17">parse-markdown</a>
+;;          "Test [[<a href="./file_lisp.html#robo19">file</a> projects/img.jpg]] or [[<a href="./asset_lisp.html#robo9">asset</a> logo.png]]"))
+;;        (result md))
+;;   (setf result (<a href="#robo55">parse-file-paths</a> result))
+;;   (setf result (<a href="#robo54">parse-asset-paths</a> result))
+;;   (setf result (<a href="#robo56">parse-page-uuids</a> result))
+;;   result)                          
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defmacro <strong>with-colportage</strong> (string)
@@ -379,7 +426,7 @@
 
 <hr />
 <a name="template2fyield2dasset"></a>
-<a name="robo55"></a><h2>template/yield-asset [ Generics ]</h2>
+<a name="robo58"></a><h2>template/yield-asset [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -407,7 +454,7 @@
 
 <hr />
 <a name="template2fyield2dpage2dby2duuid"></a>
-<a name="robo56"></a><h2>template/yield-page-by-uuid [ Generics ]</h2>
+<a name="robo59"></a><h2>template/yield-page-by-uuid [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -435,7 +482,7 @@
 
 <hr />
 <a name="template2fyield2dsnippet"></a>
-<a name="robo57"></a><h2>template/yield-snippet [ Generics ]</h2>
+<a name="robo60"></a><h2>template/yield-snippet [ Generics ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">template</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -463,7 +510,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-03-27 22:43:01</p>
+<p>Generated from ./src/template.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-20 20:59:10</p>
 </div> <!-- footer -->
 </body>
 </html>
