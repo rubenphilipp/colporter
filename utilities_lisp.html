@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>utilities.lisp</title>
+<!-- Source: ./src/utilities.lisp -->
+<!-- Generated with ROBODoc Version 4.99.45 (Mar  5 2025) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="./masterindex.html#top">Index</a>
+<a class="menuitem" href="./robo_generics.html#top">Generics</a>
+<a class="menuitem" href="./robo_classes.html#top">Classes</a>
+<a class="menuitem" href="./robo_functions.html#top">Functions</a>
+<a class="menuitem" href="./robo_modules.html#top">Modules</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_variables.html#top">Variables</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="utilities2fadd2dsnippet"></a>
+<a name="robo61"></a><h2>utilities/add-snippet [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-03-27
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro creates a <a href="./snippet_lisp.html#robo22">snippet</a> (via <a href="./snippet_lisp.html#robo44">define-snippet</a> and make-<a href="./snippet_lisp.html#robo22">snippet</a>) with a
+ given id (in order to retrieve the <a href="./snippet_lisp.html#robo22">snippet</a> e.g. via insert-<a href="./snippet_lisp.html#robo22">snippet</a>) and an
+ arbitrary number of further arguments (&amp;rest) to be used in the body (cf.
+ define-<a href="./snippet_lisp.html#robo22">snippet</a>). This could be useful, e.g. in order to pass the <a href="./page_lisp.html#robo20">page</a> or
+ <a href="./site_lisp.html#robo21">site</a> object to the <a href="./snippet_lisp.html#robo22">snippet</a> (see example). 
+ The <a href="./snippet_lisp.html#robo22">snippet</a> will be written to a hash table which can later be used e.g. in
+ <a href="./site_lisp.html#robo41">make-site</a>.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The id of the <a href="./snippet_lisp.html#robo22">snippet</a> (e.g. to be used with insert-<a href="./snippet_lisp.html#robo22">snippet</a>).
+ - A symbol which must be a hash-table available in the scope of the
+   macroexpansion (see example).
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> Rest:
+ An arbitrary amount of additional arguments to be used in the context of the
+ body (see description and example). 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">;;; this could be placed in your snippets-load <a href="./file_lisp.html#robo19">file</a>
+(setf +<a href="./site_lisp.html#robo21">site</a>-snippets+ (make-hash-table :test #'equal))
+;;; this is an example for a <a href="./snippet_lisp.html#robo22">snippet</a> <a href="./file_lisp.html#robo19">file</a>
+(<strong>add-snippet</strong> ("about-header" +<a href="./site_lisp.html#robo21">site</a>-snippets+ <a href="./site_lisp.html#robo21">site</a> <a href="./page_lisp.html#robo20">page</a> title)
+  (with-html
+    (:header title)
+     (:h1 
+     (:nav
+      ;; list of pages related to the about section (see above)
+      (:ul :class "horizontal"
+           (let ((about-pages
+                   (loop for <a href="./page_lisp.html#robo20">page</a> in (<a href="./site_lisp.html#robo36">get-pages</a> <a href="./site_lisp.html#robo21">site</a> :objects t)
+                         with result = '()
+                         when (and
+                               (equal "about" (<a href="./site_lisp.html#robo30">get-data</a> <a href="./page_lisp.html#robo20">page</a> "type"))
+                               (numberp (<a href="./site_lisp.html#robo30">get-data</a> <a href="./page_lisp.html#robo20">page</a> "listed")))
+                           do (push <a href="./page_lisp.html#robo20">page</a> result)
+                         finally
+                            (return
+                              (sort result #'&lt;
+                                    :key #'(lambda (p)
+                                             (<a href="./site_lisp.html#robo30">get-data</a> p "listed")))))))
+             (loop for pg in about-pages
+                   do
+                      (:li
+                       (:a
+                        :class
+                        ;; mark active <a href="./page_lisp.html#robo20">page</a>
+                        (if (equal (uid <a href="./page_lisp.html#robo20">page</a>) (uid pg))
+                            "active"
+                            "inactive")
+                        :href (insert-<a href="./page_lisp.html#robo20">page</a>-path (uid pg))
+                        (<a href="./site_lisp.html#robo30">get-data</a> pg "title"))))))))))
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>add-snippet</strong> ((id place &amp;rest args) &amp;body body)
+</pre>
+
+<hr />
+<a name="utilities2fadd2dtemplate"></a>
+<a name="robo62"></a><h2>utilities/add-template [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-03-27
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro creates a <a href="./template_lisp.html#robo23">template</a> (via <a href="./template_lisp.html#robo47">define-template</a> and make-<a href="./template_lisp.html#robo23">template</a>) with a
+ given id (in order to retrieve the <a href="./template_lisp.html#robo23">template</a> e.g. via make-<a href="./site_lisp.html#robo21">site</a>). 
+ The <a href="./template_lisp.html#robo23">template</a> will be written to a hash table which can later be used e.g. in
+ <a href="./site_lisp.html#robo41">make-site</a>.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The id of the <a href="./template_lisp.html#robo23">template</a>.
+ - A symbol which must be a hash-table available in the scope of the
+   macroexpansion (see example).
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> none. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">;;; this could be placed in your templates-load <a href="./file_lisp.html#robo19">file</a>
+(defvar +<a href="./site_lisp.html#robo21">site</a>-templates+ (make-hash-table :test #'equal))
+;;; this is an example for a <a href="./template_lisp.html#robo23">template</a> <a href="./file_lisp.html#robo19">file</a>
+(<strong>add-template</strong> ("default" +<a href="./site_lisp.html#robo21">site</a>-templates+)
+  (with-html-string
+    (:doctype)
+    (:html
+     (<a href="./template_lisp.html#robo52">insert-snippet</a> "head"
+                     <a href="./site_lisp.html#robo21">site</a> <a href="./page_lisp.html#robo20">page</a> (concatenate 'string
+                                            (<a href="./site_lisp.html#robo30">get-data</a> <a href="./site_lisp.html#robo21">site</a> "title")
+                                            " | "
+                                            (<a href="./site_lisp.html#robo30">get-data</a> <a href="./page_lisp.html#robo20">page</a> "title")))
+     (:body
+      (<a href="./template_lisp.html#robo52">insert-snippet</a> "header" <a href="./site_lisp.html#robo21">site</a> <a href="./page_lisp.html#robo20">page</a>)
+      (:main
+       (:raw
+        (<a href="./template_lisp.html#robo57">with-colportage</a>
+            (<a href="./site_lisp.html#robo30">get-data</a> <a href="./page_lisp.html#robo20">page</a> "content"))))))))
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>add-template</strong> ((id place) &amp;body body)
+</pre>
+
+<hr />
+<a name="utilities2falistp"></a>
+<a name="robo63"></a><h2>utilities/alistp [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-17
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Tests if an object is of type alist.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The object to test.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> Either t or NIL
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>alistp</strong> '((a . b)
+          (c . d)))
+
+;; =&gt; T
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>alistp</strong> (object)
+</pre>
+
+<hr />
+<a name="utilities2fassoc2dkeys"></a>
+<a name="robo64"></a><h2>utilities/assoc-keys [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-17
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns a list with all keys of an alist. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> An alist. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A list with keys of the alist.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(let ((lst '((:test . 12)
+             (:value2 . 13)
+             (:something . 'of-importance))))
+  (<strong>assoc-keys</strong> lst))
+
+;; =&gt; '(:TEST :VALUE2 :SOMETHING)
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>assoc-keys</strong> (alist)
+</pre>
+
+<hr />
+<a name="utilities2fget2drandom2duuid"></a>
+<a name="robo65"></a><h2>utilities/get-random-uuid [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-07-20
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This method returns a UUIV v4 (random UUID), generated via frugal-uuid. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> none.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :string. A boolean indicating whether a string (t) or fuuid-object schould
+   be returned. Default = T
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The UUID as a string. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(get-random-uuid)
+;; =&gt; "31db7363-f393-4fbc-ad26-10ffb6339640"
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>get-random-uuid</strong> (&amp;key (string t))
+</pre>
+
+<hr />
+<a name="utilities2fleading2dslash"></a>
+<a name="robo66"></a><h2>utilities/leading-slash [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-31
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function ensures that a string starts with a slash (e.g. useful when
+ treating relative as absolute paths).
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A string.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :dot. When T, also adds a "." to the leading path (i.e. "./").
+   Default = NIL.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The string with a leading slash.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>leading-slash</strong> "hello/world")
+;; =&gt; "/hello/world"
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>leading-slash</strong> (string &amp;key dot)
+</pre>
+
+<hr />
+<a name="utilities2fload2dfiles2dby2dextension"></a>
+<a name="robo67"></a><h2>utilities/load-files-by-extension [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-03-27
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This macro loads all files from a given directory ending with a given
+ <a href="./file_lisp.html#robo19">file</a> extension/suffix. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The search directory.
+ - The <a href="./file_lisp.html#robo19">file</a> extension/suffix (string).
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> none. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmacro <strong>load-files-by-extension</strong> (dir extension)
+</pre>
+
+<hr />
+<a name="utilities2fload2dfrom2dsame2ddir"></a>
+<a name="robo68"></a><h2>utilities/load-from-same-dir [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2024-02-26
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function loads a lisp <a href="./file_lisp.html#robo19">file</a> from the <a href="./file_lisp.html#robo19">file</a> relative to the directory of
+ the current <a href="./file_lisp.html#robo19">file</a> (cf. path-from-same-dir).
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A string indicating the filename (or pathname) to the <a href="./file_lisp.html#robo19">file</a> relative to
+   the current lisp <a href="./file_lisp.html#robo19">file</a>.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The result of the #'load call.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>load-from-same-dir</strong> (<a href="./file_lisp.html#robo19">file</a>)
+</pre>
+
+<hr />
+<a name="utilities2fpath2dfrom2dsame2ddir"></a>
+<a name="robo69"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-09
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function returns the full path to a <a href="./file_lisp.html#robo19">file</a> reilative to the directory of
+ the current lisp <a href="./file_lisp.html#robo19">file</a>.
+ NB: This function is borrowed from Michael Edwards's slippery-chicken.
+ NB2: This function does not work with files which have been loaded via
+      ASDF/quicklisp.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A string indicating the filename (or pathname) to the <a href="./file_lisp.html#robo19">file</a> relative to
+   the current lisp <a href="./file_lisp.html#robo19">file</a>.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A string with the full path to the <a href="./file_lisp.html#robo19">file</a>.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>path-from-same-dir</strong> (<a href="./file_lisp.html#robo19">file</a>)
+</pre>
+
+<hr />
+<a name="utilities2fpath2dfrom2dsrc2ddir"></a>
+<a name="robo70"></a><h2>utilities/path-from-src-dir [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function returns a path from the src dir. It is intended to be used
+ within the main lisp files.
+ NB: This function requires ASDF. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A string indicating the filename (or pathname) to the <a href="./file_lisp.html#robo19">file</a> relative to
+   the src directory <a href="./file_lisp.html#robo19">file</a>.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A string with the full path to the <a href="./file_lisp.html#robo19">file</a>.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>path-from-src-dir</strong> (<a href="./file_lisp.html#robo19">file</a>)
+</pre>
+
+<hr />
+<a name="utilities2frelative2dpath"></a>
+<a name="robo71"></a><h2>utilities/relative-path [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-30
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns a path to the <a href="./file_lisp.html#robo19">file</a> indicated by the target path relative to the
+ location directory.
+ E.g.:
+ location: "/tmp/project/"
+ target: "/tmp/image.jpg"
+ =&gt; result: "../image.jpg"
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The location directory from which the relative link to the target has to
+   be constructed. Must be a string.
+ - The target path (e.g. to a <a href="./file_lisp.html#robo19">file</a>). 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A pathname namestring being the path to the target relative to the location.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(let ((ln "tmp/project/")
+      (tg "tmp/images/test.jpg"))
+  (<strong>relative-path</strong> ln tg))
+;; =&gt; "../images/test.jpg"
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>relative-path</strong> (location target)
+</pre>
+
+<hr />
+<a name="utilities2fshell"></a>
+<a name="robo72"></a><h2>utilities/shell [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Runs a <strong>shell</strong> program and return the full result as a string or throws an
+ error when the call to the program fails.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The command (e.g. a path to a binary).
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> rest:
+ - The arguments to the <strong>shell</strong> program. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The result of the <strong>shell</strong> program call as a string.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>shell</strong> "git" "-v")
+;; =&gt; "git version 2.40.1"
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>shell</strong> (command &amp;rest arguments)
+</pre>
+
+<hr />
+<a name="utilities2fsimple2dshell"></a>
+<a name="robo73"></a><h2>utilities/simple-shell [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Run a <a href="#robo72">shell</a> command from lisp and return the exit code.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The <a href="#robo72">shell</a> command (i.e., most likely, path to the binary)
+ 
+ OPTIONAL ARGUMENTS:
+ rest:
+ - The arguments to the <a href="#robo72">shell</a> program.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The the exit-code of the process.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>simple-shell</strong> (command &amp;rest arguments)
+</pre>
+
+<hr />
+<a name="utilities2fstring2dto2dtimestamp"></a>
+<a name="robo74"></a><h2>utilities/string-to-timestamp [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-08-05
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Parses a string (e.g. "2023-02-03 15:05" or "2023-08-03 15:35:00")
+ to a timestamp, extending local-time:parse-timestring with default key
+ arguments as well as tolerance for times seconds padded to the end of
+ the timestring (e.g. "15:00" instead of "15:00:00").
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A string to be parsed as a timestamp. 
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :fail-on-error. A boolean indicating whether to interrupt the program
+   with an error message when the conversion fails. Default = t
+ - :date-time-separator. A char being the seperator between date and
+   time values. Defaule = #\space
+ - :time-separator. A char being the seperator between time elements.
+   Default = #\:
+ - :date-separator. A char being the separator between date elements.
+   Default = #\-
+ - :fract-time-separators. A list of chars being the separators between
+   fractionals of time (i.e. milliseconds etc.). Defaul = '(#\. #\,)
+ - :allow-missing-elements. Allow time elements missing from the string.
+   Default = t
+ - :allow-missing-date-part. Tolerate a missing date part. Default = nil
+ - :allow-missing-time-part. Tolerate a missing time part. Default = t.
+ - :allow-missing-timezone-part. Tolerate a missing timezone indication.
+   Default = t.
+ - :offset. A number to be added as an offset to the timestamp.
+   Default = 0
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The parsed timestamp.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>string-to-timestamp</strong> "2023-05-03 16:00")
+;; =&gt; @2023-05-03T18:00:00.000000+02:00
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>string-to-timestamp</strong> (str &amp;key
+                                  (fail-on-error t)
+                                  (date-time-separator #\space)
+                                  (time-separator #\:)
+                                  (date-separator #\-)
+                                  (fract-time-separators '(#\. #\,))
+                                  (allow-missing-elements t)
+                                  (allow-missing-date-part nil)
+                                  (allow-missing-time-part t)
+                                  (allow-missing-timezone-part t)
+                                  (offset 0))
+</pre>
+
+<hr />
+<a name="utilities2ftrailing2dslash"></a>
+<a name="robo75"></a><h2>utilities/trailing-slash [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-09
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function ensures that a (path) string ends with a trailing slash.
+ NB: This function is borrowed from Michael Edward's slippery-chicken.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A string containing the path to be checked and corrected.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The path with a trailing slash.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>trailing-slash</strong> (path)
+</pre>
+
+<hr />
+<a name="utilities2fuid2dfrom2dpath"></a>
+<a name="robo76"></a><h2>utilities/uid-from-path [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function returns a uid from a given path.
+ When base is set, the uid will be relative to the path given as base.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A path to a <a href="./file_lisp.html#robo19">file</a> as a string. 
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> - base. The root directory, which serves as the base for retrieving a
+   (relative) UID. Either a string or NIL. Default = NIL. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The UID generated. As a string.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>uid-from-path</strong> "/sites/rubenphilipp/content/projects/opus-1.yaml"
+               "/sites/rubenphilipp/content/")
+
+;; =&gt; "projects/opus-1"
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>uid-from-path</strong> (path &amp;optional base)
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.45 on 2025-03-05 23:19:38</p>
+</div> <!-- footer -->
+</body>
+</html>

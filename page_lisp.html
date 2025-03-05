@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>page.lisp</title>
+<!-- Source: ./src/page.lisp -->
+<!-- Generated with ROBODoc Version 4.99.45 (Mar  5 2025) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="./masterindex.html#top">Index</a>
+<a class="menuitem" href="./robo_generics.html#top">Generics</a>
+<a class="menuitem" href="./robo_classes.html#top">Classes</a>
+<a class="menuitem" href="./robo_functions.html#top">Functions</a>
+<a class="menuitem" href="./robo_modules.html#top">Modules</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_variables.html#top">Variables</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="named2dobject2fpage"></a>
+<a name="robo20"></a><h2>named-object/page [ Classes ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo6">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p class="item_name">NAME</p>
+<pre> <strong>page</strong>
+</pre>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-23
+</pre>
+<p class="item_name">PURPOSE</p>
+<pre> Implementation of the <strong>page</strong> class and related methods and functions.
+ A <strong>page</strong> object contains both the data/content of the <strong>page</strong> as well as 
+ meta information required for processing (e.g. a <a href="./template_lisp.html#robo23">template</a> id related to
+ a <a href="./template_lisp.html#robo23">template</a> object which will be used to render the <strong>page</strong>).
+
+ A <strong>page</strong> always relates to a source <a href="./file_lisp.html#robo19">file</a> (e.g. a .yaml <a href="./file_lisp.html#robo19">file</a>) or object (e.g.
+ a database row), which is used to retrieve the content and the data. 
+
+ The data of the <strong>page</strong> is a hash table retrieved from the (e.g. YAML) data
+ from the source <a href="./file_lisp.html#robo19">file</a>/object.
+
+ CLASS HIERARCHY
+ <a href="./named-object_lisp.html#robo6">named-object</a> -&gt; <strong>page</strong>
+
+ $$ Last modified:  20:29:36 Sat Jul 20 2024 CEST
+</pre>
+
+<hr />
+<a name="page2fget2ddata"></a>
+<a name="robo24"></a><h2>page/get-data [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">page</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns the data of a given key from the YAML hash table contained in the
+ data slot of a <a href="#robo20">page</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The <a href="#robo20">page</a> object.
+ - The key to the data field.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The data contained in the slot of the data hash-table. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>get-data</strong> ((obj <a href="#robo20">page</a>) key)
+</pre>
+
+<hr />
+<a name="page2fmake2dpage"></a>
+<a name="robo25"></a><h2>page/make-page [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">page</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function is a shortcut to instantiate a <a href="#robo20">page</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The (absolute) path to the <a href="./file_lisp.html#robo19">file</a> used to retrieve the <a href="#robo20">page</a> data.
+   Should be (as of 2023-07-24) a YAML-<a href="./file_lisp.html#robo19">file</a>. Path is given as a string.
+ - The base path to the content directory. This is the directory that
+   holds the data structure which will also reflect the data structure of
+   the <a href="./site_lisp.html#robo21">site</a> generated via <a href="./colporter_lisp.html#robo18">colporter</a>. 
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :uid. A UID of the <a href="#robo20">page</a>. It is recommended to leave this blank, as the
+   UID will be generated using the path and the base path.
+   E.g.: "/sites/rubenphilipp/content/projects/opus-1.yaml"
+   with base="/sites/rubenphilipp/content/" =&gt; "projects/opus-1"
+   (cf. uid-from-path).
+ - :uuid. The Unique IDentifier for the <a href="#robo20">page</a>. This value could be used for
+   creating permalinks or referencing to a <a href="#robo20">page</a> independent of the uid /
+   hierarchical <a href="#robo20">page</a> structure of a <a href="./site_lisp.html#robo21">site</a>. A uuid should be explicitly
+   assigned to a <a href="#robo20">page</a> object and be -- for the sake of consistency --
+   persisted, e.g. in the <a href="#robo20">page</a>-constituing <a href="./file_lisp.html#robo19">file</a> (i.e. most likely a YAML
+   <a href="./file_lisp.html#robo19">file</a>).
+   NB: <a href="./colporter_lisp.html#robo18">colporter</a> will automatically look for a value in the <a href="#robo20">page</a> data
+   hash-table field "uuid". When given, it will be automatically assigned,
+   unless a different value has been assigned, e.g. via this method. 
+   NB 2: In case when working on <a href="#robo20">page</a>'s contents with Emacs, uuidgen might
+   be helpful when creating uuids to be stored, e.g. in a "uuid"-field in
+   the YAML <a href="./file_lisp.html#robo19">file</a> of a <a href="#robo20">page</a>. (cf. <a href="https://github.com/kanru/uuidgen-el)">https://github.com/kanru/uuidgen-el)</a>
+   Default = nil.
+ - :<a href="./template_lisp.html#robo23">template</a>. A <a href="./template_lisp.html#robo23">template</a> id referring to the <a href="./template_lisp.html#robo23">template</a> object which will be
+   used to render the <a href="#robo20">page</a>. If NIL, the <a href="./template_lisp.html#robo23">template</a> will be automatically
+   selected based on the data of the <a href="#robo20">page</a> or the default <a href="./template_lisp.html#robo23">template</a>.
+   NB: In order to <a href="./colporter_lisp.html#robo7">build</a> the <a href="#robo20">page</a> with the processes suggested in
+   <a href="./colporter_lisp.html#robo_top_of_doc">colporter.lisp</a>, the value of this slot should correspond to a key
+   in the :pages slot in a <a href="./colporter_lisp.html#robo18">colporter</a> object. 
+   Must be a symbol. Default = NIL.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The <a href="#robo20">page</a> object. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>make-page</strong> (path base-path &amp;key
+                                   (uid nil)
+                                   (uuid nil)
+                                   (<a href="./template_lisp.html#robo23">template</a> nil))
+</pre>
+
+<hr />
+<a name="page2fmake2dpages2dfrom2ddir"></a>
+<a name="robo26"></a><h2>page/make-pages-from-dir [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">page</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function recursively scans a given directory for all files that match
+ the common <a href="#robo20">page</a> suffix (e.g. "yaml") and instantiates <a href="#robo20">page</a> objects with
+ the respective uid set according to the given (base) path. Finally, the
+ generated objects will be returned as a hash-table with keys set to the
+ uids to be further used in a <a href="./site_lisp.html#robo21">site</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A string being the path to the directory to recursively scan for <a href="#robo20">page</a> files.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :<a href="#robo20">page</a>-suffix. A string being the <a href="./file_lisp.html#robo19">file</a> suffix of pages which will be
+   included from the search. Default = The :<a href="#robo20">page</a>-suffix from
+   <a href="./globals_lisp.html#robo14">+clptr-config-data+</a>. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A hash-table with <a href="#robo20">page</a> objects (see above and cf. <a href="./site_lisp.html#robo21">site</a>).
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(let ((pgs (<strong>make-pages-from-dir</strong>
+            "/Users/rubenphilipp/lisp/<a href="./colporter_lisp.html#robo18">colporter</a>/tests/content"
+            :<a href="#robo20">page</a>-suffix "yaml")))
+  (hash-table-keys pgs))
+;; =&gt; ("error" "home" "projects/bla/dings" "projects/opus-1")
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>make-pages-from-dir</strong> (dir
+                            &amp;key
+                              (<a href="#robo20">page</a>-suffix (<a href="./globals_lisp.html#robo15">get-clptr-config</a> :<a href="#robo20">page</a>-suffix)))
+</pre>
+
+<hr />
+<a name="page2fupdate"></a>
+<a name="robo27"></a><h2>page/update [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo20">page</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-24
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This method updates the slots of a <a href="#robo20">page</a> object. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> A <a href="#robo20">page</a> object. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The updated <a href="#robo20">page</a> object. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>update</strong> ((pg <a href="#robo20">page</a>))
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/page.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.45 on 2025-03-05 23:19:38</p>
+</div> <!-- footer -->
+</body>
+</html>
