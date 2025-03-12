@@ -13,7 +13,7 @@ Tested with SBCL.
 
 A tutorial is coming up soon. For now, refer to ~examples/~ and the
 code documentation, available in ~doc/~ or
-[[http://code.rubenphilipp.com/colporter]].
+[[https://rubenphilipp.github.io/colporter]]. 
 
 ** Examples
 
@@ -57,5 +57,5 @@ the root of the ~content/~ (or similarly named) directory of the site. The
 
 
 #+begin_comment
-$$ Last modified:  21:35:10 Sat Jul 20 2024 CEST
+$$ Last modified:  12:08:26 Wed Mar 12 2025 CET
 #+end_comment
