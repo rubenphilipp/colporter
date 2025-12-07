@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  21:28:26 Sun Dec  7 2025 CET
+;;; $$ Last modified:  21:44:28 Sun Dec  7 2025 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -191,6 +191,8 @@
   ;; remove the output-dir before building the site
   ;; RP  Sun Dec  7 21:21:12 2025
   (when pre-wipe?
+    (when verbose
+      (format t "- wiping output-dir... ~%"))
     (uiop:delete-directory-tree (pathname (output-dir clptr)) 
                                 :validate t 
                                 :if-does-not-exist :ignore))
