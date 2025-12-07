@@ -23,7 +23,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> colporter
 ;;;
-;;; $$ Last modified:  19:10:40 Mon Mar 18 2024 CET
+;;; $$ Last modified:  21:28:26 Sun Dec  7 2025 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -170,6 +170,10 @@
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
+;;; - :pre-wipe? When T, the output directory will be wiped (i.e. deleted)
+;;;   before building the site.  This might be necessary to prevent old content
+;;;   which is not present in the source/content data to persist in e.g. in the
+;;;   production version of the site.  Default = nil. 
 ;;; - :verbose. Print occasional status messages to the stream. Default = t.
 ;;; 
 ;;; RETURN VALUE
@@ -178,11 +182,18 @@
 ;;; SYNOPSIS
 (defmethod build ((clptr colporter)
                   &key
+                    (pre-wipe? nil)
                     (verbose t))
   ;;; ****
   (when verbose
     (format t "~%**********~% ~
                COLPORTER BUILD STARTED ~%~%"))
+  ;; remove the output-dir before building the site
+  ;; RP  Sun Dec  7 21:21:12 2025
+  (when pre-wipe?
+    (uiop:delete-directory-tree (pathname (output-dir clptr)) 
+                                :validate t 
+                                :if-does-not-exist :ignore))
   ;; test if output directory exists
   (ensure-directories-exist (output-dir clptr) :verbose verbose)
   ;; move all assets to the asset-base-dir in the output-dir
