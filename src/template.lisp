@@ -18,7 +18,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> template
 ;;;
-;;; $$ Last modified:  20:57:20 Sat Jul 20 2024 CEST
+;;; $$ Last modified:  00:49:59 Thu Jan 22 2026 CET
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -573,32 +573,34 @@
 ;;; SYNOPSIS
 (defmacro with-colportage (string)
 ;;; ****
-  `(let* ((md (parse-markdown ,string))
+  `(let* ((pre-parsed-string (parse-asset-paths
+                              (parse-file-paths ,string)))
+          (md (parse-markdown pre-parsed-string))
           (result md))
      ;; parse files
-     (setf result (parse-file-paths result)
-           ;; (cl-ppcre::regex-replace-all
-           ;;  "\\[\\[file\\s(.*?)\\]\\]"
-           ;;  result
-           ;;  #'(lambda (target start end match-start match-end &rest args)
-           ;;      (declare (ignore start end args))
-           ;;      (let* ((regex "(?:\\[\\[file\\s)\|(?:\\]\\])")
-           ;;             (match (subseq target match-start match-end))
-           ;;             (uid (cl-ppcre:regex-replace-all regex match "")))
-           ;;        (insert-file-path uid))))
-           )
+     ;; (setf result (parse-file-paths result)
+     ;;       ;; (cl-ppcre::regex-replace-all
+     ;;       ;;  "\\[\\[file\\s(.*?)\\]\\]"
+     ;;       ;;  result
+     ;;       ;;  #'(lambda (target start end match-start match-end &rest args)
+     ;;       ;;      (declare (ignore start end args))
+     ;;       ;;      (let* ((regex "(?:\\[\\[file\\s)\|(?:\\]\\])")
+     ;;       ;;             (match (subseq target match-start match-end))
+     ;;       ;;             (uid (cl-ppcre:regex-replace-all regex match "")))
+     ;;       ;;        (insert-file-path uid))))
+     ;;       )
      ;; parse assets
-     (setf result (parse-asset-paths result)
-           ;; (cl-ppcre::regex-replace-all
-           ;;  "\\[\\[asset\\s(.*?)\\]\\]"
-           ;;  result
-           ;;  #'(lambda (target start end match-start match-end &rest args)
-           ;;      (declare (ignore start end args))
-           ;;      (let* ((regex "(?:\\[\\[asset\\s)\|(?:\\]\\])")
-           ;;             (match (subseq target match-start match-end))
-           ;;             (uid (cl-ppcre:regex-replace-all regex match "")))
-           ;;        (insert-asset-path uid))))
-           )
+     ;; (setf result (parse-asset-paths result)
+     ;;       ;; (cl-ppcre::regex-replace-all
+     ;;       ;;  "\\[\\[asset\\s(.*?)\\]\\]"
+     ;;       ;;  result
+     ;;       ;;  #'(lambda (target start end match-start match-end &rest args)
+     ;;       ;;      (declare (ignore start end args))
+     ;;       ;;      (let* ((regex "(?:\\[\\[asset\\s)\|(?:\\]\\])")
+     ;;       ;;             (match (subseq target match-start match-end))
+     ;;       ;;             (uid (cl-ppcre:regex-replace-all regex match "")))
+     ;;       ;;        (insert-asset-path uid))))
+     ;;       )
      ;; parse page-uuid
      (setf result (parse-page-uuids result)
            ;; (cl-ppcre::regex-replace-all
