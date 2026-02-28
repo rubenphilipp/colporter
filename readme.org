@@ -3,6 +3,16 @@
 #+date: 2023-07-09
 #+startup: showall 
 
+* This Repository Has Moved!
+
+This repository has been moved to Codeberg in February 2026. 
+
+You'll find it here: https://codeberg.org/rubenphilipp/colporter
+
+-----
+
+** Description
+
 /colporter/ is a static-site generator written in Common Lisp.
 Its HTML generation is able to take advantage of [[https://github.com/ruricolist/spinneret][Spinneret]] (cf.
 ~tests/tests.lisp~ and ~examples/~).
